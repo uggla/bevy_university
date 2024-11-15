@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Beve university</title>
+
+		<meta name="description" content="Quest to the fake object">
+		<meta name="author" content="Bastien Sevajol" >
+		<meta name="author" content="René Ribaud" >
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="../reveal.js/dist/theme/beige.css" />
+		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"> -->
+		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Satisfy"> -->
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" />
+
+		<style type="text/css">
+		.iwantitatleft { text-align: left; }
+		.lots_of_items ul { font-size: 0.6em; text-align: left; }
+		.lots_of_items h3 { font-size: 0.7em; }
+		.lots_of_items h4 { font-size: 0.6em; }
+		.lots_of_items code { font-size: 0.7em; }
+		.pic { position: relative; float: left; width:50%; top: 0px; }
+		.left_text { position: relative; float: left; width:50%; text-align: left; }
+		.left_text_bio { position: relative; float: left; width:50%; font-size:0.6em; text-align: left; }
+		.right_text { width:50%; text-align: left; float: right; text-align: left; }
+    .skill-list li { font-size: 1.5rem; margin-top: 1rem; }
+		/*
+		.reveal a { color: #007DBA; }
+		.reveal h2 b { color: #0096D6; }
+		.reveal h2 .day { font-size: 0.6em; position:relative; bottom: 20px; }
+		*/
+		.reveal { font-family: "Satisfy", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,sans-serif; font-size:40px; }
+		.reveal h2 { margin-top: 35px; }
+		.reveal ul { margin: 0 0 0 0; }
+		.reveal pre { width: 100%; font-size:18px; }
+		.reveal pre code { max-height: 100%; }
+		.reveal section img { border: none; box-shadow: none; background: rgba(255, 255, 255, 0.0); }
+
+		body { line-height:1.1; }
+		</style>
+	</head>
+
+	<body>
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<!-- <section data-background="images/background.svg" data-background-size="cover"> -->
+                <section>
+                    <h1>Bevy university</h1>
+					<img src="images/bevy_logo_dark.svg" alt="bevy logo" width="50%">
+                </section>
+
+                <section>
+                    <h2>Welcome and Development Environment Setup</h2>
+                </section>
+
+                <section>
+                    <h3>Installation and Configuration of Tools</h3>
+                    <ul>
+                        <li><strong>Install Rust</strong>: rustup, rustc, cargo, clippy, rustfmt.</li>
+                        <li><strong>Configure Editor</strong>: Set up your preferred editor with Rust Analyzer.</li>
+                        <li><strong>GitHub Setup</strong>: Clone the workshop repository from GitHub.</li>
+                        <li><strong>Edit Cargo.toml</strong>: Prepare the project for Bevy (Get Started with Bevy).</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Our Presentation</h2>
+                </section>
+
+                <section>
+                    <h3>Quick Overview of the Project</h3>
+                    <ul>
+                        <li>Goals of the workshop.</li>
+                        <li>What we will build together.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Quick Overview of Rust (Optional)</h3>
+                    <ul>
+                        <li><strong>Key Concepts</strong>: Syntax, ownership, and borrow checker.</li>
+                        <li><strong>Memory Management</strong>: Zero-cost abstractions, safety, and control.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Introduction to the ECS Framework</h2>
+                </section>
+
+                <section>
+                    <h3>Entity Component System (ECS)</h3>
+                    <ul>
+                        <li><strong>Entities</strong>: Abstract game objects.</li>
+                        <li><strong>Components</strong>: Data associated with entities.</li>
+                        <li><strong>Systems</strong>: Logic that operates on entities and their components.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Create a minimal Bevy project using a dedicated branch in the repository.</p>
+                </section>
+
+                <section>
+                    <h2>Systems and Scheduling in Bevy</h2>
+                </section>
+
+                <section>
+                    <h3>What is a System?</h3>
+                    <p>Core unit of logic in an ECS framework that operates on specific components of entities.</p>
+                </section>
+
+                <section>
+                    <h3>Introduction to Bevy Scheduler</h3>
+                    <ul>
+                        <li><strong>Concept</strong>: Coordinates system execution.</li>
+                        <li><strong>Practical Exercise</strong>: Create and schedule systems in Bevy.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Manipulating Entities and Components in Bevy</h2>
+                </section>
+
+                <section>
+                    <h3>Key Topics</h3>
+                    <ul>
+                        <li>Declare entities and associate components.</li>
+                        <li>Structure systems to define behaviors.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Add sprites as entities in a 2D scene.</p>
+                </section>
+
+                <section>
+                    <h2>Resources and Plugins in Bevy</h2>
+                </section>
+
+                <section>
+                    <h3>Resources</h3>
+                    <p><strong>Definition</strong>: Shared global data accessible by systems.</p>
+                </section>
+
+                <section>
+                    <h3>Plugins</h3>
+                    <p><strong>Modularity</strong>: Extend Bevy functionality with plugins.</p>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Create and integrate a custom plugin.</p>
+                </section>
+
+                <section>
+                    <h2>Handling User Input</h2>
+                </section>
+
+                <section>
+                    <h3>Input Handling in Bevy</h3>
+                    <p>Manage keyboard, mouse, and controller inputs.</p>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Control a sprite using keyboard input (e.g., movement, basic actions).</p>
+                </section>
+
+                <section>
+                    <h2>Physics with Rapier Plugin</h2>
+                </section>
+
+                <section>
+                    <h3>Introducing Rapier</h3>
+                    <p><strong>Purpose</strong>: Physics simulation for 2D/3D in Bevy.</p>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Add basic collision detection between entities.</p>
+                </section>
+
+                <section>
+                    <h2>Compilation and Exportation</h2>
+                </section>
+
+                <section>
+                    <h3>Building and Exporting</h3>
+                    <ul>
+                        <li><strong>Native Compilation</strong>: Test the mockup locally.</li>
+                        <li><strong>WebAssembly Compilation</strong>: Deploy on a simple webpage.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Integrate the game mockup into a webpage and test the WebAssembly version.</p>
+                </section>
+
+                <section>
+                    <h2>Achievements and Q&A</h2>
+                    <p>Celebrate our accomplishments and address questions or feedback.</p>
+                </section>
+
+                <section>
+					<img src="images/thanks.gif" alt="thank you" width="50%">
+					<ul>
+                        <li>Bastion Sevajol &lt;bastien@sevajol.fr&gt;</li>
+                        <li>René Ribaud &lt;rene.ribaud@gmail.com&gt;</li>
+					</ul>
+				</section>
+
+			</div>
+
+		</div>
+
+		</script>
+        <script type="module">
+        import Reveal from "../reveal.js/dist/reveal.esm.js";
+        import Markdown from "../reveal.js/plugin/markdown/markdown.esm.js";
+        import Highlight from "../reveal.js/plugin/highlight/highlight.esm.js";
+
+        let deck = new Reveal({
+        plugins: [Markdown, Highlight],
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        width: 960,
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+		// Use this to print in pdf
+		// margin: 0.6,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+        maxScale: 1.5,
+
+        transition: "convex",
+        });
+
+        deck.initialize();
+        </script>
+
+	</body>
+</html>
