@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Bevy university</title>
+
+		<meta name="description" content="Quest to the fake object">
+		<meta name="author" content="Bastien Sevajol" >
+		<meta name="author" content="René Ribaud" >
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="../reveal.js/dist/reveal.css" />
+        <link rel="stylesheet" href="../reveal.js/dist/theme/beige.css" />
+		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"> -->
+		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Satisfy"> -->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"> -->
+
+        <!-- Code syntax highlighting -->
+        <!-- <link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" /> -->
+        <link rel="stylesheet" href="css/stackoverflow-light.css" />
+
+		<style type="text/css">
+		.iwantitatleft { text-align: left; }
+		.lots_of_items ul { font-size: 0.6em; text-align: left; }
+		.lots_of_items h3 { font-size: 0.7em; }
+		.lots_of_items h4 { font-size: 0.6em; }
+		.lots_of_items code { font-size: 0.7em; }
+		.long_link a { font-size: 0.8em; }
+		.pic { position: relative; float: left; width:50%; top: 0px; }
+		.left_text { position: relative; float: left; width:50%; text-align: left; }
+		.left_text_bio { position: relative; float: left; width:50%; font-size:0.6em; text-align: left; }
+		.right_text { width:50%; text-align: left; float: right; text-align: left; }
+        .skill-list li { font-size: 1.5rem; margin-top: 1rem; }
+		/*
+		.reveal a { color: #007DBA; }
+		.reveal h2 b { color: #0096D6; }
+		.reveal h2 .day { font-size: 0.6em; position:relative; bottom: 20px; }
+		.reveal { font-family: "Source Code Pro", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,sans-serif; font-size:40px; }
+		*/
+		.reveal { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,sans-serif; font-size:40px; }
+		.reveal h2 { margin-top: 35px; }
+		.reveal ul { margin: 0 0 0 0; }
+		.reveal pre { width: 100%; font-size:18px; }
+		.reveal pre code { max-height: 100%; }
+		.reveal section img { border: none; box-shadow: none; background: rgba(255, 255, 255, 0.0); }
+
+		body { line-height:1.1; }
+		</style>
+	</head>
+
+	<body>
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<!-- <section data-background="images/background.svg" data-background-size="cover"> -->
+                <section>
+                    <h1>Bevy university</h1>
+					<img src="images/bevy_logo_dark.svg" alt="bevy logo" width="50%">
+                </section>
+
+                <section>
+                    <h3>Development Environment Setup and Welcome</h3>
+                    <ul>
+                        <li>Save time by doing the bevy setup if not already done.</li>
+                        <li>Then we will do the introduction.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Installation and Configuration of Tools</h3>
+                    <div class="long_link">
+                        <ol>
+                            <li><strong>Install Rust</strong>: rustup, rustc, cargo, clippy, rustfmt.</li>
+                            <li><strong>Configure Editor</strong>: Set up your preferred editor with Rust Analyzer.</li>
+                            <li><strong>Get bevy dependencies</strong> according to your OS.
+                                <a href="https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies">https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies</a></li>
+                            <li><strong>Clone the workshop repository</strong> from GitHub.
+                                <a href="https://github.com/uggla/bevy_university">https://github.com/uggla/bevy_university</a></li>
+                            <li><strong>Compile</strong> the project.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section>
+					<h3>2 words about us 1/2</h3>
+					<div class="left_text_bio">
+                        <ul>
+                            <li>Stats</li>
+                  		    <ul>
+                    		    <li>First name: Bastien</li>
+                    		    <li>Last name: Sevajol</li>
+                  		    </ul>
+                        </ul>
+
+                        <ul>
+                            <li>Skills</li>
+                  		    <ul>
+                    		    <li>Class: Software engineer</li>
+                    		    <li>Latest Guilde: </li>
+                    		    <li>Age of Experience: x years</li>
+                    		    <li>Preferred weapon: Rust, Python</li>
+                  		    </ul>
+                        </ul>
+
+                        <ul>
+                            <li>Optional traits</li>
+                  		    <ul>
+                    		    <li>tbd</li>
+                  		    </ul>
+                        </ul>
+					</div>
+					<div class="pic">
+						<img src="images/bastien.jpg" alt="Bastien" width="53%">
+					</div>
+                </section>
+
+                <section>
+					<h3>2 words about us 2/2</h3>
+					<div class="left_text_bio">
+                        <!-- <pre class="bio"> -->
+                        <ul>
+                            <li>Stats</li>
+                  		    <ul>
+                    		    <li>First name: René (Uggla)</li>
+                    		    <li>Last name: Ribaud</li>
+                  		    </ul>
+                        </ul>
+
+                        <ul>
+                            <li>Skills</li>
+                  		    <ul>
+                    		    <li>Class: Software engineer</li>
+                    		    <li>Previous Class: Solution architect (Cloud / Devops)</li>
+                    		    <li>Latest Guilde: Red Hat</li>
+                    		    <li>Game start: 1998</li>
+                    		    <li>Preferred weapons: Rust / Python</li>
+                    		    <li>Artefact: Openstack Nova</li>
+                  		    </ul>
+                        </ul>
+
+                        <ul>
+                            <li>Optional traits</li>
+                  		    <ul>
+                    		    <li>Linux and FLOSS since 1995</li>
+                    		    <li>Previously Ops, Dev today to produce my bugs</li>
+                  		    </ul>
+                        </ul>
+					</div>
+					<div class="pic">
+						<img src="images/uggla.jpg" alt="René" width="53%">
+					</div>
+                </section>
+
+                <section>
+                    <h3>Quick Overview of Rust (Optional)</h3>
+                    <ul>
+					    <li>Provide an alternative to C/C++ and also higher-level languages</li>
+						<li>Multi paradigm language (imperative, functional, object oriented (not fully))</li>
+						<li>By Mozilla and the Community</li>
+						<li>Fast, safe, and efficient (modern)</li>
+						<li>No garbage collector, ownership and borrow checker</li>
+						<li>Dual license MIT and Apache v2.0</li>
+						<li>First stable release May 15th, 2015</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Quick Overview of the Project</h3>
+                    <ul>
+                        <li>Goals of the workshop.</li>
+                        <li>What we will build together.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>The shortest Bevy project</h3>
+                    <ul>
+                        <li>Builder pattern</li>
+                        <pre><code class="hljs rust" data-trim data-line-numbers>
+                            use bevy::prelude::*;
+
+                            fn main() {
+                            App::new().run();
+                            }
+                        </code></pre>
+                        <li>Initializing resources in the World to store globally available data that we only need a single copy of.</li>
+                        <li>Adding systems to our Schedule, which can read and modify resources and our entities' components, according to our game logic.</li>
+                        <li>Importing other blocks of App-modifying code using Plugins.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Introduction to the ECS Framework</h2>
+					<img src="images/ecs.webp" alt="ecs" width="50%">
+                </section>
+
+                <section>
+                    <h3>Entity Component System (ECS)</h3>
+                    <ul>
+                        <li><strong>Entities</strong>: Abstract game objects.
+                            <pre><code class="hljs rust" data-trim>
+                                struct Entity(u64);
+                            </code></pre>
+                        </li>
+                        <li><strong>Components</strong>: Data associated with entities.
+                            <pre><code class="hljs rust" data-trim>
+                                #[derive(Component)]
+                                struct Position {
+                                    x: f32,
+                                    y: f32,
+                                }
+                            </code></pre>
+                        </li>
+                        <li><strong>Systems</strong>: Logic that operates on entities and their components.
+                            <pre><code class="hljs rust" data-trim>
+                                fn hello_world() {
+                                    println!("hello world!");
+                                }
+                            </code></pre>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Analogy to SQL</h3>
+                    <p>ECS can be "compared" to an in memory SQL database. With only a big table</p>
+                    <ul>
+                        <li><strong>Entities</strong>: Line in the table.</li>
+                        <li><strong>Components</strong>: Columns in the table.</li>
+                        <li><strong>Systems</strong>: Stored procedures in which we can query the table.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Systems and Scheduling in Bevy</h3>
+					<img src="images/systems_and_scheduling.webp" alt="ecs" width="50%">
+                </section>
+
+                <section>
+                    <h3>Introduction to Bevy Scheduler</h3>
+                    <ul>
+                        <li><strong>Concept</strong>: Coordinates system execution.</li>
+                        <li><strong>Practical Exercise</strong>: Create and schedule systems in Bevy.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Manipulating Entities and Components in Bevy</h2>
+                </section>
+
+                <section>
+                    <h3>Key Topics</h3>
+                    <ul>
+                        <li>Declare entities and associate components.</li>
+                        <li>Structure systems to define behaviors.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Add sprites as entities in a 2D scene.</p>
+                </section>
+
+                <section>
+                    <h2>Resources and Plugins in Bevy</h2>
+                </section>
+
+                <section>
+                    <h3>Resources</h3>
+                    <p><strong>Definition</strong>: Shared global data accessible by systems.</p>
+                </section>
+
+                <section>
+                    <h3>Plugins</h3>
+                    <p><strong>Modularity</strong>: Extend Bevy functionality with plugins.</p>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Create and integrate a custom plugin.</p>
+                </section>
+
+                <section>
+                    <h2>Handling User Input</h2>
+                </section>
+
+                <section>
+                    <h3>Input Handling in Bevy</h3>
+                    <p>Manage keyboard, mouse, and controller inputs.</p>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Control a sprite using keyboard input (e.g., movement, basic actions).</p>
+                </section>
+
+                <section>
+                    <h2>Physics with Rapier Plugin</h2>
+                </section>
+
+                <section>
+                    <h3>Introducing Rapier</h3>
+                    <p><strong>Purpose</strong>: Physics simulation for 2D/3D in Bevy.</p>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Add basic collision detection between entities.</p>
+                </section>
+
+                <section>
+                    <h2>Compilation and Exportation</h2>
+                </section>
+
+                <section>
+                    <h3>Building and Exporting</h3>
+                    <ul>
+                        <li><strong>Native Compilation</strong>: Test the mockup locally.</li>
+                        <li><strong>WebAssembly Compilation</strong>: Deploy on a simple webpage.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Practical Exercise</h3>
+                    <p>Integrate the game mockup into a webpage and test the WebAssembly version.</p>
+                </section>
+
+                <section>
+                    <h2>Achievements and Q&A</h2>
+                    <p>Celebrate our accomplishments and address questions or feedback.</p>
+                </section>
+
+                <section>
+					<img src="images/thanks.gif" alt="thank you" width="50%">
+					<ul>
+                        <li>Bastion Sevajol &lt;bastien@sevajol.fr&gt;</li>
+                        <li>René Ribaud &lt;rene.ribaud@gmail.com&gt;</li>
+					</ul>
+				</section>
+
+			</div>
+
+		</div>
+
+		</script>
+        <script type="module">
+        import Reveal from "../reveal.js/dist/reveal.esm.js";
+        import Markdown from "../reveal.js/plugin/markdown/markdown.esm.js";
+        import Highlight from "../reveal.js/plugin/highlight/highlight.esm.js";
+        import Zoom from "../reveal.js/plugin/zoom/zoom.esm.js";
+
+        let deck = new Reveal({
+            plugins: [Markdown, Highlight, Zoom],
+            controls: true,
+            progress: true,
+            history: true,
+            center: false,
+            width: 960,
+            height: 700,
+
+            // Factor of the display size that should remain empty around the content
+            margin: 0.1,
+		    // Use this to print in pdf
+		    // margin: 0.6,
+
+            // Bounds for smallest/largest possible scale to apply to content
+            minScale: 0.2,
+            maxScale: 1.5,
+
+            transition: "convex",
+        });
+
+        deck.initialize();
+        </script>
+
+	</body>
+</html>
