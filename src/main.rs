@@ -1,28 +1,48 @@
 use bevy::prelude::*;
 
+#[derive(Component)]
+struct Player {
+    name: String,
+    lifes: u8,
+}
+
 fn main() {
     App::new()
         .add_systems(Startup, my_first_system)
-        .add_systems(
-            Update,
-            (my_second_system, my_third_system, my_fourth_system),
-            // (my_second_system, my_third_system, my_fourth_system).chain(),
-        )
+        .add_systems(Update, my_second_system)
         .run();
 }
 
-fn my_first_system() {
+fn my_first_system(mut commands: Commands) {
     println!("Hello, bevy! I'm the first system!");
+    commands.spawn(Player {
+        name: "Bob".to_string(),
+        lifes: 3,
+    });
+    // commands.spawn(Player {
+    //     name: "Alice".to_string(),
+    //     lifes: 4,
+    // });
 }
 
-fn my_second_system() {
-    println!("I'm the second system!");
-}
+fn my_second_system(players: Query<&Player>) {
+    let player = players.single();
+    println!(
+        "I'm the second system! Player {} has {} lifes!",
+        player.name, player.lifes
+    );
 
-fn my_third_system() {
-    println!("I'm the third system!");
-}
+    if let Ok(player) = players.get_single() {
+        println!(
+            "I'm the second system! Player {} has {} lifes!",
+            player.name, player.lifes
+        );
+    }
 
-fn my_fourth_system() {
-    println!("I'm the fourth system!");
+    for player in players.iter() {
+        println!(
+            "I'm the second system, looping on Players! Player {} has {} lifes!",
+            player.name, player.lifes
+        );
+    }
 }
