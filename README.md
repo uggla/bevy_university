@@ -15,7 +15,7 @@ cd bevy_university
 npm install
 ```
 
-3. Intall staticjinja
+3. Install staticjinja
 
 Some presentations (e.g. Rust) are using staticjinja templating system to include code snippets and compose the presentation.
 Staticjinja can be installed using pip. A proper installation could be to install it in a virtualenv.
@@ -26,7 +26,7 @@ pip3 install staticjinja
 
 4. Build the presentation with staticjinja
 
-Run staticjinja within the presentation directory `staticjinja build`.
+Run staticjinja within the `slides` directory: `staticjinja build`.
 
 Note: `staticjinja watch` can be run and it will rebuild the presentation as soon as it will detect a change in the templates folder.
 
