@@ -33,7 +33,6 @@ def check_tools():
 
 
 def serve_content():
-    os.chdir(SLIDES_DIR)
     with socketserver.TCPServer(("", PORT), Handler) as httpd:
         print("serving at http://localhost:{}".format(PORT))
         httpd.serve_forever()
