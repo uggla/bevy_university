@@ -25,21 +25,25 @@ fn my_first_system(mut commands: Commands) {
     // });
 }
 
-fn my_second_system(players: Query<&Player>) {
-    let player = players.single();
+fn my_second_system(mut players: Query<&mut Player>) {
+    let mut player = players.single_mut();
+    player.name = "Anakin".to_string();
     println!(
         "I'm the second system! Player {} has {} lifes!",
         player.name, player.lifes
     );
 
-    if let Ok(player) = players.get_single() {
+    if let Ok(mut player) = players.get_single_mut() {
+        player.name = "Leia".to_string();
         println!(
             "I'm the second system! Player {} has {} lifes!",
             player.name, player.lifes
         );
     }
 
-    for player in players.iter() {
+    for mut player in players.iter_mut() {
+        player.name = "Luc".to_string();
+        player.lifes = 2;
         println!(
             "I'm the second system, looping on Players! Player {} has {} lifes!",
             player.name, player.lifes
