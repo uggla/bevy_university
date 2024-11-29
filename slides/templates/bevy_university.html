@@ -198,7 +198,7 @@
 
                 <section>
                     <h2>Introduction to the ECS Framework</h2>
-					<img src="images/ecs.webp" alt="ecs" width="50%">
+					<img src="images/space_invaders.png" alt="ecs" width="75%">
                 </section>
 
                 <section>
@@ -240,7 +240,7 @@
 
                 <section>
                     <h3>Systems and Scheduling in Bevy</h3>
-					<img src="images/systems_and_scheduling.webp" alt="ecs" width="50%">
+					<img src="images/pacman.webp" alt="system&scheduling" width="75%">
                 </section>
 
                 <section>
@@ -248,30 +248,24 @@
                     <div class="lots_of_items">
                         <ul>
                             <li><strong>Concept</strong>: Coordinates system execution.</li>
-                            <li><strong>Practical Exercise</strong>: Create and schedule systems in Bevy.</li>
+                            <li>
+                                <strong>Practical Exercise</strong>: Create and schedule systems in Bevy.
+                                <table>
 
-                                <pre><code class="hljs rust" data-trim data-line-numbers>
-                                    ...
-                                    fn main() {
-                                        App::new()
-                                            .add_systems(Startup, my_first_system)
-                                            .add_systems(
-                                                Update,
-                                                (my_second_system, my_third_system, my_fourth_system),
-                                                // (my_second_system, my_third_system, my_fourth_system).chain(),
-                                            )
-                                            .run();
-                                    }
-
-                                    fn my_first_system() {
-                                        println!("Hello, bevy! I'm the first system!");
-                                    }
-
-                                    fn my_second_system() {
-                                        println!("I'm the second system!");
-                                    }
-                                    ...
-                                </code></pre>
+						            <thead>
+							            <tr>
+								            <th>Branch</th>
+								            <th>Files</th>
+							            </tr>
+						            </thead>
+						            <tbody>
+							            <tr>
+								            <td>01_systems</td>
+								            <td>src/main.rs</td>
+							            </tr>
+						            </tbody>
+                                </table>
+                            </li>
                             <li>The systems are run in parallel so they are not sequentially executed.</li>
                             <li>But we can control the order of execution with methods <code>(after, before, chain)</code>.</li>
                         </ul>
@@ -279,15 +273,60 @@
                 </section>
 
                 <section>
-                    <h2>Manipulating Entities and Components in Bevy</h2>
+                    <h3>Manipulating Entities and Components in Bevy</h3>
+					<img src="images/outrun.jpg" alt="system&scheduling" width="75%">
                 </section>
 
                 <section>
-                    <h3>Key Topics</h3>
-                    <ul>
-                        <li>Declare entities and associate components.</li>
-                        <li>Structure systems to define behaviors.</li>
-                    </ul>
+                    <h3>Declare entities and associate components</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li><strong>Concept</strong>: Create a Player component.</li>
+                            <li><strong>Concept</strong>: Spawn an entity with the Player component.</li>
+                            <li><strong>Concept</strong>: Various way of querying the component in a system.</li>
+                            <li><strong>Practical Exercise</strong>:
+                                <table>
+						            <thead>
+							            <tr>
+								            <th>Branch</th>
+								            <th>Files</th>
+							            </tr>
+						            </thead>
+						            <tbody>
+							            <tr>
+								            <td>02-components_and_entity</td>
+								            <td>src/main.rs</td>
+							            </tr>
+						            </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Mut component(s) in entity(ies)</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li><strong>Concept</strong>: Various way of querying the Player component in a system and change its name value.</li>
+                            <li><strong>Practical Exercise</strong>:
+                                <table>
+						            <thead>
+							            <tr>
+								            <th>Branch</th>
+								            <th>Files</th>
+							            </tr>
+						            </thead>
+						            <tbody>
+							            <tr>
+								            <td>03-mut_components_and_entities</td>
+								            <td>src/main.rs</td>
+							            </tr>
+						            </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
                 </section>
 
                 <section>
