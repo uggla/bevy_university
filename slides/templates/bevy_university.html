@@ -31,6 +31,9 @@
 		.lots_of_items h3 { font-size: 0.7em; }
 		.lots_of_items h4 { font-size: 0.6em; }
 		.lots_of_items code { font-size: 0.7em; }
+        .lots_of_items table { float: left; margin-right: 1em; }
+        .clearfix { clear: left; }
+
 		.long_link a { font-size: 0.8em; }
 		.pic { position: relative; float: left; width:50%; top: 0px; }
 		.left_text { position: relative; float: left; width:50%; text-align: left; }
@@ -172,10 +175,27 @@
                 </section>
 
                 <section>
+                    <h3>Overview of Bevy</h3>
+                    <ul>
+					    <li>TBD</li>
+                    </ul>
+                </section>
+
+                <section>
                     <h3>Quick Overview of the Project</h3>
                     <ul>
-                        <li>Goals of the workshop.</li>
-                        <li>What we will build together.</li>
+                        <li>Goals of the workshop.
+                            <ul>
+                                <li>Follow the Bevy tutorial.</li>
+                                <li>What we will build together.</li>
+                            </ul>
+                        </li>
+                        <li>What we will build together.
+                            <ul>
+                                <li>An mockup of Asteroids.</li>
+                                <li>Paste screenshots of the game.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </section>
 
@@ -230,12 +250,14 @@
 
                 <section>
                     <h3>Analogy to SQL</h3>
-                    <p>ECS can be "compared" to an in memory SQL database. With only a big table</p>
-                    <ul>
-                        <li><strong>Entities</strong>: Line in the table.</li>
-                        <li><strong>Components</strong>: Columns in the table.</li>
-                        <li><strong>Systems</strong>: Stored procedures in which we can query the table.</li>
-                    </ul>
+                    <div class="iwantitatleft"
+                        <p>ECS can be "compared" to an in memory SQL database. With only a big table</p>
+                        <ul>
+                            <li><strong>Entities</strong>: Line in the table.</li>
+                            <li><strong>Components</strong>: Columns in the table.</li>
+                            <li><strong>Systems</strong>: Stored procedures in which we can query the table.</li>
+                        </ul>
+                    </div>
                 </section>
 
                 <section>
@@ -266,6 +288,7 @@
 						            </tbody>
                                 </table>
                             </li>
+                            <div class="clearfix"></div>
                             <li>The systems are run in parallel so they are not sequentially executed.</li>
                             <li>But we can control the order of execution with methods <code>(after, before, chain)</code>.</li>
                         </ul>
@@ -282,9 +305,10 @@
                     <div class="lots_of_items">
                         <ul>
                             <li><strong>Concept</strong>: Create a Player component.</li>
-                            <li><strong>Concept</strong>: Spawn an entity with the Player component.</li>
-                            <li><strong>Concept</strong>: Various way of querying the component in a system.</li>
+                            <li>Spawn an entity with the Player component.</li>
+                            <li>Various way of querying the component in a system.</li>
                             <li><strong>Practical Exercise</strong>:
+                            <div class="clearfix"></div>
                                 <table>
 						            <thead>
 							            <tr>
@@ -310,6 +334,7 @@
                         <ul>
                             <li><strong>Concept</strong>: Various way of querying the Player component in a system and change its name value.</li>
                             <li><strong>Practical Exercise</strong>:
+                                <div class="clearfix"></div>
                                 <table>
 						            <thead>
 							            <tr>
@@ -325,6 +350,76 @@
 						            </tbody>
                                 </table>
                             </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Load default plugins and set a camera</h3>
+					<img src="images/crystal_castle.png" alt="default_plugins&camera" width="75%">
+                </section>
+
+                <section>
+                    <h3>Load default plugins</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li><strong>Concept</strong>: Game loop and window.</li>
+                            <li>Load the default plugins.</li>
+                            <li>DefaultPlugins is a PluginGroup, a collection of plugins.</li>
+                            <li>Define windows size constants and set a window with appropriate size and title.</li>
+                            <li>my_second_system "update" is now in a 60fps game loop.</li>
+                            <li><strong>Practical Exercise</strong>:
+                                <div class="clearfix"></div>
+                                <table>
+						            <thead>
+							            <tr>
+								            <th>Branch</th>
+								            <th>Files</th>
+							            </tr>
+						            </thead>
+						            <tbody>
+							            <tr>
+								            <td>04-default_plugins</td>
+								            <td>src/main.rs</td>
+							            </tr>
+						            </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Set a 2D camera</h3>
+                    <div class="left_text lots_of_items">
+                        <ul>
+                            <li><strong>Concept</strong>: Camera and bundles.</li>
+                            <li>Modify first_system to spawn a Camera2dBundle.</li>
+                            <li>A bundle is a collection of components.</li>
+                            <li>Cordinate (0,0) at the middle of the screen.</li>
+                            <li>Spawn a default sprite bundle.</li>
+                            <li><strong>Practical Exercise</strong>:
+                                <table>
+						            <thead>
+							            <tr>
+								            <th>Branch</th>
+								            <th>Files</th>
+							            </tr>
+						            </thead>
+						            <tbody>
+							            <tr>
+								            <td>05-camera</td>
+								            <td>src/main.rs</td>
+							            </tr>
+						            </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pic lots_of_items">
+                        <ul>
+                            <li>Orientation</li>
+                        <img src="images/coordinates.png" alt="orientation" width="65%">
                         </ul>
                     </div>
                 </section>
