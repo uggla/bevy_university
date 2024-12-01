@@ -32,10 +32,16 @@ fn my_first_system(mut commands: Commands) {
         name: "Bob".to_string(),
         lifes: 3,
     });
-    // commands.spawn(Player {
-    //     name: "Alice".to_string(),
-    //     lifes: 4,
-    // });
+
+    commands.spawn(Camera2dBundle::default());
+
+    commands.spawn(SpriteBundle {
+        sprite: Sprite {
+            color: Color::srgb(1.0, 0.0, 0.0),
+            ..default()
+        },
+        ..default()
+    });
 }
 
 fn my_second_system(mut players: Query<&mut Player>) {
