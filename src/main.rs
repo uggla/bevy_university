@@ -1,4 +1,8 @@
-use bevy::prelude::*;
+use bevy::{prelude::*, window::WindowResolution};
+
+// 16/9 1280x720
+pub const WINDOW_WIDTH: f32 = 1280.0;
+pub const WINDOW_HEIGHT: f32 = 720.0;
 
 #[derive(Component)]
 struct Player {
@@ -8,6 +12,15 @@ struct Player {
 
 fn main() {
     App::new()
+        .add_plugins(DefaultPlugins.set(WindowPlugin {
+            primary_window: Some(Window {
+                title: "Bevy University".to_string(),
+                resizable: false,
+                resolution: WindowResolution::new(WINDOW_WIDTH, WINDOW_HEIGHT),
+                ..default()
+            }),
+            ..default()
+        }))
         .add_systems(Startup, my_first_system)
         .add_systems(Update, my_second_system)
         .run();
