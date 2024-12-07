@@ -394,10 +394,11 @@
                     <div class="left_text lots_of_items">
                         <ul>
                             <li><strong>Concept</strong>: Camera and bundles.</li>
-                            <li>Modify first_system to spawn a Camera2dBundle.</li>
-                            <li>A bundle is a collection of components.</li>
-                            <li>Cordinate (0,0) at the middle of the screen.</li>
-                            <li>Spawn a default sprite bundle.</li>
+                            <li>Modify first_system to spawn a Camera2dBundle or Camera2d (bevy 0.15).</li>
+                            <li>A bundle is a collection of components but is now not the preferred way to build components but still compatible.</li>
+                            <li>A required macro is now used to create dependencies between components.</li>
+                            <li>Coordinate (0,0) at the middle of the screen.</li>
+                            <li>Spawn a default sprite.</li>
                             <li><strong>Practical Exercise</strong>:
                                 <table>
 						            <thead>
@@ -442,12 +443,12 @@
                 </section>
 
                 <section>
-                    <h3>Asset server, texture, transform</h3>
+                    <h3>Asset server, image, transform</h3>
                     <div class="lots_of_items">
                         <ul>
                             <li>Asset server is a builtin resource that read assets from the file system.</li>
-                            <li>Add a texture to the sprite bundle using the asset server to display the sprite.</li>
-                            <li>The texture "sprites/player.png" can be loaded from the assets folder by default.</li>
+                            <li>Add an image to the sprite using the asset server.</li>
+                            <li>The image "sprites/player.png" can be loaded from the assets folder by default.</li>
                             <li>Remove the sprite color red and add a transformation to reduce the size by 2.</li>
                             <li><strong>Practical Exercise</strong>:
                                 <div class="clearfix"></div>
