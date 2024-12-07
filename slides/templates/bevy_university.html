@@ -166,9 +166,8 @@
                     <ul>
 					    <li>Provide an alternative to C/C++ and also higher-level languages</li>
 						<li>Multi paradigm language (imperative, functional, object oriented (not fully))</li>
-						<li>By Mozilla and the Community</li>
 						<li>Fast, safe, and efficient (modern)</li>
-						<li>No garbage collector, ownership and borrow checker</li>
+						<li>No garbage collector (good for games), ownership and borrow checker</li>
 						<li>Dual license MIT and Apache v2.0</li>
 						<li>First stable release May 15th, 2015</li>
                     </ul>
@@ -176,9 +175,20 @@
 
                 <section>
                     <h3>Overview of Bevy</h3>
-                    <ul>
-					    <li>TBD</li>
-                    </ul>
+                    <div class="lots_of_items">
+                        <ul>
+					        <li>Data-driven game engine built in Rust</li>
+					        <li>August 10, 2020 by Carter Anderson</li>
+						    <li>Dual license MIT and Apache v2.0</li>
+						    <li>Current version 0.15</li>
+						    <li>Not stable, breaking changes ~3 months and migration guides</li>
+						    <li>Fully based on the ECS pattern that encourages clean, decoupled designs</li>
+						    <li>Lots of features 2D, 3D, UI, Audio...</li>
+						    <li>Extensible with plugins</li>
+                            <li>Performant multi-threaded</li>
+						    <li>Multi platform (Windows, Linux, macOS, Web (Wasm), Android, iOS)</li>
+                        </ul>
+                    </div>
                 </section>
 
                 <section>
@@ -427,6 +437,7 @@
 
                 <section>
                     <h3>Resources and asset server</h3>
+                    <h3>Display our vessel</h3>
 					<img src="images/captain_blood.png" alt="default_plugins&camera" width="65%">
                 </section>
 
@@ -443,7 +454,7 @@
                 </section>
 
                 <section>
-                    <h3>Asset server, image, transform</h3>
+                    <h3>Asset server, image, transform, display our vessel</h3>
                     <div class="lots_of_items">
                         <ul>
                             <li>Asset server is a builtin resource that read assets from the file system.</li>
@@ -465,6 +476,46 @@
 								            <td>src/main.rs</td>
 							            </tr>
 						            </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Manage the game states</h3>
+					<img src="images/elite.png" alt="game_states" width="50%">
+                </section>
+
+                <section>
+                    <h3>States</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li><strong>Definition:</strong> A state represents a specific mode or phase of your application,
+                                enabling systems to be selectively triggered based on the current state.</li>
+                            <li>While not essential for this mockup, states are highly beneficial.
+                                Implementing them from the start helps avoid a time-consuming rework later.</li>
+                            <li>States must derive the traits <code>Clone</code>, <code>Hash</code>, <code>Eq</code>,
+                                <code>PartialEq</code>, and <code>Default</code>.</li>
+                            <li>States need to be initialized within the application to be functional.</li>
+                            <li>Systems can be triggered or executed conditionally based on specific states.</li>
+                            <li>State information can be read using the <code>State</code> resource and updated with the
+                                <code>NextState</code> resource.</li>
+                            <li><strong>Practical Exercise:</strong>
+                                <div class="clearfix"></div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Branch</th>
+                                            <th>Files</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>07-states</td>
+                                            <td>src/main.rs</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </li>
                         </ul>
