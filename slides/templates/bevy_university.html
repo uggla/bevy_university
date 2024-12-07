@@ -34,6 +34,8 @@
         .lots_of_items table { float: left; margin-right: 1em; }
         .clearfix { clear: left; }
 
+		.lots_of_items2 ul { font-size: 0.8em; text-align: left; }
+
 		.long_link a { font-size: 0.8em; }
 		.pic { position: relative; float: left; width:50%; top: 0px; }
 		.left_text { position: relative; float: left; width:50%; text-align: left; }
@@ -193,20 +195,25 @@
 
                 <section>
                     <h3>Quick Overview of the Project</h3>
+                    <div class="left_text lots_of_items2">
                     <ul>
-                        <li>Goals of the workshop.
+                        <li>Goals of the Workshop:
                             <ul>
-                                <li>Follow the Bevy tutorial.</li>
-                                <li>What we will build together.</li>
+                                <li>First, we will follow the Bevy tutorial to understand the basics.</li>
+                                <li>Next, we will explore additional concepts, equipping you with the tools to build your own game.</li>
                             </ul>
                         </li>
                         <li>What we will build together.
                             <ul>
-                                <li>An mockup of Asteroids.</li>
-                                <li>Paste screenshots of the game.</li>
+                                <li>An mockup of Asteroids game.</li>
                             </ul>
                         </li>
                     </ul>
+                    </div>
+                    <div class="pic lots_of_items">
+                        <p>Paste screenshots of the game.</p>
+                        <img src="images/asteroids.png" alt="asteroids" width="50%">
+                    </div>
                 </section>
 
                 <section>
@@ -514,6 +521,43 @@
                                         <tr>
                                             <td>07-states</td>
                                             <td>src/main.rs</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Create your own plugins</h3>
+					<img src="images/defender_of_the_crown_01.png" alt="plugins" width="50%">
+                </section>
+
+                <section>
+                    <h3>Plugins</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li><strong>Definition:</strong> A plugin is a modular unit of functionality that can be added to
+                                your application. Plugins help organize code, enable features, and set up the
+                                engine's systems, resources, and behaviors in a reusable and scalable way.</li>
+                            <li>Create a <code>states.rs</code> file, define a <code>StatePlugin</code>, and implement
+                                the <code>Plugin</code> trait.</li>
+                            <li>Refactor the code to move all state-related functionality to the <code>states.rs</code> file.</li>
+                            <li><strong>Caution:</strong> Ensure the <code>GameState</code> struct is made public (<code>pub</code>).</li>
+                            <li><strong>Practical Exercise:</strong>
+                                <div class="clearfix"></div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Branch</th>
+                                            <th>Files</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>08-plugins</td>
+                                            <td>src/main.rs<br/>src/states.rs</td>
                                         </tr>
                                     </tbody>
                                 </table>
