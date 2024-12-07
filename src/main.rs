@@ -10,6 +10,9 @@ struct Player {
     lifes: u8,
 }
 
+#[derive(Resource, Debug)]
+struct CurrentLevel(u8);
+
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(WindowPlugin {
@@ -23,11 +26,17 @@ fn main() {
         }))
         .add_systems(Startup, my_first_system)
         .add_systems(Update, my_second_system)
+        .insert_resource(CurrentLevel(0))
         .run();
 }
 
-fn my_first_system(mut commands: Commands) {
+fn my_first_system(
+    mut commands: Commands,
+    mut current_level: ResMut<CurrentLevel>,
+    asset_server: Res<AssetServer>,
+) {
     println!("Hello, bevy! I'm the first system!");
+    current_level.0 = 1;
     commands.spawn(Player {
         name: "Bob".to_string(),
         lifes: 3,
@@ -35,14 +44,17 @@ fn my_first_system(mut commands: Commands) {
 
     commands.spawn(Camera2d);
 
-    commands.spawn(Sprite {
-        color: Color::srgb(1.0, 0.0, 0.0),
+    commands.spawn(SpriteBundle {
+        texture: asset_server.load("sprites/player.png"),
+        transform: Transform::from_scale(Vec3::new(0.5, 0.5, 0.5)),
         ..default()
     });
 }
 
-fn my_second_system(mut players: Query<&mut Player>) {
+fn my_second_system(mut players: Query<&mut Player>, current_level: Res<CurrentLevel>) {
     let mut player = players.single_mut();
+
+    println!("Current level: {:?}", current_level.0);
     player.name = "Anakin".to_string();
     println!(
         "I'm the second system! Player {} has {} lifes!",
