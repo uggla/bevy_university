@@ -425,17 +425,49 @@
                 </section>
 
                 <section>
-                    <h3>Practical Exercise</h3>
-                    <p>Add sprites as entities in a 2D scene.</p>
-                </section>
-
-                <section>
-                    <h2>Resources and Plugins in Bevy</h2>
+                    <h3>Resources and asset server</h3>
+					<img src="images/captain_blood.png" alt="default_plugins&camera" width="65%">
                 </section>
 
                 <section>
                     <h3>Resources</h3>
-                    <p><strong>Definition</strong>: Shared global data accessible by systems.</p>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li><strong>Definition</strong>: Shared global data accessible by systems.</li>
+                            <li>Create a resource CurrentLevel and update it's value in the first_system.</li>
+                            <li>Resources need to be initialized in our application.</li>
+                            <li>Read the CurrentLevel resource in the second_system.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Asset server, texture, transform</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li>Asset server is a builtin resource that read assets from the file system.</li>
+                            <li>Add a texture to the sprite bundle using the asset server to display the sprite.</li>
+                            <li>The texture "sprites/player.png" can be loaded from the assets folder by default.</li>
+                            <li>Remove the sprite color red and add a transformation to reduce the size by 2.</li>
+                            <li><strong>Practical Exercise</strong>:
+                                <div class="clearfix"></div>
+                                <table>
+						            <thead>
+							            <tr>
+								            <th>Branch</th>
+								            <th>Files</th>
+							            </tr>
+						            </thead>
+						            <tbody>
+							            <tr>
+								            <td>06-resources</td>
+								            <td>src/main.rs</td>
+							            </tr>
+						            </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
                 </section>
 
                 <section>
