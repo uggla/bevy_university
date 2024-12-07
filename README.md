@@ -1,5 +1,12 @@
 # My presentations using reveal.js
 
+## Organization
+
+- main branch contains the slides.
+- other branches contain the code evolution.
+
+**Changes on slides must be done on the main branch.**
+
 ## Get and build presentations
 
 1. Requirements
