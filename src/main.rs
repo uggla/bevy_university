@@ -13,6 +13,16 @@ struct Player {
 #[derive(Resource, Debug)]
 struct CurrentLevel(u8);
 
+#[allow(dead_code)]
+#[derive(Debug, States, Clone, Eq, PartialEq, Hash, Default)]
+enum GameState {
+    #[default]
+    Menu,
+    InGame,
+    Paused,
+    GameOver,
+}
+
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(WindowPlugin {
@@ -24,10 +34,20 @@ fn main() {
             }),
             ..default()
         }))
-        .add_systems(Startup, my_first_system)
-        .add_systems(Update, my_second_system)
+        .add_systems(Update, start_game.run_if(in_state(GameState::Menu)))
+        .add_systems(OnEnter(GameState::InGame), my_first_system)
+        .add_systems(Update, my_second_system.run_if(in_state(GameState::InGame)))
         .insert_resource(CurrentLevel(0))
+        .init_state::<GameState>()
         .run();
+}
+
+fn start_game(state: Res<State<GameState>>, mut next_state: ResMut<NextState<GameState>>) {
+    // TODO: right now we enter the InGame state directly,
+    // but we should display a "menu" and add a condition when player press a button.
+    if *state == GameState::Menu {
+        next_state.set(GameState::InGame);
+    }
 }
 
 fn my_first_system(
