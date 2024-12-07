@@ -33,13 +33,10 @@ fn my_first_system(mut commands: Commands) {
         lifes: 3,
     });
 
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera2d);
 
-    commands.spawn(SpriteBundle {
-        sprite: Sprite {
-            color: Color::srgb(1.0, 0.0, 0.0),
-            ..default()
-        },
+    commands.spawn(Sprite {
+        color: Color::srgb(1.0, 0.0, 0.0),
         ..default()
     });
 }
