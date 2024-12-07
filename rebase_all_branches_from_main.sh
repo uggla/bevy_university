@@ -9,6 +9,7 @@ arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
 
 branches=$(git branch | grep -P '^\s+\d\d-')
 
+echo "Use $0 -f to rebase and force push the changes"
 git checkout main
 
 for branch in $branches; do
@@ -19,5 +20,7 @@ for branch in $branches; do
   if [[ "${arg[0]}" == "-f" ]]; then
     git push -f
   fi
-
 done
+
+git checkout main
+exit 0
