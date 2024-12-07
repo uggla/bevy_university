@@ -42,13 +42,15 @@ fn my_first_system(
         lifes: 3,
     });
 
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera2d);
 
-    commands.spawn(SpriteBundle {
-        texture: asset_server.load("sprites/player.png"),
-        transform: Transform::from_scale(Vec3::new(0.5, 0.5, 0.5)),
-        ..default()
-    });
+    commands.spawn((
+        Sprite {
+            image: asset_server.load("sprites/player.png"),
+            ..default()
+        },
+        Transform::from_scale(Vec3::new(0.5, 0.5, 0.5)),
+    ));
 }
 
 fn my_second_system(mut players: Query<&mut Player>, current_level: Res<CurrentLevel>) {
