@@ -20,6 +20,9 @@ pub const WINDOW_HEIGHT: f32 = 720.0;
 #[derive(Resource, Debug)]
 struct CurrentLevel(u8);
 
+#[derive(Resource, Debug)]
+struct CurrentLevel(u8);
+
 fn main() {
     App::new()
         .add_plugins((
