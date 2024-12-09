@@ -1,5 +1,7 @@
 mod states;
 
+use std::f32::consts::PI;
+
 use bevy::{prelude::*, window::WindowResolution};
 use states::{GameState, StatesPlugin};
 
@@ -30,10 +32,15 @@ fn main() {
             }),
             StatesPlugin,
         ))
+        .add_systems(OnEnter(GameState::Menu), setup_camera)
         .add_systems(OnEnter(GameState::InGame), my_first_system)
-        .add_systems(Update, my_second_system.run_if(in_state(GameState::InGame)))
+        .add_systems(Update, rotate_vessel.run_if(in_state(GameState::InGame)))
         .insert_resource(CurrentLevel(0))
         .run();
+}
+
+fn setup_camera(mut commands: Commands) {
+    commands.spawn(Camera2d);
 }
 
 fn my_first_system(
@@ -41,14 +48,7 @@ fn my_first_system(
     mut current_level: ResMut<CurrentLevel>,
     asset_server: Res<AssetServer>,
 ) {
-    println!("Hello, bevy! I'm the first system!");
     current_level.0 = 1;
-    commands.spawn(Player {
-        name: "Bob".to_string(),
-        lifes: 3,
-    });
-
-    commands.spawn(Camera2d);
 
     commands.spawn((
         Sprite {
@@ -56,33 +56,38 @@ fn my_first_system(
             ..default()
         },
         Transform::from_scale(Vec3::new(0.5, 0.5, 0.5)),
+        Player {
+            name: "Anakin".to_string(),
+            lifes: 3,
+        },
     ));
 }
 
-fn my_second_system(mut players: Query<&mut Player>, current_level: Res<CurrentLevel>) {
+fn rotate_vessel(
+    mut players: Query<&mut Transform, With<Player>>,
+
+    keybord: Res<ButtonInput<KeyCode>>,
+    gamepads: Query<(Entity, &Gamepad)>,
+) {
     let mut player = players.single_mut();
 
-    println!("Current level: {:?}", current_level.0);
-    player.name = "Anakin".to_string();
-    println!(
-        "I'm the second system! Player {} has {} lifes!",
-        player.name, player.lifes
-    );
-
-    if let Ok(mut player) = players.get_single_mut() {
-        player.name = "Leia".to_string();
-        println!(
-            "I'm the second system! Player {} has {} lifes!",
-            player.name, player.lifes
-        );
+    if keybord.pressed(KeyCode::ArrowLeft) {
+        player.rotate_z(PI / 24.0);
+    }
+    if keybord.pressed(KeyCode::ArrowRight) {
+        player.rotate_z(-PI / 24.0);
     }
 
-    for mut player in players.iter_mut() {
-        player.name = "Luc".to_string();
-        player.lifes = 2;
-        println!(
-            "I'm the second system, looping on Players! Player {} has {} lifes!",
-            player.name, player.lifes
-        );
+    for (entity, gamepad) in gamepads.iter() {
+        if let Some(left_stick_x) = gamepad.get(GamepadAxis::LeftStickX) {
+            if left_stick_x > 0.6 {
+                debug!("{:?} LeftStickX value is {}", entity, left_stick_x);
+                player.rotate_z(-PI / 24.0);
+            }
+            if left_stick_x < -0.6 {
+                debug!("{:?} LeftStickX value is {}", entity, left_stick_x);
+                player.rotate_z(PI / 24.0);
+            }
+        }
     }
 }
