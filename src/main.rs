@@ -1,14 +1,17 @@
+mod camera;
 mod states;
 
 use std::f32::consts::PI;
 
 use bevy::{prelude::*, window::WindowResolution};
+use camera::CameraPlugin;
 use states::{GameState, StatesPlugin};
 
 // 16/9 1280x720
 pub const WINDOW_WIDTH: f32 = 1280.0;
 pub const WINDOW_HEIGHT: f32 = 720.0;
 
+#[allow(dead_code)]
 #[derive(Component)]
 struct Player {
     name: String,
@@ -31,16 +34,12 @@ fn main() {
                 ..default()
             }),
             StatesPlugin,
+            CameraPlugin,
         ))
-        .add_systems(OnEnter(GameState::Menu), setup_camera)
         .add_systems(OnEnter(GameState::InGame), setup_vessel)
         .add_systems(Update, rotate_vessel.run_if(in_state(GameState::InGame)))
         .insert_resource(CurrentLevel(0))
         .run();
-}
-
-fn setup_camera(mut commands: Commands) {
-    commands.spawn(Camera2d);
 }
 
 fn setup_vessel(
