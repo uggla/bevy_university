@@ -33,7 +33,7 @@ fn main() {
             StatesPlugin,
         ))
         .add_systems(OnEnter(GameState::Menu), setup_camera)
-        .add_systems(OnEnter(GameState::InGame), my_first_system)
+        .add_systems(OnEnter(GameState::InGame), setup_vessel)
         .add_systems(Update, rotate_vessel.run_if(in_state(GameState::InGame)))
         .insert_resource(CurrentLevel(0))
         .run();
@@ -43,7 +43,7 @@ fn setup_camera(mut commands: Commands) {
     commands.spawn(Camera2d);
 }
 
-fn my_first_system(
+fn setup_vessel(
     mut commands: Commands,
     mut current_level: ResMut<CurrentLevel>,
     asset_server: Res<AssetServer>,
