@@ -639,10 +639,10 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><code>09-inputs</code></td>
+                                            <td>09-inputs</td>
                                             <td>
-                                                <code>src/main.rs</code><br/>
-                                                <code>src/states.rs</code>
+                                                src/main.rs<br/>
+                                                src/states.rs
                                             </td>
                                             <td>15 minutes</td>
                                         </tr>
@@ -654,27 +654,81 @@
                 </section>
 
                 <section>
-                    <h3>Plugins</h3>
-                    <p><strong>Modularity</strong>: Extend Bevy functionality with plugins.</p>
+                    <h3>Debug camera</h3>
+					<img src="images/bomberman.png" alt="plugins" width="100%">
                 </section>
 
                 <section>
-                    <h3>Practical Exercise</h3>
-                    <p>Create and integrate a custom plugin.</p>
+                    <h3>Refactor Camera into a Plugin and Add a Debug Camera</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li>Refactor the camera systems into a <code>CameraPlugin</code> for better modularity.</li>
+                            <li>Add a system <code>debug_camera</code> to handle camera adjustments in debug mode.</li>
+                            <li>The <code>debug_camera</code> system should modify the <code>OrthographicProjection</code> scale based on user inputs (<code>W</code> to zoom in and <code>X</code> to zoom out).</li>
+                            <li>
+                                <strong>Practical Exercise:</strong>
+                                <div class="clearfix"></div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Branch</th>
+                                            <th>Files</th>
+                                            <th>Estimated Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>10-debug_camera</td>
+                                            <td>
+                                                src/main.rs<br/>
+                                                src/camera.rs
+                                            </td>
+                                            <td>5 minutes</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
                 </section>
 
                 <section>
-                    <h2>Handling User Input</h2>
+                    <h3>Display Asteroids</h3>
+					<img src="images/rick_dangerous.webp" alt="plugins" width="60%">
                 </section>
 
                 <section>
-                    <h3>Input Handling in Bevy</h3>
-                    <p>Manage keyboard, mouse, and controller inputs.</p>
-                </section>
-
-                <section>
-                    <h3>Practical Exercise</h3>
-                    <p>Control a sprite using keyboard input (e.g., movement, basic actions).</p>
+                    <h3>Create an Asteroid Plugin that spawn Asteroids</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li>Create an <code>AsteroidPlugin</code> for better modularity.</li>
+                            <li></li>
+                            <li></li>
+                            <li>
+                                <strong>Practical Exercise:</strong>
+                                <div class="clearfix"></div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Branch</th>
+                                            <th>Files</th>
+                                            <th>Estimated Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>11-asteroids</td>
+                                            <td>
+                                                src/main.rs<br/>
+                                                src/camera.rs
+                                            </td>
+                                            <td>5 minutes</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
                 </section>
 
                 <section>
