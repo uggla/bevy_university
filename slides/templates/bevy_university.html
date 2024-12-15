@@ -34,7 +34,7 @@
         .lots_of_items table { float: left; margin-right: 1em; }
         .clearfix { clear: left; }
 
-		.lots_of_items2 ul { font-size: 0.8em; text-align: left; }
+		.lots_of_items2 ul { font-size: 0.7em; text-align: left; }
 
 		.long_link a { font-size: 0.8em; }
 		.pic { position: relative; float: left; width:50%; top: 0px; }
@@ -194,21 +194,29 @@
                 </section>
 
                 <section>
-                    <h3>Quick Overview of the Project</h3>
+                    <h3>Quick Overview of the project and the session</h3>
                     <div class="left_text lots_of_items2">
                     <ul>
                         <li>Goals of the Workshop:
                             <ul>
                                 <li>First, we will follow the Bevy tutorial to understand the basics.</li>
                                 <li>Next, we will explore additional concepts, equipping you with the tools to build your own game.</li>
+                                <li>Finally we will produce a native and web (wasm) version</li>
                             </ul>
                         </li>
                         <li>What we will build together.
                             <ul>
                                 <li>An mockup of Asteroids game.</li>
                             </ul>
-                        </li>
-                    </ul>
+                            </li>
+                            <li>Session Overview
+                                <ul>
+                                    <li>Provide an explanation of the tasks to be completed (via slides), showcasing the corresponding code. Engage actively by asking questions.</li>
+                                    <li>Work on the code yourself, and don't hesitate to ask for help if needed.</li>
+                                    <li>If you encounter any issues, no worries—you can always check out the branch for this specific section.</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                     <div class="pic lots_of_items">
                         <p>Paste screenshots of the game.</p>
@@ -295,12 +303,14 @@
 							            <tr>
 								            <th>Branch</th>
 								            <th>Files</th>
+								            <th>Time</th>
 							            </tr>
 						            </thead>
 						            <tbody>
 							            <tr>
 								            <td>01_systems</td>
 								            <td>src/main.rs</td>
+								            <td>5mn</td>
 							            </tr>
 						            </tbody>
                                 </table>
@@ -331,12 +341,14 @@
 							            <tr>
 								            <th>Branch</th>
 								            <th>Files</th>
+								            <th>Time</th>
 							            </tr>
 						            </thead>
 						            <tbody>
 							            <tr>
 								            <td>02-components_and_entity</td>
 								            <td>src/main.rs</td>
+								            <td>5mn</td>
 							            </tr>
 						            </tbody>
                                 </table>
@@ -357,12 +369,14 @@
 							            <tr>
 								            <th>Branch</th>
 								            <th>Files</th>
+								            <th>Time</th>
 							            </tr>
 						            </thead>
 						            <tbody>
 							            <tr>
 								            <td>03-mut_components_and_entities</td>
 								            <td>src/main.rs</td>
+								            <td>5mn</td>
 							            </tr>
 						            </tbody>
                                 </table>
@@ -392,12 +406,14 @@
 							            <tr>
 								            <th>Branch</th>
 								            <th>Files</th>
+								            <th>Time</th>
 							            </tr>
 						            </thead>
 						            <tbody>
 							            <tr>
 								            <td>04-default_plugins</td>
 								            <td>src/main.rs</td>
+								            <td>5mn</td>
 							            </tr>
 						            </tbody>
                                 </table>
@@ -422,12 +438,14 @@
 							            <tr>
 								            <th>Branch</th>
 								            <th>Files</th>
+								            <td>Time</td>
 							            </tr>
 						            </thead>
 						            <tbody>
 							            <tr>
 								            <td>05-camera</td>
 								            <td>src/main.rs</td>
+								            <td>5mn</td>
 							            </tr>
 						            </tbody>
                                 </table>
@@ -475,12 +493,14 @@
 							            <tr>
 								            <th>Branch</th>
 								            <th>Files</th>
+								            <th>Time</th>
 							            </tr>
 						            </thead>
 						            <tbody>
 							            <tr>
 								            <td>06-resources</td>
 								            <td>src/main.rs</td>
+								            <td>5mn</td>
 							            </tr>
 						            </tbody>
                                 </table>
@@ -515,12 +535,14 @@
                                         <tr>
                                             <th>Branch</th>
                                             <th>Files</th>
+                                            <th>Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>07-states</td>
                                             <td>src/main.rs</td>
+                                            <td>5mn</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -552,12 +574,77 @@
                                         <tr>
                                             <th>Branch</th>
                                             <th>Files</th>
+                                            <th>Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>08-plugins</td>
                                             <td>src/main.rs<br/>src/states.rs</td>
+                                            <td>5mn</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>User Inputs</h3>
+                    <h3>Create a Simple Menu and Enable Vessel Rotation</h3>
+					<img src="images/super_mario.webp" alt="plugins" width="50%">
+                    <h5>At this point, we have covered almost all the fundamentals, and we will introduce more changes in the upcoming sections.</h5>
+                </section>
+
+                <section>
+                    <h3>Refactor States Plugin to Display a Menu</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li>Add a <code>Menu</code> component to tag menu-related entities.</li>
+                            <li>Add a system <code>display_menu</code> to create and display the menu when entering the <code>GameState::Menu</code> state.</li>
+                            <li>The menu consists of a parent entity with a <code>Node</code> component and a child entity with a <code>Text</code> component.</li>
+                            <li>
+                                Refactor the <code>start_game</code> system to handle user inputs from both keyboard and gamepad:
+                                <ul>
+                                    <li>Use the <code>ButtonInput&lt;KeyCode&gt;</code> resource to detect keyboard inputs.</li>
+                                    <li>Use a query on the <code>Gamepad</code> component to handle gamepad inputs.</li>
+                                </ul>
+                            </li>
+                            <li>Add a system <code>despawn_menu</code> to remove menu entities when exiting the <code>GameState::Menu</code> state.</li>
+                            <li><strong>Warning:</strong> The application might crash if a camera is not available during state transitions.</li>
+                            <li>Create a system in <code>main.rs</code> to spawn a <code>Camera2d</code> when entering the <code>GameState::Menu</code> state.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Refactor Systems in main.rs to Rotate the Vessel</h3>
+                    <div class="lots_of_items">
+                        <ul>
+                            <li>Rename <code>my_first_system</code> to <code>setup_vessel</code>, remove all <code>println!</code> calls, and attach the <code>Player</code> component to the entity with the sprite component.</li>
+                            <li>Rename <code>my_second_system</code> to <code>rotate_vessel</code>, remove all <code>println!</code> calls, and keep only <code>let mut player = players.single_mut();</code> to perform the query.</li>
+                            <li>Modify the query to retrieve the entity that has both the <code>Player</code> and <code>Transform</code> components.</li>
+                            <li>Rotate the vessel around the Z-axis based on user inputs using <code>player.rotate_z(PI / 24.0);</code>.</li>
+                            <li>
+                                <strong>Practical Exercise:</strong>
+                                <div class="clearfix"></div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Branch</th>
+                                            <th>Files</th>
+                                            <th>Estimated Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>09-inputs</code></td>
+                                            <td>
+                                                <code>src/main.rs</code><br/>
+                                                <code>src/states.rs</code>
+                                            </td>
+                                            <td>15 minutes</td>
                                         </tr>
                                     </tbody>
                                 </table>
