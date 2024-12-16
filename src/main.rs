@@ -1,8 +1,10 @@
+mod asteroids;
 mod camera;
 mod states;
 
 use std::f32::consts::PI;
 
+use asteroids::AsteroidsPlugin;
 use bevy::{prelude::*, window::WindowResolution};
 use camera::CameraPlugin;
 use states::{GameState, StatesPlugin};
@@ -35,6 +37,7 @@ fn main() {
             }),
             StatesPlugin,
             CameraPlugin,
+            AsteroidsPlugin,
         ))
         .add_systems(OnEnter(GameState::InGame), setup_vessel)
         .add_systems(Update, rotate_vessel.run_if(in_state(GameState::InGame)))
