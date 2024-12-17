@@ -7,9 +7,10 @@ set -euo pipefail
 arg=${1:-}
 arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
 
-branches=$(git branch | grep -P '^\s+\d\d-')
+branches=$(git branch -a | grep -P '/\d\d-' | sed 's/^.\+\///')
 
 echo "Use $0 -f to rebase and force push the changes"
+cd "$(dirname "$0")"
 git checkout main
 
 for branch in $branches; do
