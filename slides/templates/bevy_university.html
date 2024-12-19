@@ -1,814 +1,1128 @@
 <!doctype html>
 <html lang="en">
-
-	<head>
-		<meta charset="utf-8">
-
-		<title>Bevy university</title>
-
-		<meta name="description" content="Quest to the fake object">
-		<meta name="author" content="Bastien Sevajol" >
-		<meta name="author" content="René Ribaud" >
-
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
-        <link rel="stylesheet" href="../reveal.js/dist/reveal.css" />
-        <link rel="stylesheet" href="../reveal.js/dist/theme/beige.css" />
-		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"> -->
-		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Satisfy"> -->
-        <!-- <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"> -->
-
-        <!-- Code syntax highlighting -->
-        <!-- <link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" /> -->
-        <link rel="stylesheet" href="css/stackoverflow-light.css" />
-
-		<style type="text/css">
-		.iwantitatleft { text-align: left; }
-		.lots_of_items ul { font-size: 0.6em; text-align: left; }
-		.lots_of_items h3 { font-size: 0.7em; }
-		.lots_of_items h4 { font-size: 0.6em; }
-		.lots_of_items code { font-size: 0.7em; }
-        .lots_of_items table { float: left; margin-right: 1em; }
-        .clearfix { clear: left; }
-
-		.lots_of_items2 ul { font-size: 0.7em; text-align: left; }
-
-		.long_link a { font-size: 0.8em; }
-		.pic { position: relative; float: left; width:50%; top: 0px; }
-		.left_text { position: relative; float: left; width:50%; text-align: left; }
-		.left_text_bio { position: relative; float: left; width:50%; font-size:0.6em; text-align: left; }
-		.right_text { width:50%; text-align: left; float: right; text-align: left; }
-        .skill-list li { font-size: 1.5rem; margin-top: 1rem; }
-		/*
-		.reveal a { color: #007DBA; }
-		.reveal h2 b { color: #0096D6; }
-		.reveal h2 .day { font-size: 0.6em; position:relative; bottom: 20px; }
-		.reveal { font-family: "Source Code Pro", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,sans-serif; font-size:40px; }
-		*/
-		.reveal { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,sans-serif; font-size:40px; }
-		.reveal h2 { margin-top: 35px; }
-		.reveal ul { margin: 0 0 0 0; }
-		.reveal pre { width: 100%; font-size:18px; }
-		.reveal pre code { max-height: 100%; }
-		.reveal section img { border: none; box-shadow: none; background: rgba(255, 255, 255, 0.0); }
-
-		body { line-height:1.1; }
-		</style>
-	</head>
-
-	<body>
-		<div class="reveal">
-
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<!-- <section data-background="images/background.svg" data-background-size="cover"> -->
-                <section>
-                    <h1>Bevy university</h1>
-					<img src="images/bevy_logo_dark.svg" alt="bevy logo" width="50%">
-                </section>
-
-                <section>
-                    <h3>Development Environment Setup and Welcome</h3>
-                    <ul>
-                        <li>Save time by doing the bevy setup if not already done.</li>
-                        <li>Then we will do the introduction.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3>Installation and Configuration of Tools</h3>
-                    <div class="long_link">
-                        <ol>
-                            <li><strong>Install Rust</strong>: rustup, rustc, cargo, clippy, rustfmt.</li>
-                            <li><strong>Configure Editor</strong>: Set up your preferred editor with Rust Analyzer.</li>
-                            <li><strong>Get bevy dependencies</strong> according to your OS.
-                                <a href="https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies">https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies</a></li>
-                            <li><strong>Clone the workshop repository</strong> from GitHub.
-                                <a href="https://github.com/uggla/bevy_university">https://github.com/uggla/bevy_university</a></li>
-                            <li><strong>Compile</strong> the project.</li>
-                        </ol>
-                    </div>
-                </section>
-
-                <section>
-					<h3>2 words about us 1/2</h3>
-					<div class="left_text_bio">
-                        <ul>
-                            <li>Stats</li>
-                  		    <ul>
-                    		    <li>First name: Bastien</li>
-                    		    <li>Last name: Sevajol</li>
-                  		    </ul>
-                        </ul>
-
-                        <ul>
-                            <li>Skills</li>
-                  		    <ul>
-                    		    <li>Class: Software engineer</li>
-                    		    <li>Latest Guilde: Biologic</li>
-                    		    <li>Age of Experience: 16 years</li>
-                    		    <li>Preferred weapon: Rust, Python</li>
-                  		    </ul>
-                        </ul>
-
-                        <ul>
-                            <li>Optional traits</li>
-                  		    <ul>
-                                <li>Sleep in the forest</li>
-                                <li>Play code and code games</li>
-                  		    </ul>
-                        </ul>
-					</div>
-					<div class="pic">
-						<img src="images/bastien.jpg" alt="Bastien" width="53%">
-					</div>
-                </section>
-
-                <section>
-					<h3>2 words about us 2/2</h3>
-					<div class="left_text_bio">
-                        <!-- <pre class="bio"> -->
-                        <ul>
-                            <li>Stats</li>
-                  		    <ul>
-                    		    <li>First name: René (Uggla)</li>
-                    		    <li>Last name: Ribaud</li>
-                  		    </ul>
-                        </ul>
-
-                        <ul>
-                            <li>Skills</li>
-                  		    <ul>
-                    		    <li>Class: Software engineer</li>
-                    		    <li>Previous Class: Solution architect (Cloud / Devops)</li>
-                    		    <li>Latest Guilde: Red Hat</li>
-                    		    <li>Game start: 1998</li>
-                    		    <li>Preferred weapons: Rust / Python</li>
-                    		    <li>Artefact: Openstack Nova</li>
-                  		    </ul>
-                        </ul>
-
-                        <ul>
-                            <li>Optional traits</li>
-                  		    <ul>
-                    		    <li>Linux and FLOSS since 1995</li>
-                    		    <li>Previously Ops, Dev today to produce my bugs</li>
-                  		    </ul>
-                        </ul>
-					</div>
-					<div class="pic">
-						<img src="images/uggla.jpg" alt="René" width="53%">
-					</div>
-                </section>
-
-                <section>
-                    <h3>Quick Overview of Rust (Optional)</h3>
-                    <ul>
-					    <li>Provide an alternative to C/C++ and also higher-level languages</li>
-						<li>Multi paradigm language (imperative, functional, object oriented (not fully))</li>
-						<li>Fast, safe, and efficient (modern)</li>
-						<li>No garbage collector (good for games), ownership and borrow checker</li>
-						<li>Dual license MIT and Apache v2.0</li>
-						<li>First stable release May 15th, 2015</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3>Overview of Bevy</h3>
-                    <div class="lots_of_items2">
-                        <ul>
-					        <li>Data-driven game engine built in Rust</li>
-					        <li>August 10, 2020 by Carter Anderson</li>
-						    <li>Dual license MIT and Apache v2.0</li>
-						    <li>Current version 0.15</li>
-						    <li>Not stable, breaking changes ~3 months and migration guides</li>
-						    <li>Fully based on the ECS pattern that encourages clean, decoupled designs</li>
-						    <li>Lots of features 2D, 3D, UI, Audio...</li>
-						    <li>Extensible with plugins</li>
-                            <li>Performant multi-threaded</li>
-						    <li>Multi platform (Windows, Linux, macOS, Web (Wasm), Android, iOS)</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Quick Overview of the project and the session</h3>
-                    <div class="left_text lots_of_items2">
-                    <ul>
-                        <li>Goals of the Workshop:
-                            <ul>
-                                <li>First, we will follow the Bevy tutorial to understand the basics.</li>
-                                <li>Next, we will explore additional concepts, equipping you with the tools to build your own game.</li>
-                                <li>Finally we will produce a native and web (wasm) version</li>
-                            </ul>
-                        </li>
-                        <li>What we will build together.
-                            <ul>
-                                <li>An mockup of Asteroids game.</li>
-                            </ul>
-                            </li>
-                            <li>Session Overview
-                                <ul>
-                                    <li>Provide an explanation of the tasks to be completed (via slides), showcasing the corresponding code. Engage actively by asking questions.</li>
-                                    <li>Work on the code yourself, and don't hesitate to ask for help if needed.</li>
-                                    <li>If you encounter any issues, no worries—you can always check out the branch for this specific section.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="pic lots_of_items">
-                        <p>Paste screenshots of the game.</p>
-                        <img src="images/asteroids.png" alt="asteroids" width="50%">
-                    </div>
-                </section>
-
-                <section>
-                    <h3>The shortest Bevy project</h3>
-                    <ul>
-                        <li>Builder pattern</li>
-                        <pre><code class="hljs rust" data-trim data-line-numbers>
-                            use bevy::prelude::*;
-
-                            fn main() {
-                                App::new().run();
-                            }
-                        </code></pre>
-                        <li>Initializing resources in the World to store globally available data that we only need a single copy of.</li>
-                        <li>Adding systems to our Schedule, which can read and modify resources and our entities' components, according to our game logic.</li>
-                        <li>Importing other blocks of App-modifying code using Plugins.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Introduction to the ECS Framework</h2>
-					<img src="images/space_invaders.png" alt="ecs" width="75%">
-                </section>
-
-                <section>
-                    <h3>Entity Component System (ECS)</h3>
-                    <ul>
-                        <li><strong>Entities</strong>: Abstract game objects.
-                            <pre><code class="hljs rust" data-trim>
-                                struct Entity(u64);
-                            </code></pre>
-                        </li>
-                        <li><strong>Components</strong>: Data associated with entities.
-                            <pre><code class="hljs rust" data-trim>
-                                #[derive(Component)]
-                                struct Position {
-                                    x: f32,
-                                    y: f32,
-                                }
-                            </code></pre>
-                        </li>
-                        <li><strong>Systems</strong>: Logic that operates on entities and their components.
-                            <pre><code class="hljs rust" data-trim>
-                                fn hello_world() {
-                                    println!("hello world!");
-                                }
-                            </code></pre>
-                        </li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3>Analogy to SQL</h3>
-                    <div class="iwantitatleft"
-                        <p>ECS can be "compared" to an in memory SQL database. With only a big table</p>
-                        <ul>
-                            <li><strong>Entities</strong>: Line in the table.</li>
-                            <li><strong>Components</strong>: Columns in the table.</li>
-                            <li><strong>Systems</strong>: Stored procedures in which we can query the table.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Systems and Scheduling in Bevy</h3>
-					<img src="images/pacman.webp" alt="system&scheduling" width="75%">
-                </section>
-
-                <section>
-                    <h3>Introduction to Bevy Scheduler</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li><strong>Concept</strong>: Coordinates system execution.</li>
-                            <li>
-                                <strong>Practical Exercise</strong>: Create and schedule systems in Bevy.
-                                <table>
-
-						            <thead>
-							            <tr>
-								            <th>Branch</th>
-								            <th>Files</th>
-								            <th>Time</th>
-							            </tr>
-						            </thead>
-						            <tbody>
-							            <tr>
-								            <td>01_systems</td>
-								            <td>src/main.rs</td>
-								            <td>5mn</td>
-							            </tr>
-						            </tbody>
-                                </table>
-                            </li>
-                            <div class="clearfix"></div>
-                            <li>The systems are run in parallel so they are not sequentially executed.</li>
-                            <li>But we can control the order of execution with methods <code>(after, before, chain)</code>.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Manipulating Entities and Components in Bevy</h3>
-					<img src="images/outrun.jpg" alt="system&scheduling" width="75%">
-                </section>
-
-                <section>
-                    <h3>Declare entities and associate components</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li><strong>Concept</strong>: Create a Player component.</li>
-                            <li>Spawn an entity with the Player component.</li>
-                            <li>Various way of querying the component in a system.</li>
-                            <li><strong>Practical Exercise</strong>:
-                            <div class="clearfix"></div>
-                                <table>
-						            <thead>
-							            <tr>
-								            <th>Branch</th>
-								            <th>Files</th>
-								            <th>Time</th>
-							            </tr>
-						            </thead>
-						            <tbody>
-							            <tr>
-								            <td>02-components_and_entity</td>
-								            <td>src/main.rs</td>
-								            <td>5mn</td>
-							            </tr>
-						            </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Mut component(s) in entity(ies)</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li><strong>Concept</strong>: Various way of querying the Player component in a system and change its name value.</li>
-                            <li><strong>Practical Exercise</strong>:
-                                <div class="clearfix"></div>
-                                <table>
-						            <thead>
-							            <tr>
-								            <th>Branch</th>
-								            <th>Files</th>
-								            <th>Time</th>
-							            </tr>
-						            </thead>
-						            <tbody>
-							            <tr>
-								            <td>03-mut_components_and_entities</td>
-								            <td>src/main.rs</td>
-								            <td>5mn</td>
-							            </tr>
-						            </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Load default plugins and set a camera</h3>
-					<img src="images/crystal_castle.png" alt="default_plugins&camera" width="75%">
-                </section>
-
-                <section>
-                    <h3>Load default plugins</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li><strong>Concept</strong>: Game loop and window.</li>
-                            <li>Load the default plugins.</li>
-                            <li>DefaultPlugins is a PluginGroup, a collection of plugins.</li>
-                            <li>Define windows size constants and set a window with appropriate size and title.</li>
-                            <li>my_second_system "update" is now in a 60fps game loop.</li>
-                            <li><strong>Practical Exercise</strong>:
-                                <div class="clearfix"></div>
-                                <table>
-						            <thead>
-							            <tr>
-								            <th>Branch</th>
-								            <th>Files</th>
-								            <th>Time</th>
-							            </tr>
-						            </thead>
-						            <tbody>
-							            <tr>
-								            <td>04-default_plugins</td>
-								            <td>src/main.rs</td>
-								            <td>5mn</td>
-							            </tr>
-						            </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Set a 2D camera</h3>
-                    <div class="left_text lots_of_items">
-                        <ul>
-                            <li><strong>Concept</strong>: Camera and bundles.</li>
-                            <li>Modify first_system to spawn a Camera2dBundle or Camera2d (bevy 0.15).</li>
-                            <li>A bundle is a collection of components but is now not the preferred way to build components but still compatible.</li>
-                            <li>A required macro is now used to create dependencies between components.</li>
-                            <li>Coordinate (0,0) at the middle of the screen.</li>
-                            <li>Spawn a default sprite.</li>
-                            <li><strong>Practical Exercise</strong>:
-                                <table>
-						            <thead>
-							            <tr>
-								            <th>Branch</th>
-								            <th>Files</th>
-								            <td>Time</td>
-							            </tr>
-						            </thead>
-						            <tbody>
-							            <tr>
-								            <td>05-camera</td>
-								            <td>src/main.rs</td>
-								            <td>5mn</td>
-							            </tr>
-						            </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="pic lots_of_items">
-                        <ul>
-                            <li>Orientation</li>
-                        <img src="images/coordinates.png" alt="orientation" width="65%">
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Resources and asset server</h3>
-                    <h3>Display our vessel</h3>
-					<img src="images/captain_blood.png" alt="default_plugins&camera" width="65%">
-                </section>
-
-                <section>
-                    <h3>Resources</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li><strong>Definition</strong>: Shared global data accessible by systems.</li>
-                            <li>Create a resource CurrentLevel and update it's value in the first_system.</li>
-                            <li>Resources need to be initialized in our application.</li>
-                            <li>Read the CurrentLevel resource in the second_system.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Asset server, image, transform, display our vessel</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li>Asset server is a builtin resource that read assets from the file system.</li>
-                            <li>Add an image to the sprite using the asset server.</li>
-                            <li>The image "sprites/player.png" can be loaded from the assets folder by default.</li>
-                            <li>Remove the sprite color red and add a transformation to reduce the size by 2.</li>
-                            <li><strong>Practical Exercise</strong>:
-                                <div class="clearfix"></div>
-                                <table>
-						            <thead>
-							            <tr>
-								            <th>Branch</th>
-								            <th>Files</th>
-								            <th>Time</th>
-							            </tr>
-						            </thead>
-						            <tbody>
-							            <tr>
-								            <td>06-resources</td>
-								            <td>src/main.rs</td>
-								            <td>5mn</td>
-							            </tr>
-						            </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Manage the game states</h3>
-					<img src="images/elite.png" alt="game_states" width="50%">
-                </section>
-
-                <section>
-                    <h3>States</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li><strong>Definition:</strong> A state represents a specific mode or phase of your application,
-                                enabling systems to be selectively triggered based on the current state.</li>
-                            <li>While not essential for this mockup, states are highly beneficial.
-                                Implementing them from the start helps avoid a time-consuming rework later.</li>
-                            <li>States must derive the traits <code>Clone</code>, <code>Hash</code>, <code>Eq</code>,
-                                <code>PartialEq</code>, and <code>Default</code>.</li>
-                            <li>States need to be initialized within the application to be functional.</li>
-                            <li>Systems can be triggered or executed conditionally based on specific states.</li>
-                            <li>State information can be read using the <code>State</code> resource and updated with the
-                                <code>NextState</code> resource.</li>
-                            <li><strong>Practical Exercise:</strong>
-                                <div class="clearfix"></div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Branch</th>
-                                            <th>Files</th>
-                                            <th>Time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>07-states</td>
-                                            <td>src/main.rs</td>
-                                            <td>5mn</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Create your own plugins</h3>
-					<img src="images/defender_of_the_crown_01.png" alt="plugins" width="50%">
-                </section>
-
-                <section>
-                    <h3>Plugins</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li><strong>Definition:</strong> A plugin is a modular unit of functionality that can be added to
-                                your application. Plugins help organize code, enable features, and set up the
-                                engine's systems, resources, and behaviors in a reusable and scalable way.</li>
-                            <li>Create a <code>states.rs</code> file, define a <code>StatePlugin</code>, and implement
-                                the <code>Plugin</code> trait.</li>
-                            <li>Refactor the code to move all state-related functionality to the <code>states.rs</code> file.</li>
-                            <li><strong>Caution:</strong> Ensure the <code>GameState</code> struct is made public (<code>pub</code>).</li>
-                            <li><strong>Practical Exercise:</strong>
-                                <div class="clearfix"></div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Branch</th>
-                                            <th>Files</th>
-                                            <th>Time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>08-plugins</td>
-                                            <td>src/main.rs<br/>src/states.rs</td>
-                                            <td>5mn</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>User Inputs</h3>
-                    <h3>Create a Simple Menu and Enable Vessel Rotation</h3>
-					<img src="images/super_mario.webp" alt="plugins" width="50%">
-                    <h5>At this point, we have covered almost all the fundamentals, and we will introduce more changes in the upcoming sections.</h5>
-                </section>
-
-                <section>
-                    <h3>Refactor States Plugin to Display a Menu</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li>Add a <code>Menu</code> component to tag menu-related entities.</li>
-                            <li>Add a system <code>display_menu</code> to create and display the menu when entering the <code>GameState::Menu</code> state.</li>
-                            <li>The menu consists of a parent entity with a <code>Node</code> component and a child entity with a <code>Text</code> component.</li>
-                            <li>
-                                Refactor the <code>start_game</code> system to handle user inputs from both keyboard and gamepad:
-                                <ul>
-                                    <li>Use the <code>ButtonInput&lt;KeyCode&gt;</code> resource to detect keyboard inputs.</li>
-                                    <li>Use a query on the <code>Gamepad</code> component to handle gamepad inputs.</li>
-                                </ul>
-                            </li>
-                            <li>Add a system <code>despawn_menu</code> to remove menu entities when exiting the <code>GameState::Menu</code> state.</li>
-                            <li><strong>Warning:</strong> The application might crash if a camera is not available during state transitions.</li>
-                            <li>Create a system in <code>main.rs</code> to spawn a <code>Camera2d</code> when entering the <code>GameState::Menu</code> state.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Refactor Systems in main.rs to Rotate the Vessel</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li>Rename <code>my_first_system</code> to <code>setup_vessel</code>, remove all <code>println!</code> calls, and attach the <code>Player</code> component to the entity with the sprite component.</li>
-                            <li>Rename <code>my_second_system</code> to <code>rotate_vessel</code>, remove all <code>println!</code> calls, and keep only <code>let mut player = players.single_mut();</code> to perform the query.</li>
-                            <li>Modify the query to retrieve the entity that has both the <code>Player</code> and <code>Transform</code> components.</li>
-                            <li>Rotate the vessel around the Z-axis based on user inputs using <code>player.rotate_z(PI / 24.0);</code>.</li>
-                            <li>
-                                <strong>Practical Exercise:</strong>
-                                <div class="clearfix"></div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Branch</th>
-                                            <th>Files</th>
-                                            <th>Estimated Time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>09-inputs</td>
-                                            <td>
-                                                src/main.rs<br/>
-                                                src/states.rs
-                                            </td>
-                                            <td>15 minutes</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Debug camera</h3>
-					<img src="images/bomberman.png" alt="plugins" width="100%">
-                </section>
-
-                <section>
-                    <h3>Refactor Camera into a Plugin and Add a Debug Camera</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li>Refactor the camera systems into a <code>CameraPlugin</code> for better modularity.</li>
-                            <li>Add a system <code>debug_camera</code> to handle camera adjustments in debug mode.</li>
-                            <li>The <code>debug_camera</code> system should modify the <code>OrthographicProjection</code> scale based on user inputs (<code>W</code> to zoom in and <code>X</code> to zoom out).</li>
-                            <li>
-                                <strong>Practical Exercise:</strong>
-                                <div class="clearfix"></div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Branch</th>
-                                            <th>Files</th>
-                                            <th>Estimated Time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>10-debug_camera</td>
-                                            <td>
-                                                src/main.rs<br/>
-                                                src/camera.rs
-                                            </td>
-                                            <td>5 minutes</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Display Asteroids</h3>
-					<img src="images/rick_dangerous.webp" alt="plugins" width="60%">
-                </section>
-
-                <section>
-                    <h3>Create an Asteroid Plugin that spawn Asteroids</h3>
-                    <div class="lots_of_items">
-                        <ul>
-                            <li>Create an <code>AsteroidPlugin</code> for better modularity.</li>
-                            <li></li>
-                            <li></li>
-                            <li>
-                                <strong>Practical Exercise:</strong>
-                                <div class="clearfix"></div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Branch</th>
-                                            <th>Files</th>
-                                            <th>Estimated Time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>11-asteroids</td>
-                                            <td>
-                                                src/main.rs<br/>
-                                                src/camera.rs
-                                            </td>
-                                            <td>5 minutes</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h2>Physics with Rapier Plugin</h2>
-                </section>
-
-                <section>
-                    <h3>Introducing Rapier</h3>
-                    <p><strong>Purpose</strong>: Physics simulation for 2D/3D in Bevy.</p>
-                </section>
-
-                <section>
-                    <h3>Practical Exercise</h3>
-                    <p>Add basic collision detection between entities.</p>
-                </section>
-
-                <section>
-                    <h2>Compilation and Exportation</h2>
-                </section>
-
-                <section>
-                    <h3>Building and Exporting</h3>
-                    <ul>
-                        <li><strong>Native Compilation</strong>: Test the mockup locally.</li>
-                        <li><strong>WebAssembly Compilation</strong>: Deploy on a simple webpage.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3>Practical Exercise</h3>
-                    <p>Integrate the game mockup into a webpage and test the WebAssembly version.</p>
-                </section>
-
-                <section>
-                    <h2>Achievements and Q&A</h2>
-                    <p>Celebrate our accomplishments and address questions or feedback.</p>
-                </section>
-
-                <section>
-					<img src="images/thanks.gif" alt="thank you" width="50%">
-					<ul>
-                        <li>Bastion Sevajol &lt;bastien@sevajol.fr&gt;</li>
-                        <li>René Ribaud &lt;rene.ribaud@gmail.com&gt;</li>
-					</ul>
-				</section>
-
-			</div>
-
-		</div>
-
-        <script type="module">
-        import Reveal from "../reveal.js/dist/reveal.esm.js";
-        import Markdown from "../reveal.js/plugin/markdown/markdown.esm.js";
-        import Highlight from "../reveal.js/plugin/highlight/highlight.esm.js";
-        import Zoom from "../reveal.js/plugin/zoom/zoom.esm.js";
-
-        let deck = new Reveal({
-            plugins: [Markdown, Highlight, Zoom],
-            controls: true,
-            progress: true,
-            history: true,
-            center: false,
-            width: 960,
-            height: 700,
-
-            // Factor of the display size that should remain empty around the content
-            margin: 0.1,
-		    // Use this to print in pdf
-		    // margin: 0.6,
-
-            // Bounds for smallest/largest possible scale to apply to content
-            minScale: 0.2,
-            maxScale: 1.5,
-
-            transition: "convex",
-        });
-
-        deck.initialize();
-        </script>
-
-	</body>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Bevy university</title>
+
+    <meta name="description" content="Quest to the fake object" />
+    <meta name="author" content="Bastien Sevajol" />
+    <meta name="author" content="René Ribaud" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"
+    />
+
+    <link rel="stylesheet" href="../reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="../reveal.js/dist/theme/beige.css" />
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Satisfy"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"> -->
+
+    <!-- Code syntax highlighting -->
+    <!-- <link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" /> -->
+    <link rel="stylesheet" href="css/stackoverflow-light.css" />
+
+    <style type="text/css">
+      .iwantitatleft {
+        text-align: left;
+      }
+
+      .lots_of_items ul {
+        font-size: 0.6em;
+        text-align: left;
+      }
+
+      .lots_of_items h3 {
+        font-size: 0.7em;
+      }
+
+      .lots_of_items h4 {
+        font-size: 0.6em;
+      }
+
+      .lots_of_items code {
+        font-size: 0.7em;
+      }
+
+      .lots_of_items table {
+        float: left;
+        margin-right: 1em;
+      }
+
+      .clearfix {
+        clear: left;
+      }
+
+      .lots_of_items2 ul {
+        font-size: 0.7em;
+        text-align: left;
+      }
+
+      .long_link a {
+        font-size: 0.8em;
+      }
+
+      .pic {
+        position: relative;
+        float: left;
+        width: 50%;
+        top: 0px;
+      }
+
+      .left_text {
+        position: relative;
+        float: left;
+        width: 50%;
+        text-align: left;
+      }
+
+      .left_text_bio {
+        position: relative;
+        float: left;
+        width: 50%;
+        font-size: 0.6em;
+        text-align: left;
+      }
+
+      .right_text {
+        width: 50%;
+        text-align: left;
+        float: right;
+        text-align: left;
+      }
+
+      .skill-list li {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+      }
+      /*
+            .reveal a { color: #007DBA; }
+            .reveal h2 b { color: #0096D6; }
+            .reveal h2 .day { font-size: 0.6em; position:relative; bottom: 20px; }
+            .reveal { font-family: "Source Code Pro", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,sans-serif; font-size:40px; }
+            */
+      .reveal {
+        font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,
+          sans-serif;
+        font-size: 40px;
+      }
+
+      .reveal h2 {
+        margin-top: 35px;
+      }
+
+      .reveal ul {
+        margin: 0 0 0 0;
+      }
+
+      .reveal pre {
+        width: 100%;
+        font-size: 18px;
+      }
+
+      .reveal pre code {
+        max-height: 100%;
+      }
+
+      .reveal section img {
+        border: none;
+        box-shadow: none;
+        background: rgba(255, 255, 255, 0);
+      }
+
+      body {
+        line-height: 1.1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <!-- <section data-background="images/background.svg" data-background-size="cover"> -->
+        <section>
+          <h1>Bevy university</h1>
+          <img src="images/bevy_logo_dark.svg" alt="bevy logo" width="50%" />
+        </section>
+
+        <section>
+          <h3>Development Environment Setup and Welcome</h3>
+          <ul>
+            <li>Save time by doing the bevy setup if not already done.</li>
+            <li>Then we will do the introduction.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Installation and Configuration of Tools</h3>
+          <div class="long_link">
+            <ol>
+              <li>
+                <strong>Install Rust</strong>: rustup, rustc, cargo, clippy,
+                rustfmt.
+              </li>
+              <li>
+                <strong>Configure Editor</strong>: Set up your preferred editor
+                with Rust Analyzer.
+              </li>
+              <li>
+                <strong>Get bevy dependencies</strong> according to your OS.
+                <a
+                  href="https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies"
+                  >https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies</a
+                >
+              </li>
+              <li>
+                <strong>Clone the workshop repository</strong>
+                from GitHub.
+                <a href="https://github.com/uggla/bevy_university"
+                  >https://github.com/uggla/bevy_university</a
+                >
+              </li>
+              <li><strong>Compile</strong> the project.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section>
+          <h3>2 words about us 1/2</h3>
+          <div class="left_text_bio">
+            <ul>
+              <li>Stats</li>
+              <ul>
+                <li>First name: Bastien</li>
+                <li>Last name: Sevajol</li>
+              </ul>
+            </ul>
+
+            <ul>
+              <li>Skills</li>
+              <ul>
+                <li>Class: Software engineer</li>
+                <li>Latest Guilde: Biologic</li>
+                <li>Age of Experience: 16 years</li>
+                <li>Preferred weapon: Rust, Python</li>
+              </ul>
+            </ul>
+
+            <ul>
+              <li>Optional traits</li>
+              <ul>
+                <li>Sleep in the forest</li>
+                <li>Play code and code games</li>
+              </ul>
+            </ul>
+          </div>
+          <div class="pic">
+            <img src="images/bastien.jpg" alt="Bastien" width="53%" />
+          </div>
+        </section>
+
+        <section>
+          <h3>2 words about us 2/2</h3>
+          <div class="left_text_bio">
+            <!-- <pre class="bio"> -->
+            <ul>
+              <li>Stats</li>
+              <ul>
+                <li>First name: René (Uggla)</li>
+                <li>Last name: Ribaud</li>
+              </ul>
+            </ul>
+
+            <ul>
+              <li>Skills</li>
+              <ul>
+                <li>Class: Software engineer</li>
+                <li>Previous Class: Solution architect (Cloud / Devops)</li>
+                <li>Latest Guilde: Red Hat</li>
+                <li>Game start: 1998</li>
+                <li>Preferred weapons: Rust / Python</li>
+                <li>Artefact: Openstack Nova</li>
+              </ul>
+            </ul>
+
+            <ul>
+              <li>Optional traits</li>
+              <ul>
+                <li>Linux and FLOSS since 1995</li>
+                <li>Previously Ops, Dev today to produce my bugs</li>
+              </ul>
+            </ul>
+          </div>
+          <div class="pic">
+            <img src="images/uggla.jpg" alt="René" width="53%" />
+          </div>
+        </section>
+
+        <section>
+          <h3>Quick Overview of Rust (Optional)</h3>
+          <ul>
+            <li>
+              Provide an alternative to C/C++ and also higher-level languages
+            </li>
+            <li>
+              Multi paradigm language (imperative, functional, object oriented
+              (not fully))
+            </li>
+            <li>Fast, safe, and efficient (modern)</li>
+            <li>
+              No garbage collector (good for games), ownership and borrow
+              checker
+            </li>
+            <li>Dual license MIT and Apache v2.0</li>
+            <li>First stable release May 15th, 2015</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Overview of Bevy</h3>
+          <div class="lots_of_items2">
+            <ul>
+              <li>Data-driven game engine built in Rust</li>
+              <li>August 10, 2020 by Carter Anderson</li>
+              <li>Dual license MIT and Apache v2.0</li>
+              <li>Current version 0.15</li>
+              <li>
+                Not stable, breaking changes ~3 months and migration guides
+              </li>
+              <li>
+                Fully based on the ECS pattern that encourages clean, decoupled
+                designs
+              </li>
+              <li>Lots of features 2D, 3D, UI, Audio...</li>
+              <li>Extensible with plugins</li>
+              <li>Performant multi-threaded</li>
+              <li>
+                Multi platform (Windows, Linux, macOS, Web (Wasm), Android, iOS)
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Quick Overview of the project and the session</h3>
+          <div class="left_text lots_of_items2">
+            <ul>
+              <li>
+                Goals of the Workshop:
+                <ul>
+                  <li>
+                    First, we will follow the Bevy tutorial to understand the
+                    basics.
+                  </li>
+                  <li>
+                    Next, we will explore additional concepts, equipping you
+                    with the tools to build your own game.
+                  </li>
+                  <li>
+                    Finally we will produce a native and web (wasm) version
+                  </li>
+                </ul>
+              </li>
+              <li>
+                What we will build together.
+                <ul>
+                  <li>An mockup of Asteroids game.</li>
+                </ul>
+              </li>
+              <li>
+                Session Overview
+                <ul>
+                  <li>
+                    Provide an explanation of the tasks to be completed (via
+                    slides), showcasing the corresponding code. Engage actively
+                    by asking questions.
+                  </li>
+                  <li>
+                    Work on the code yourself, and don't hesitate to ask for
+                    help if needed.
+                  </li>
+                  <li>
+                    If you encounter any issues, no worries—you can always check
+                    out the branch for this specific section.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="pic lots_of_items">
+            <p>Paste screenshots of the game.</p>
+            <img src="images/asteroids.png" alt="asteroids" width="50%" />
+          </div>
+        </section>
+
+        <section>
+          <h3>The shortest Bevy project</h3>
+          <ul>
+            <li>Builder pattern</li>
+            <pre>
+              <code class="hljs rust" data-trim data-line-numbers>
+                use bevy::prelude::*;
+
+                fn main() {
+                    App::new().run();
+                }
+              </code>
+            </pre>
+            <li>
+              Initializing resources in the World to store globally available
+              data that we only need a single copy of.
+            </li>
+            <li>
+              Adding systems to our Schedule, which can read and modify
+              resources and our entities' components, according to our game
+              logic.
+            </li>
+            <li>Importing other blocks of App-modifying code using Plugins.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Introduction to the ECS Framework</h2>
+          <img src="images/space_invaders.png" alt="ecs" width="75%" />
+        </section>
+
+        <section>
+          <h3>Entity Component System (ECS)</h3>
+          <ul>
+            <li>
+              <strong>Entities</strong>: Abstract game objects.
+              <pre>
+                <code class="hljs rust" data-trim>
+                  struct Entity(u64);
+                </code>
+              </pre>
+            </li>
+            <li>
+              <strong>Components</strong>: Data associated with entities.
+              <pre>
+                <code class="hljs rust" data-trim>
+                  #[derive(Component)]
+                  struct Position {
+                      x: f32,
+                      y: f32,
+                  }
+                  </code>
+              </pre>
+            </li>
+            <li>
+              <strong>Systems</strong>: Logic that operates on entities and
+              their components.
+              <pre>
+                <code class="hljs rust" data-trim>
+                  fn hello_world() {
+                      println!("hello world!");
+                  }
+                </code>
+              </pre>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Analogy to SQL</h3>
+          <div class="iwantitatleft">
+            <p>
+              ECS can be "compared" to an in memory SQL database. With only a
+              big table
+            </p>
+            <ul>
+              <li><strong>Entities</strong>: Line in the table.</li>
+              <li><strong>Components</strong>: Columns in the table.</li>
+              <li>
+                <strong>Systems</strong>: Stored procedures in which we can
+                query the table.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Systems and Scheduling in Bevy</h3>
+          <img src="images/pacman.webp" alt="system&scheduling" width="75%" />
+        </section>
+
+        <section>
+          <h3>Introduction to Bevy Scheduler</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li><strong>Concept</strong>: Coordinates system execution.</li>
+              <li>
+                <strong>Practical Exercise</strong>: Create and schedule systems
+                in Bevy.
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>01_systems</td>
+                      <td>src/main.rs</td>
+                      <td>5mn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <div class="clearfix"></div>
+              <li>
+                The systems are run in parallel so they are not sequentially
+                executed.
+              </li>
+              <li>
+                But we can control the order of execution with methods
+                <code>(after, before, chain)</code>.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Manipulating Entities and Components in Bevy</h3>
+          <img src="images/outrun.jpg" alt="system&scheduling" width="75%" />
+        </section>
+
+        <section>
+          <h3>Declare entities and associate components</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li><strong>Concept</strong>: Create a Player component.</li>
+              <li>Spawn an entity with the Player component.</li>
+              <li>Various way of querying the component in a system.</li>
+              <li>
+                <strong>Practical Exercise</strong>:
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>02-components_and_entity</td>
+                      <td>src/main.rs</td>
+                      <td>5mn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Mut component(s) in entity(ies)</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                <strong>Concept</strong>: Various way of querying the Player
+                component in a system and change its name value.
+              </li>
+              <li>
+                <strong>Practical Exercise</strong>:
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>03-mut_components_and_entities</td>
+                      <td>src/main.rs</td>
+                      <td>5mn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Load default plugins and set a camera</h3>
+          <img
+            src="images/crystal_castle.png"
+            alt="default_plugins&camera"
+            width="75%"
+          />
+        </section>
+
+        <section>
+          <h3>Load default plugins</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li><strong>Concept</strong>: Game loop and window.</li>
+              <li>Load the default plugins.</li>
+              <li>DefaultPlugins is a PluginGroup, a collection of plugins.</li>
+              <li>
+                Define windows size constants and set a window with appropriate
+                size and title.
+              </li>
+              <li>my_second_system "update" is now in a 60fps game loop.</li>
+              <li>
+                <strong>Practical Exercise</strong>:
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>04-default_plugins</td>
+                      <td>src/main.rs</td>
+                      <td>5mn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Set a 2D camera</h3>
+          <div class="left_text lots_of_items">
+            <ul>
+              <li><strong>Concept</strong>: Camera and bundles.</li>
+              <li>
+                Modify first_system to spawn a Camera2dBundle or Camera2d (bevy
+                0.15).
+              </li>
+              <li>
+                A bundle is a collection of components but is now not the
+                preferred way to build components but still compatible.
+              </li>
+              <li>
+                A required macro is now used to create dependencies between
+                components.
+              </li>
+              <li>Coordinate (0,0) at the middle of the screen.</li>
+              <li>Spawn a default sprite.</li>
+              <li>
+                <strong>Practical Exercise</strong>:
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <td>Time</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>05-camera</td>
+                      <td>src/main.rs</td>
+                      <td>5mn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+          <div class="pic lots_of_items">
+            <ul>
+              <li>Orientation</li>
+              <img src="images/coordinates.png" alt="orientation" width="65%" />
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Resources and asset server</h3>
+          <h3>Display our vessel</h3>
+          <img
+            src="images/captain_blood.png"
+            alt="default_plugins&camera"
+            width="65%"
+          />
+        </section>
+
+        <section>
+          <h3>Resources</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                <strong>Definition</strong>: Shared global data accessible by
+                systems.
+              </li>
+              <li>
+                Create a resource CurrentLevel and update it's value in the
+                first_system.
+              </li>
+              <li>Resources need to be initialized in our application.</li>
+              <li>Read the CurrentLevel resource in the second_system.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Asset server, image, transform, display our vessel</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Asset server is a builtin resource that read assets from the
+                file system.
+              </li>
+              <li>Add an image to the sprite using the asset server.</li>
+              <li>
+                The image "sprites/player.png" can be loaded from the assets
+                folder by default.
+              </li>
+              <li>
+                Remove the sprite color red and add a transformation to reduce
+                the size by 2.
+              </li>
+              <li>
+                <strong>Practical Exercise</strong>:
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>06-resources</td>
+                      <td>src/main.rs</td>
+                      <td>5mn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Manage the game states</h3>
+          <img src="images/elite.png" alt="game_states" width="50%" />
+        </section>
+
+        <section>
+          <h3>States</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                <strong>Definition:</strong> A state represents a specific mode
+                or phase of your application, enabling systems to be selectively
+                triggered based on the current state.
+              </li>
+              <li>
+                While not essential for this mockup, states are highly
+                beneficial. Implementing them from the start helps avoid a
+                time-consuming rework later.
+              </li>
+              <li>
+                States must derive the traits
+                <code>Clone</code>, <code>Hash</code>, <code>Eq</code>,
+                <code>PartialEq</code>, and <code>Default</code>.
+              </li>
+              <li>
+                States need to be initialized within the application to be
+                functional.
+              </li>
+              <li>
+                Systems can be triggered or executed conditionally based on
+                specific states.
+              </li>
+              <li>
+                State information can be read using the
+                <code>State</code> resource and updated with the
+                <code>NextState</code> resource.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>07-states</td>
+                      <td>src/main.rs</td>
+                      <td>5mn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Create your own plugins</h3>
+          <img
+            src="images/defender_of_the_crown_01.png"
+            alt="plugins"
+            width="50%"
+          />
+        </section>
+
+        <section>
+          <h3>Plugins</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                <strong>Definition:</strong> A plugin is a modular unit of
+                functionality that can be added to your application. Plugins
+                help organize code, enable features, and set up the engine's
+                systems, resources, and behaviors in a reusable and scalable
+                way.
+              </li>
+              <li>
+                Create a <code>states.rs</code> file, define a
+                <code>StatePlugin</code>, and implement the
+                <code>Plugin</code> trait.
+              </li>
+              <li>
+                Refactor the code to move all state-related functionality to the
+                <code>states.rs</code> file.
+              </li>
+              <li>
+                <strong>Caution:</strong> Ensure the
+                <code>GameState</code> struct is made public (<code>pub</code>).
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>08-plugins</td>
+                      <td>src/main.rs<br />src/states.rs</td>
+                      <td>5mn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>User Inputs</h3>
+          <h3>Create a Simple Menu and Enable Vessel Rotation</h3>
+          <img src="images/super_mario.webp" alt="plugins" width="50%" />
+          <h5>
+            At this point, we have covered almost all the fundamentals, and we
+            will introduce more changes in the upcoming sections.
+          </h5>
+        </section>
+
+        <section>
+          <h3>Refactor States Plugin to Display a Menu</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Add a <code>Menu</code> component to tag menu-related entities.
+              </li>
+              <li>
+                Add a system <code>display_menu</code> to create and display the
+                menu when entering the <code>GameState::Menu</code> state.
+              </li>
+              <li>
+                The menu consists of a parent entity with a
+                <code>Node</code> component and a child entity with a
+                <code>Text</code> component.
+              </li>
+              <li>
+                Refactor the <code>start_game</code> system to handle user
+                inputs from both keyboard and gamepad:
+                <ul>
+                  <li>
+                    Use the
+                    <code>ButtonInput&lt;KeyCode&gt;</code>
+                    resource to detect keyboard inputs.
+                  </li>
+                  <li>
+                    Use a query on the
+                    <code>Gamepad</code> component to handle gamepad inputs.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Add a system <code>despawn_menu</code> to remove menu entities
+                when exiting the <code>GameState::Menu</code> state.
+              </li>
+              <li>
+                <strong>Warning:</strong> The application might crash if a
+                camera is not available during state transitions.
+              </li>
+              <li>
+                Create a system in <code>main.rs</code> to spawn a
+                <code>Camera2d</code> when entering the
+                <code>GameState::Menu</code> state.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Refactor Systems in main.rs to Rotate the Vessel</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Rename <code>my_first_system</code> to
+                <code>setup_vessel</code>, remove all
+                <code>println!</code> calls, and attach the
+                <code>Player</code> component to the entity with the sprite
+                component.
+              </li>
+              <li>
+                Rename <code>my_second_system</code> to
+                <code>rotate_vessel</code>, remove all
+                <code>println!</code> calls, and keep only
+                <code>let mut player = players.single_mut();</code>
+                to perform the query.
+              </li>
+              <li>
+                Modify the query to retrieve the entity that has both the
+                <code>Player</code> and <code>Transform</code> components.
+              </li>
+              <li>
+                Rotate the vessel around the Z-axis based on user inputs using
+                <code>player.rotate_z(PI / 24.0);</code>.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>09-inputs</td>
+                      <td>
+                        src/main.rs<br />
+                        src/states.rs
+                      </td>
+                      <td>15 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Debug camera</h3>
+          <img src="images/bomberman.png" alt="plugins" width="100%" />
+        </section>
+
+        <section>
+          <h3>Refactor Camera into a Plugin and Add a Debug Camera</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Refactor the camera systems into a
+                <code>CameraPlugin</code> for better modularity.
+              </li>
+              <li>
+                Add a system <code>debug_camera</code> to handle camera
+                adjustments in debug mode.
+              </li>
+              <li>
+                The <code>debug_camera</code> system should modify the
+                <code>OrthographicProjection</code> scale based on user inputs
+                (<code>W</code> to zoom in and <code>X</code> to zoom out).
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>10-debug_camera</td>
+                      <td>
+                        src/main.rs<br />
+                        src/camera.rs
+                      </td>
+                      <td>5 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Display Asteroids</h3>
+          <img src="images/rick_dangerous.webp" alt="plugins" width="60%" />
+        </section>
+
+        <section>
+          <h3>Create an Asteroid Plugin that spawn Asteroids</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Create an <code>AsteroidPlugin</code> for better modularity.
+              </li>
+              <li></li>
+              <li></li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>11-asteroids</td>
+                      <td>
+                        src/main.rs<br />
+                        src/camera.rs
+                      </td>
+                      <td>5 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Physics with Rapier Plugin</h2>
+        </section>
+
+        <section>
+          <h3>Introducing Rapier</h3>
+          <p><strong>Purpose</strong>: Physics simulation for 2D/3D in Bevy.</p>
+        </section>
+
+        <section>
+          <h3>Practical Exercise</h3>
+          <p>Add basic collision detection between entities.</p>
+        </section>
+
+        <section>
+          <h2>Compilation and Exportation</h2>
+        </section>
+
+        <section>
+          <h3>Building and Exporting</h3>
+          <ul>
+            <li>
+              <strong>Native Compilation</strong>: Test the mockup locally.
+            </li>
+            <li>
+              <strong>WebAssembly Compilation</strong>: Deploy on a simple
+              webpage.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Practical Exercise</h3>
+          <p>
+            Integrate the game mockup into a webpage and test the WebAssembly
+            version.
+          </p>
+        </section>
+
+        <section>
+          <h2>Achievements and Q&A</h2>
+          <p>
+            Celebrate our accomplishments and address questions or feedback.
+          </p>
+        </section>
+
+        <section>
+          <img src="images/thanks.gif" alt="thank you" width="50%" />
+          <ul>
+            <li>Bastion Sevajol &lt;bastien@sevajol.fr&gt;</li>
+            <li>René Ribaud &lt;rene.ribaud@gmail.com&gt;</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script type="module">
+      import Reveal from "../reveal.js/dist/reveal.esm.js";
+      import Markdown from "../reveal.js/plugin/markdown/markdown.esm.js";
+      import Highlight from "../reveal.js/plugin/highlight/highlight.esm.js";
+      import Zoom from "../reveal.js/plugin/zoom/zoom.esm.js";
+
+      let deck = new Reveal({
+        plugins: [Markdown, Highlight, Zoom],
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        width: 960,
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+        // Use this to print in pdf
+        // margin: 0.6,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+        maxScale: 1.5,
+
+        transition: "convex",
+      });
+
+      deck.initialize();
+    </script>
+  </body>
 </html>
