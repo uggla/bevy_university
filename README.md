@@ -2,8 +2,8 @@
 
 ## Organization
 
-- main branch contains the slides.
-- other branches contain the code evolution.
+- Main branch contains the slides.
+- Other branches contain the code evolution.
 
 **Changes on slides must be done on the main branch.**
 
@@ -13,36 +13,45 @@
 
 - git
 - python3
+- npm
 
 2. Clone the repo with the sub modules (reveal.js).
 
 ```
 git clone --recurse-submodules https://github.com/uggla/bevy_university
-cd bevy_university
+cd bevy_university/reveal.js
 npm install
+cd..
 ```
 
-3. Install staticjinja
+## Build the presentation with staticjinja (optional)
 
-Some presentations (e.g. Rust) are using staticjinja templating system to include code snippets and compose the presentation.
-Staticjinja can be installed using pip. A proper installation could be to install it in a virtualenv.
+Run staticjinja within the `slides` directory: `uv tool run staticjinja build`.
 
-```
-pip3 install staticjinja
-```
-
-4. Build the presentation with staticjinja
-
-Run staticjinja within the `slides` directory: `staticjinja build`.
-
-Note: `staticjinja watch` can be run and it will rebuild the presentation as soon as it will detect a change in the templates folder.
+Note: `uv tool run staticjinja watch` can be run and it will rebuild the presentation as soon as it will detect a change in the templates folder.
 
 ## Modify a presentation
 
 Change the presentation .html file.
 
-**Warning**, if staticjinja is used change the file **into the templates directory** not the one at the presentation root directory.
+**Warning**, if **staticjinja** is used change the file **into the templates directory** not the one at the presentation root directory.
 
 ## Serve presentations
 
-Just run `./server.py` from the root of the project and point your browser to http://localhost:8000.
+To serve the presentation locally, run:
+
+```bash
+./server.py
+```
+
+from the root of the project. Then, open your browser and navigate to [http://localhost:8000](http://localhost:8000).
+
+The `server.py` script builds the presentation using **staticjinja** and serves it.
+
+For live updates, use the `--watch` option:
+
+```bash
+./server.py --watch
+```
+
+This will rebuild the presentation automatically whenever changes are detected and continue serving it.
