@@ -9,7 +9,7 @@ fi
 
 set +e
 #shellcheck disable=SC2009
-server=$(ps -ef | grep "[p]ython3 server.py")
+server=$(ps -ef | grep "python3 \(\./\)\?[s]erver.py")
 set -e
 
 if [[ -z "$server" ]]; then
