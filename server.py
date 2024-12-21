@@ -12,6 +12,7 @@ import socketserver
 import os
 import subprocess
 import sys
+import argparse
 
 PORT = 8000
 SLIDES_DIR = "slides"
@@ -52,9 +53,29 @@ def build_presentations():
     os.chdir("..")
 
 
+def watch():
+    print("\033[32mStaticjinja watch for {}\033[0m".format(SLIDES_DIR))
+    os.chdir(SLIDES_DIR)
+    command = ["staticjinja", "watch"]  # Replace with your shell command and arguments
+
+    # Run the command in the background
+    process = subprocess.Popen(
+        command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+    )
+    os.chdir("..")
+
+
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--watch", help="Watch for template changes", action="store_true"
+    )
+    args = parser.parse_args()
+
     check_tools()
     build_presentations()
+    if args.watch:
+        watch()
     serve_content()
 
 
