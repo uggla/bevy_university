@@ -6,12 +6,19 @@ use std::f32::consts::PI;
 
 use asteroids::AsteroidsPlugin;
 use bevy::{prelude::*, window::WindowResolution};
+use bevy_rapier2d::{
+    plugin::{NoUserData, RapierPhysicsPlugin},
+    render::RapierDebugRenderPlugin,
+};
 use camera::CameraPlugin;
 use states::{GameState, StatesPlugin};
 
 // 16/9 1280x720
 pub const WINDOW_WIDTH: f32 = 1280.0;
 pub const WINDOW_HEIGHT: f32 = 720.0;
+
+pub const VESSEL_WIDTH: f32 = 112.0;
+pub const VESSEL_HEIGHT: f32 = 75.0;
 
 #[allow(dead_code)]
 #[derive(Component)]
@@ -38,6 +45,8 @@ fn main() {
             StatesPlugin,
             CameraPlugin,
             AsteroidsPlugin,
+            RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(VESSEL_WIDTH * 0.5 / 5.0),
+            RapierDebugRenderPlugin::default(),
         ))
         .add_systems(OnEnter(GameState::InGame), setup_vessel)
         .add_systems(Update, rotate_vessel.run_if(in_state(GameState::InGame)))
