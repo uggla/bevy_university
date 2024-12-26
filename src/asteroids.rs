@@ -64,7 +64,7 @@ fn setup_asteroids(mut commands: Commands, asset_server: Res<AssetServer>) {
     ];
 
     let mut rng = thread_rng();
-    let mut asteroids: Vec<Asteroid> = Vec::with_capacity(100);
+    let mut asteroids: Vec<Asteroid> = Vec::with_capacity(200);
 
     for _ in 0..=200 {
         let asteroid_size = *asteroid_size.choose(&mut rng).unwrap();
