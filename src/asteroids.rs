@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use bevy_rapier2d::prelude::{Collider, GravityScale, RigidBody, Velocity};
 use rand::seq::SliceRandom;
 use rand::{thread_rng, Rng};
 
@@ -11,6 +12,7 @@ impl Plugin for AsteroidsPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(OnEnter(GameState::InGame), setup_asteroids);
         app.add_systems(OnExit(GameState::InGame), despawn_asteroids);
+        app.add_systems(Update, wrap_asteroids);
     }
 }
 
@@ -18,12 +20,18 @@ impl Plugin for AsteroidsPlugin {
 struct Asteroid {
     pos: Vec2,
     speed: Vec2,
+    rot_speed: f32,
     size: AsteriodSize,
 }
 
 impl Asteroid {
-    fn new(pos: Vec2, speed: Vec2, size: AsteriodSize) -> Self {
-        Self { pos, speed, size }
+    fn new(pos: Vec2, speed: Vec2, rot_speed: f32, size: AsteriodSize) -> Self {
+        Self {
+            pos,
+            speed,
+            rot_speed,
+            size,
+        }
     }
 }
 
@@ -53,6 +61,15 @@ impl AsteriodSize {
             AsteriodSize::Big => "sprites/meteorbrown_big1.png",
         }
     }
+
+    fn radius(&self) -> u32 {
+        match self {
+            AsteriodSize::Tiny => (12.0 * 1.5) as u32,
+            AsteriodSize::Small => (18.0 * 1.5) as u32,
+            AsteriodSize::Medium => (28.0 * 1.5) as u32,
+            AsteriodSize::Big => (60.0 * 1.5) as u32,
+        }
+    }
 }
 
 fn setup_asteroids(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -80,11 +97,14 @@ fn setup_asteroids(mut commands: Commands, asset_server: Res<AssetServer>) {
             );
         }
 
-        asteroids.push(Asteroid::new(pos, Vec2::ZERO, asteroid_size));
+        let initial_speed = Vec2::new(rng.gen_range(-100.0..100.0), rng.gen_range(-100.0..100.0));
+        let rot_speed = rng.gen_range(-5.0..5.0);
+
+        asteroids.push(Asteroid::new(pos, initial_speed, rot_speed, asteroid_size));
     }
     debug!("Asteroids: {:?}", asteroids);
 
-    for asteroid in asteroids {
+    for asteroid in asteroids.iter() {
         commands.spawn((
             Sprite {
                 image: asset_server.load(asteroid.size.sprite()),
@@ -95,7 +115,14 @@ fn setup_asteroids(mut commands: Commands, asset_server: Res<AssetServer>) {
                 translation: asteroid.pos.extend(0.0),
                 ..default()
             },
-            asteroid,
+            asteroid.clone(),
+            RigidBody::Dynamic,
+            Collider::ball(asteroid.size.radius() as f32 / 2.0),
+            GravityScale(0.0),
+            Velocity {
+                linvel: asteroid.speed,
+                angvel: asteroid.rot_speed,
+            },
         ));
     }
 }
@@ -110,6 +137,24 @@ fn pos_is_valid(asteroids: &[Asteroid], pos: Vec2, size: u32) -> bool {
         let distance = a.pos.distance(pos);
         distance > size
     })
+}
+
+fn wrap_asteroids(mut query: Query<&mut Transform, With<Asteroid>>) {
+    for mut transform in query.iter_mut() {
+        if transform.translation.x > WINDOW_WIDTH * 4.0 {
+            transform.translation.x = -WINDOW_WIDTH * 4.0;
+        }
+        if transform.translation.x < -WINDOW_WIDTH * 4.0 {
+            transform.translation.x = WINDOW_WIDTH * 4.0;
+        }
+
+        if transform.translation.y > WINDOW_HEIGHT * 4.0 {
+            transform.translation.y = -WINDOW_HEIGHT * 4.0;
+        }
+        if transform.translation.y < -WINDOW_HEIGHT * 4.0 {
+            transform.translation.y = WINDOW_HEIGHT * 4.0;
+        }
+    }
 }
 
 fn despawn_asteroids(mut commands: Commands, query: Query<Entity, With<Asteroid>>) {
