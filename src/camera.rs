@@ -1,12 +1,16 @@
 use bevy::prelude::*;
 
-use crate::states::GameState;
+use crate::{states::GameState, vessel::Player};
 
 pub struct CameraPlugin;
 
 impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(OnEnter(GameState::Menu), setup_camera);
+        app.add_systems(
+            Update,
+            stick_camera_on_vessel.run_if(in_state(GameState::InGame)),
+        );
 
         #[cfg(debug_assertions)]
         app.add_systems(Update, debug_camera);
@@ -30,4 +34,13 @@ fn debug_camera(
     if keyboard_input.pressed(KeyCode::KeyX) {
         camera_ortho.scale -= 0.1;
     }
+}
+
+fn stick_camera_on_vessel(
+    mut camera: Query<&mut Transform, (With<Camera2d>, Without<Player>)>,
+    player: Query<&Transform, With<Player>>,
+) {
+    let player_transform = player.single();
+    let mut camera_transform = camera.single_mut();
+    camera_transform.translation = player_transform.translation;
 }
