@@ -40,6 +40,11 @@
         text-align: left;
       }
 
+      .lots_of_items ul ul {
+        font-size: 0.8em;
+        text-align: left;
+      }
+
       .lots_of_items h3 {
         font-size: 0.7em;
       }
@@ -940,7 +945,7 @@
                         src/main.rs<br />
                         src/states.rs
                       </td>
-                      <td>15 minutes</td>
+                      <td>15mn</td>
                     </tr>
                   </tbody>
                 </table>
@@ -989,7 +994,7 @@
                         src/main.rs<br />
                         src/camera.rs
                       </td>
-                      <td>5 minutes</td>
+                      <td>5mn</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1008,10 +1013,43 @@
           <div class="lots_of_items">
             <ul>
               <li>
-                Create an <code>AsteroidPlugin</code> for better modularity.
+                Create an <code>AsteroidPlugin</code> to improve modularity.
               </li>
-              <li></li>
-              <li></li>
+              <li>
+                Define an <code>Asteroid</code> structure with the fields
+                <code>position</code>, <code>speed</code>, and
+                <code>size</code>.
+              </li>
+              <li>
+                Create an <code>AsteroidSize</code> structure and implement two
+                methods:
+                <ul>
+                  <li>
+                    <code>size()</code>: Returns the size of the asteroid.
+                  </li>
+                  <li>
+                    <code>sprite()</code>: Returns the file name of the
+                    asteroid\u2019s sprite.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Implement two systems:
+                <ul>
+                  <li>
+                    <code>setup_asteroids</code>: Creates the field of
+                    asteroids.
+                  </li>
+                  <li>
+                    <code>despawn_asteroids</code>: Removes asteroids when
+                    necessary.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                The <code>setup_asteroids</code> system should spawn 200
+                asteroids at random sizes and positions, ensuring no overlaps.
+              </li>
               <li>
                 <strong>Practical Exercise:</strong>
                 <div class="clearfix"></div>
@@ -1026,11 +1064,8 @@
                   <tbody>
                     <tr>
                       <td>11-asteroids</td>
-                      <td>
-                        src/main.rs<br />
-                        src/camera.rs
-                      </td>
-                      <td>5 minutes</td>
+                      <td>src/camera.rs</td>
+                      <td>10mn</td>
                     </tr>
                   </tbody>
                 </table>
