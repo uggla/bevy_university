@@ -1,4 +1,3 @@
-use bevy::math::VectorSpace;
 use bevy::prelude::*;
 use rand::seq::SliceRandom;
 use rand::{thread_rng, Rng};
