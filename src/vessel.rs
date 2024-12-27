@@ -83,24 +83,40 @@ fn rotate_vessel(
 }
 
 fn move_vessel(
-    mut players: Query<&mut Transform, With<Player>>,
-
+    players: Query<&mut Transform, With<Player>>,
     keybord: Res<ButtonInput<KeyCode>>,
     gamepads: Query<(Entity, &Gamepad)>,
     mut ext_impulses: Query<&mut ExternalImpulse, With<Player>>,
 ) {
     if keybord.pressed(KeyCode::ArrowUp) {
-        let player_transform = players.single();
-        // Get the 2D rotation angle in radians
-        let rotation = player_transform.rotation.to_euler(EulerRot::ZYX).0; // Z-axis rotation
+        activate_thrust(&players, &mut ext_impulses);
+    }
 
-        // Compute the directional vector using cos (x) and sin (y)
-        let direction = Vec2::new(
-            rotation.sin() * -VESSEL_THRUST_POWER,
-            rotation.cos() * VESSEL_THRUST_POWER,
-        );
-        for mut ext_impulse in ext_impulses.iter_mut() {
-            ext_impulse.impulse = direction
+    for (_entity, gamepad) in gamepads.iter() {
+        if gamepad.pressed(GamepadButton::South) {
+            activate_thrust(&players, &mut ext_impulses);
+        }
+    }
+}
+
+fn activate_thrust(
+    players: &Query<&mut Transform, With<Player>>,
+    ext_impulses: &mut Query<&mut ExternalImpulse, With<Player>>,
+) {
+    let player_transform = players.single();
+    // Get the 2D rotation angle in radians
+    let rotation = player_transform.rotation.to_euler(EulerRot::ZYX).0;
+    // Z-axis rotation
+
+    // Compute the directional vector using cos (x) and sin (y)
+    let direction = Vec2::new(
+        rotation.sin() * -VESSEL_THRUST_POWER,
+        rotation.cos() * VESSEL_THRUST_POWER,
+    );
+    for mut ext_impulse in ext_impulses.iter_mut() {
+        ext_impulse.impulse = direction
+    }
+}
         }
     }
 }
