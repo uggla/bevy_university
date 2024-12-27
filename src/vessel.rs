@@ -8,7 +8,7 @@ const VESSEL_THRUST_POWER: f32 = 10000.0;
 
 use std::f32::consts::PI;
 
-use crate::{states::GameState, CurrentLevel};
+use crate::{states::GameState, CurrentLevel, WINDOW_HEIGHT, WINDOW_WIDTH};
 
 #[allow(dead_code)]
 #[derive(Component)]
@@ -24,7 +24,7 @@ impl Plugin for VesselPlugin {
         app.add_systems(OnEnter(GameState::InGame), setup_vessel)
             .add_systems(
                 Update,
-                (rotate_vessel, move_vessel).run_if(in_state(GameState::InGame)),
+                (rotate_vessel, move_vessel, wrap_vessel).run_if(in_state(GameState::InGame)),
             );
     }
 }
@@ -117,6 +117,46 @@ fn activate_thrust(
         ext_impulse.impulse = direction
     }
 }
+
+fn wrap_vessel(
+    mut objects_query: Query<&mut Transform, Without<Player>>,
+    mut players_query: Query<&mut Transform, With<Player>>,
+) {
+    let mut player_transform = players_query.single_mut();
+
+    if player_transform.translation.x > WINDOW_WIDTH * 3.0 {
+        player_transform.translation.x = -WINDOW_WIDTH * 3.0;
+        translate_objects_horiz(&mut objects_query);
+    } else if player_transform.translation.x < -WINDOW_WIDTH * 3.0 {
+        player_transform.translation.x = WINDOW_WIDTH * 3.0;
+        translate_objects_horiz(&mut objects_query);
+    }
+
+    if player_transform.translation.y > WINDOW_HEIGHT * 3.0 {
+        player_transform.translation.y = -WINDOW_HEIGHT * 3.0;
+        translate_objects_vert(&mut objects_query);
+    } else if player_transform.translation.y < -WINDOW_HEIGHT * 3.0 {
+        player_transform.translation.y = WINDOW_HEIGHT * 3.0;
+        translate_objects_vert(&mut objects_query);
+    }
+}
+
+fn translate_objects_horiz(objects_query: &mut Query<&mut Transform, Without<Player>>) {
+    for mut asteroid_transform in objects_query.iter_mut() {
+        if asteroid_transform.translation.x > WINDOW_WIDTH * 2.0 {
+            asteroid_transform.translation.x -= WINDOW_WIDTH * 6.0;
+        } else if asteroid_transform.translation.x < -WINDOW_WIDTH * 2.0 {
+            asteroid_transform.translation.x += WINDOW_WIDTH * 6.0;
+        }
+    }
+}
+
+fn translate_objects_vert(objects_query: &mut Query<&mut Transform, Without<Player>>) {
+    for mut asteroid_transform in objects_query.iter_mut() {
+        if asteroid_transform.translation.y > WINDOW_HEIGHT * 2.0 {
+            asteroid_transform.translation.y -= WINDOW_HEIGHT * 6.0;
+        } else if asteroid_transform.translation.y < -WINDOW_HEIGHT * 2.0 {
+            asteroid_transform.translation.y += WINDOW_HEIGHT * 6.0;
         }
     }
 }
