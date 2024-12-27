@@ -6,6 +6,8 @@ use rand::{thread_rng, Rng};
 use crate::states::GameState;
 use crate::{WINDOW_HEIGHT, WINDOW_WIDTH};
 
+const ASTEROIDS_COUNT: usize = 200;
+
 pub struct AsteroidsPlugin;
 
 impl Plugin for AsteroidsPlugin {
@@ -17,7 +19,7 @@ impl Plugin for AsteroidsPlugin {
 }
 
 #[derive(Component, Debug, Clone)]
-struct Asteroid {
+pub struct Asteroid {
     pos: Vec2,
     speed: Vec2,
     rot_speed: f32,
@@ -81,9 +83,9 @@ fn setup_asteroids(mut commands: Commands, asset_server: Res<AssetServer>) {
     ];
 
     let mut rng = thread_rng();
-    let mut asteroids: Vec<Asteroid> = Vec::with_capacity(200);
+    let mut asteroids: Vec<Asteroid> = Vec::with_capacity(ASTEROIDS_COUNT);
 
-    for _ in 0..=200 {
+    for _ in 0..=ASTEROIDS_COUNT {
         let asteroid_size = *asteroid_size.choose(&mut rng).unwrap();
 
         let mut pos = Vec2::new(
