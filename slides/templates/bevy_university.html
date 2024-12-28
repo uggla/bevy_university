@@ -506,7 +506,7 @@
                     <tr>
                       <td>01_systems</td>
                       <td>src/main.rs</td>
-                      <td>5mn</td>
+                      <td>5 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -551,7 +551,7 @@
                     <tr>
                       <td>02-components_and_entity</td>
                       <td>src/main.rs</td>
-                      <td>5mn</td>
+                      <td>5 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -583,7 +583,7 @@
                     <tr>
                       <td>03-mut_components_and_entities</td>
                       <td>src/main.rs</td>
-                      <td>5mn</td>
+                      <td>5 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -628,7 +628,7 @@
                     <tr>
                       <td>04-default_plugins</td>
                       <td>src/main.rs</td>
-                      <td>5mn</td>
+                      <td>5 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -670,7 +670,7 @@
                     <tr>
                       <td>05-camera</td>
                       <td>src/main.rs</td>
-                      <td>5mn</td>
+                      <td>5 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -745,7 +745,7 @@
                     <tr>
                       <td>06-resources</td>
                       <td>src/main.rs</td>
-                      <td>5mn</td>
+                      <td>5 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -806,7 +806,7 @@
                     <tr>
                       <td>07-states</td>
                       <td>src/main.rs</td>
-                      <td>5mn</td>
+                      <td>5 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -863,7 +863,7 @@
                     <tr>
                       <td>08-plugins</td>
                       <td>src/main.rs<br />src/states.rs</td>
-                      <td>5mn</td>
+                      <td>5 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -974,7 +974,7 @@
                         src/main.rs<br />
                         src/states.rs
                       </td>
-                      <td>15mn</td>
+                      <td>15 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -985,7 +985,11 @@
 
         <section>
           <h3>Debug camera</h3>
-          <img src="images/bomberman.png" alt="debug_camera" width="100%" />
+          <img
+            src="images/alone_in_the_dark.png"
+            alt="debug_camera"
+            width="75%"
+          />
         </section>
 
         <section>
@@ -1023,7 +1027,7 @@
                         src/main.rs<br />
                         src/camera.rs
                       </td>
-                      <td>5mn</td>
+                      <td>5 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1094,7 +1098,7 @@
                     <tr>
                       <td>11-asteroids</td>
                       <td>src/camera.rs</td>
-                      <td>10mn</td>
+                      <td>10 minutes</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1342,6 +1346,136 @@
             </div>
           </div>
         </section>
+
+        <section>
+          <h3>Events</h3>
+          <h3>Collisions and explosions</h3>
+          <img
+            src="images/bomberman.png"
+            alt="collisions_explosions"
+            width="80%"
+          />
+        </section>
+
+        <section>
+          <h3>Collision Events and Timers</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                <strong>Concept</strong>: Events are critical as they allow
+                communication between systems. In this example, we will use a
+                pre-existing event provided by Rapier, though custom events can
+                also be created.
+              </li>
+              <li>
+                Add the following components to the Player entity:
+                <ul>
+                  <li>
+                    <code>ActiveEvents::COLLISION_EVENTS</code> - Enables
+                    collision event tracking.
+                  </li>
+                  <li>
+                    <code>Visibility::Visible</code> - Allows control over the
+                    player's visibility.
+                  </li>
+                  <li>
+                    <code>Velocity::default()</code> - Initializes default
+                    velocity (to be used later).
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Create a <code>vessel_collision</code> system to handle
+                collision events:
+                <ul>
+                  <li>
+                    In the initial implementation, log collision events using
+                    <code>debug!()</code>.
+                  </li>
+                  <li>
+                    Later, change the Player's visibility to hidden and spawn an
+                    explosion animation.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Explosion animations can be created by spawning the following
+                components:
+                <ul>
+                  <li>
+                    An <code>Explosion</code> component to identify the entity.
+                  </li>
+                  <li>
+                    An <code>AnimationTimer</code> component that wraps a
+                    <code>Timer</code> component.
+                  </li>
+                  <li>
+                    A <code>Sprite</code> component using a
+                    <code>TextureAlias</code> to display the animation.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>13-explosions</td>
+                      <td>src/vessel.rs</td>
+                      <td>7 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Animations</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Create an <code>animate_player_explosion</code> system to update
+                the texture atlas index of the <code>Sprite</code> component.
+              </li>
+              <li>
+                The animation should loop by cycling through the index values
+                from 0 to 8.
+              </li>
+              <li>
+                The animation should be displayed on top of the vessel, which is
+                hidden.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>13-explosions</td>
+                      <td>src/vessel.rs</td>
+                      <td>7 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
           </div>
         </section>
 
