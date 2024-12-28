@@ -104,7 +104,7 @@ fn setup_asteroids(mut commands: Commands, asset_server: Res<AssetServer>) {
 
         asteroids.push(Asteroid::new(pos, initial_speed, rot_speed, asteroid_size));
     }
-    debug!("Asteroids: {:?}", asteroids);
+    trace!("Asteroids: {:?}", asteroids);
 
     for asteroid in asteroids.iter() {
         commands.spawn((
