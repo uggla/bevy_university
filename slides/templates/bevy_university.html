@@ -40,6 +40,30 @@
         font-size: 0.6em;
       }
 
+      /* Larger elements */
+      .lots_of_items2 ul {
+        font-size: 0.7em;
+        text-align: left;
+      }
+
+      /* Smaller elements */
+      .lots_of_items3 ul {
+        font-size: 0.55em;
+        text-align: left;
+      }
+
+      .lots_of_items3 ul ul {
+        font-size: 0.8em;
+        text-align: left;
+      }
+
+      .lots_of_items3 table {
+        font-size: 0.8em;
+        float: left;
+        margin-right: 1em;
+      }
+
+      /* Normal elements */
       .lots_of_items ul {
         font-size: 0.6em;
         text-align: left;
@@ -67,11 +91,6 @@
         margin-right: 1em;
       }
 
-      .lots_of_items2 ul {
-        font-size: 0.7em;
-        text-align: left;
-      }
-
       .clearfix {
         clear: left;
       }
@@ -85,6 +104,11 @@
         float: left;
         width: 50%;
         top: 0px;
+      }
+
+      /* Remove image margin use in conjuction with .pic */
+      .no_margin img {
+        margin: 0px;
       }
 
       .left_text {
@@ -1238,15 +1262,86 @@
         </section>
 
         <section>
-          <h3>Wrapping vessel</h3>
-          <div class="left_text lots_of_items">
+          <h3>Wrapping Vessel</h3>
+          <div class="left_text lots_of_items3">
             <ul>
-              <li>bla bla bla</li>
-              <li></li>
+              <li>
+                The goal is to give the player the impression of infinite space,
+                even though the playable area is limited to 6 screens in size.
+              </li>
+              <li>
+                Mechanism
+                <ul>
+                  <li>
+                    When the player moves beyond 3 screens in any direction
+                  </li>
+                  <li>
+                    The vessel is translated back by 6 screens in the opposite
+                    direction.
+                  </li>
+                  <li>
+                    Visible objects are translated and swapped to maintain their
+                    positions relative to the vessel.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Visible Objects:</strong> Defined as objects within 1
+                screen of the vessel, with an additional 0.5 screen margin for
+                safety.
+              </li>
+              <li>
+                <strong>Example:</strong>
+                <ul>
+                  <li>If the player moves more than 3 screens to the right:</li>
+                  <li>
+                    The vessel is translated to -3 screens, and objects between
+                    screens 2 and 4 are translated to screens -4 and -2.
+                  </li>
+                  <li>
+                    Objects between screens -4 and -2 are translated to screens
+                    2 and 6.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Implement a <code>wrap_vessel</code> system to handle the above
+                mechanism.
+              </li>
             </ul>
           </div>
-          <div class="pic">
-            <img src="images/wrapping.svg" alt="wrapping" width="100%" />
+          <div class="pic no_margin">
+            <img
+              src="images/wrapping.svg"
+              alt="Wrapping Mechanism"
+              width="100%"
+            />
+            <div class="lots_of_items3">
+              <ul>
+                <li>
+                  <strong>Practical Exercise:</strong>
+                  <div class="clearfix"></div>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Branch</th>
+                        <th>Files</th>
+                        <th>Estimated Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>12-movements</td>
+                        <td>src/vessel.rs</td>
+                        <td>10 minutes</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
           </div>
         </section>
 
