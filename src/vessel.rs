@@ -1,14 +1,14 @@
+use crate::{states::GameState, CurrentLevel, WINDOW_HEIGHT, WINDOW_WIDTH};
 use bevy::prelude::*;
-use bevy_rapier2d::prelude::{Collider, ExternalImpulse, GravityScale, RigidBody};
+use bevy_rapier2d::prelude::{
+    ActiveEvents, Collider, CollisionEvent, ExternalImpulse, GravityScale, RigidBody, Velocity,
+};
+use std::f32::consts::PI;
 
 pub const VESSEL_WIDTH: f32 = 112.0;
 #[allow(dead_code)]
 pub const VESSEL_HEIGHT: f32 = 75.0;
 const VESSEL_THRUST_POWER: f32 = 10000.0;
-
-use std::f32::consts::PI;
-
-use crate::{states::GameState, CurrentLevel, WINDOW_HEIGHT, WINDOW_WIDTH};
 
 #[allow(dead_code)]
 #[derive(Component)]
@@ -17,6 +17,12 @@ pub struct Player {
     lifes: u8,
 }
 
+#[derive(Component)]
+struct Explosion;
+
+#[derive(Component, Deref, DerefMut)]
+struct AnimationTimer(Timer);
+
 pub struct VesselPlugin;
 
 impl Plugin for VesselPlugin {
@@ -24,7 +30,14 @@ impl Plugin for VesselPlugin {
         app.add_systems(OnEnter(GameState::InGame), setup_vessel)
             .add_systems(
                 Update,
-                (rotate_vessel, move_vessel, wrap_vessel).run_if(in_state(GameState::InGame)),
+                (
+                    rotate_vessel,
+                    move_vessel,
+                    wrap_vessel,
+                    vessel_collisions,
+                    animate_player_explosion,
+                )
+                    .run_if(in_state(GameState::InGame)),
             );
     }
 }
@@ -50,6 +63,9 @@ fn setup_vessel(
         Collider::ball(VESSEL_WIDTH / 4.0),
         GravityScale(0.0),
         ExternalImpulse::default(),
+        ActiveEvents::COLLISION_EVENTS,
+        Visibility::Visible,
+        Velocity::default(),
     ));
 }
 
@@ -158,6 +174,82 @@ fn translate_objects_vert(objects_query: &mut Query<&mut Transform, Without<Play
             asteroid_transform.translation.y -= WINDOW_HEIGHT * 6.0;
         } else if asteroid_transform.translation.y < -WINDOW_HEIGHT * 2.0 {
             asteroid_transform.translation.y += WINDOW_HEIGHT * 6.0;
+        }
+    }
+}
+
+fn vessel_collisions(
+    mut commands: Commands,
+    mut collision_events: EventReader<CollisionEvent>,
+    mut player: Query<(Entity, &mut Visibility, &Transform), With<Player>>,
+    asset_server: Res<AssetServer>,
+    mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
+) {
+    let (player_entity, mut player_visibility, player_pos) = match player.get_single_mut() {
+        Ok(player_entity) => player_entity,
+        Err(_) => return,
+    };
+    for collision_event in collision_events.read() {
+        match collision_event {
+            CollisionEvent::Started(e1, e2, _cf) => {
+                // Warning, e1 and e2 can be swapped.
+                if (player_entity == *e2) || (player_entity == *e1) {
+                    debug!("Received collision event: {:?}", collision_event);
+                    *player_visibility = Visibility::Hidden;
+                    let texture = asset_server.load("sprites/explosion.png");
+                    let layout =
+                        TextureAtlasLayout::from_grid(UVec2::new(583, 536), 9, 1, None, None);
+                    let texture_atlas_layout = texture_atlas_layouts.add(layout);
+                    commands.spawn((
+                        Sprite::from_atlas_image(
+                            texture,
+                            TextureAtlas {
+                                layout: texture_atlas_layout,
+                                index: 0,
+                            },
+                        ),
+                        Transform {
+                            translation: player_pos.translation,
+                            scale: Vec3::splat(0.5),
+                            ..default()
+                        },
+                        Explosion,
+                        AnimationTimer(Timer::from_seconds(0.1, TimerMode::Repeating)),
+                    ));
+                }
+            }
+            CollisionEvent::Stopped(e1, e2, _cf) => {
+                // Warning, e1 and e2 can be swapped.
+                if (player_entity == *e2) || (player_entity == *e1) {
+                    debug!("Received collision event: {:?}", collision_event);
+                }
+            }
+        }
+    }
+}
+
+fn animate_player_explosion(
+    time: Res<Time>,
+    mut query: Query<(Entity, &mut Transform, &mut AnimationTimer, &mut Sprite), With<Explosion>>,
+    mut player: Query<&Transform, (With<Player>, Without<Explosion>)>,
+) {
+    let player_pos = match player.get_single_mut() {
+        Ok(player_entity) => player_entity,
+        Err(_) => return,
+    };
+
+    for (_entity, mut explosion_pos, mut timer, mut sprite) in &mut query {
+        timer.tick(time.delta());
+
+        if timer.just_finished() {
+            explosion_pos.translation = player_pos.translation;
+            if let Some(atlas) = &mut sprite.texture_atlas {
+                if atlas.index < 8 {
+                    atlas.index += 1;
+                } else {
+                    atlas.index = 0;
+                }
+            }
         }
     }
 }
