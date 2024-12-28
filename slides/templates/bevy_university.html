@@ -35,6 +35,11 @@
         text-align: left;
       }
 
+      .longtext {
+        text-align: left;
+        font-size: 0.6em;
+      }
+
       .lots_of_items ul {
         font-size: 0.6em;
         text-align: left;
@@ -62,13 +67,13 @@
         margin-right: 1em;
       }
 
-      .clearfix {
-        clear: left;
-      }
-
       .lots_of_items2 ul {
         font-size: 0.7em;
         text-align: left;
+      }
+
+      .clearfix {
+        clear: left;
       }
 
       .long_link a {
@@ -156,7 +161,7 @@
         <!-- <section data-background="images/background.svg" data-background-size="cover"> -->
         <section>
           <h1>Bevy university</h1>
-          <img src="images/bevy_logo_dark.svg" alt="bevy logo" width="50%" />
+          <img src="images/bevy_logo_dark.svg" alt="bevy_logo" width="50%" />
         </section>
 
         <section>
@@ -362,7 +367,7 @@
           </div>
           <div class="pic lots_of_items">
             <p>Paste screenshots of the game.</p>
-            <img src="images/asteroids.png" alt="asteroids" width="50%" />
+            <img src="images/asteroids.png" alt="screenshot" width="50%" />
           </div>
         </section>
 
@@ -454,7 +459,7 @@
 
         <section>
           <h3>Systems and Scheduling in Bevy</h3>
-          <img src="images/pacman.webp" alt="system&scheduling" width="75%" />
+          <img src="images/pacman.webp" alt="system_scheduling" width="75%" />
         </section>
 
         <section>
@@ -497,7 +502,7 @@
 
         <section>
           <h3>Manipulating Entities and Components in Bevy</h3>
-          <img src="images/outrun.jpg" alt="system&scheduling" width="75%" />
+          <img src="images/outrun.jpg" alt="entities_components" width="75%" />
         </section>
 
         <section>
@@ -567,7 +572,7 @@
           <h3>Load default plugins and set a camera</h3>
           <img
             src="images/crystal_castle.png"
-            alt="default_plugins&camera"
+            alt="default_plugins_camera"
             width="75%"
           />
         </section>
@@ -661,7 +666,7 @@
           <h3>Display our vessel</h3>
           <img
             src="images/captain_blood.png"
-            alt="default_plugins&camera"
+            alt="resources_and_asset_server"
             width="65%"
           />
         </section>
@@ -846,7 +851,7 @@
         <section>
           <h3>User Inputs</h3>
           <h3>Create a Simple Menu and Enable Vessel Rotation</h3>
-          <img src="images/super_mario.webp" alt="plugins" width="50%" />
+          <img src="images/super_mario.webp" alt="user_inputs" width="50%" />
           <h5>
             At this point, we have covered almost all the fundamentals, and we
             will introduce more changes in the upcoming sections.
@@ -956,7 +961,7 @@
 
         <section>
           <h3>Debug camera</h3>
-          <img src="images/bomberman.png" alt="plugins" width="100%" />
+          <img src="images/bomberman.png" alt="debug_camera" width="100%" />
         </section>
 
         <section>
@@ -1005,7 +1010,7 @@
 
         <section>
           <h3>Display Asteroids</h3>
-          <img src="images/rick_dangerous.webp" alt="plugins" width="60%" />
+          <img src="images/rick_dangerous.webp" alt="asteroids" width="60%" />
         </section>
 
         <section>
@@ -1075,7 +1080,170 @@
         </section>
 
         <section>
-          <h2>Physics with Rapier Plugin</h2>
+          <h3>Movements</h3>
+          <h3>Asteroids and Vessel Movements</h3>
+          <img src="images/speedball2.png" alt="movements" width="50%" />
+          <div class="longtext">
+            <p>
+              We could use our own physics "engine" to handle movement and
+              collisions, as the required physics are relatively simple.
+            </p>
+            <p>
+              Alternatively, we could use Rapier for physics. This would give us
+              an introduction to a physics engine and save development effort.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h3>Moving Asteroids</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Initialize the <code>RapierPhysicsPlugin</code> and the
+                <code>RapierDebugRenderPlugin</code> in the main function.
+              </li>
+              <li>
+                Modify the <code>Asteroid</code> struct to include an additional
+                field: <code>rot_speed: f32</code>.
+              </li>
+              <li>
+                Add the following components from Rapier to the entities
+                spawning asteroids to handle physics:
+                <ul>
+                  <li>
+                    <code>RigidBody::Dynamic</code> - Declares the entity as a
+                    dynamic kinematic object.
+                  </li>
+                  <li>
+                    <code>Collider::ball</code> - Defines a collider. You can
+                    use the <code>radius</code> method from the
+                    <code>AsteroidSize</code> implementation.
+                  </li>
+                  <li>
+                    <code>GravityScale</code> - Sets gravity to
+                    <code>0.0</code> so that asteroids won't fall.
+                  </li>
+                  <li>
+                    <code>Velocity</code> - Defines an initial linear and
+                    angular velocity for the asteroids.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Implement wrapping for the asteroids if they move farther than
+                four screen widths or heights in any direction.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>12-movements</td>
+                      <td>
+                        src/main.rs<br />
+                        src/asteroids.rs
+                      </td>
+                      <td>7 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Moving Vessel</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Refactor the code and add a <code>VesselPlugin</code> for better
+                modularity.
+              </li>
+              <li>
+                Define a couple of constants to set the vessel's dimensions
+                (e.g., <code>VESSEL_WIDTH</code>, <code>VESSEL_HEIGHT</code>).
+              </li>
+              <li>
+                Add the following components from Rapier to the entity spawning
+                the vessel to handle physics:
+                <ul>
+                  <li>
+                    <code>RigidBody::Dynamic</code> - Declares the entity as a
+                    dynamic kinematic object.
+                  </li>
+                  <li>
+                    <code>Collider::ball</code> - Defines a circular collider
+                    using <code>VESSEL_WIDTH / 4.0</code>.
+                  </li>
+                  <li>
+                    <code>GravityScale</code> - Sets gravity to
+                    <code>0.0</code>, ensuring the vessel doesn't fall.
+                  </li>
+                  <li>
+                    <code>ExternalImpulse</code> - Allows for velocity changes;
+                    initialize with <code>ExternalImpulse::default()</code>.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Add a <code>move_vessel</code> system to handle user input. This
+                system should generate an impulse in the direction the vessel is
+                facing. Run the code to ensure the vessel is moving properly.
+              </li>
+              <li>
+                Add a <code>stick_camera_on_vessel</code> system to the
+                <code>CameraPlugin</code> that will move (stick) the camera to
+                the vessel position.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>12-movements</td>
+                      <td>
+                        src/main.rs<br />
+                        src/vessel.rs<br />
+                        src/camera.rs
+                      </td>
+                      <td>10 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Wrapping vessel</h3>
+          <div class="left_text lots_of_items">
+            <ul>
+              <li>bla bla bla</li>
+              <li></li>
+            </ul>
+          </div>
+          <div class="pic">
+            <img src="images/wrapping.svg" alt="wrapping" width="100%" />
+          </div>
         </section>
 
         <section>
@@ -1121,7 +1289,7 @@
         </section>
 
         <section>
-          <img src="images/thanks.gif" alt="thank you" width="50%" />
+          <img src="images/thanks.gif" alt="thank_you" width="50%" />
           <ul>
             <li>Bastion Sevajol &lt;bastien@sevajol.fr&gt;</li>
             <li>René Ribaud &lt;rene.ribaud@gmail.com&gt;</li>
