@@ -6,7 +6,7 @@ pub struct CameraPlugin;
 
 impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(OnEnter(GameState::Menu), setup_camera);
+        app.add_systems(Startup, setup_camera);
         app.add_systems(
             Update,
             stick_camera_on_vessel.run_if(in_state(GameState::InGame)),
