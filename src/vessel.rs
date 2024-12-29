@@ -1,5 +1,5 @@
 use crate::{states::GameState, CurrentLevel, WINDOW_HEIGHT, WINDOW_WIDTH};
-use bevy::prelude::*;
+use bevy::{input::common_conditions::input_just_pressed, prelude::*};
 use bevy_rapier2d::prelude::{
     ActiveEvents, Collider, CollisionEvent, ExternalImpulse, GravityScale, RigidBody, Velocity,
 };
@@ -23,11 +23,22 @@ struct Explosion;
 #[derive(Component, Deref, DerefMut)]
 struct AnimationTimer(Timer);
 
+#[derive(Event)]
+struct Restart {
+    entity: Entity,
+}
+
 pub struct VesselPlugin;
 
 impl Plugin for VesselPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(OnEnter(GameState::InGame), setup_vessel)
+            .add_systems(OnExit(GameState::InGame), despawn_vessel)
+            .add_systems(
+                Update,
+                exit_to_menu
+                    .run_if(input_just_pressed(KeyCode::Escape).and(in_state(GameState::InGame))),
+            )
             .add_systems(
                 Update,
                 (
@@ -38,7 +49,8 @@ impl Plugin for VesselPlugin {
                     animate_player_explosion,
                 )
                     .run_if(in_state(GameState::InGame)),
-            );
+            )
+            .add_observer(restart);
     }
 }
 
@@ -229,6 +241,7 @@ fn vessel_collisions(
 }
 
 fn animate_player_explosion(
+    mut commands: Commands,
     time: Res<Time>,
     mut query: Query<(Entity, &mut Transform, &mut AnimationTimer, &mut Sprite), With<Explosion>>,
     mut player: Query<&Transform, (With<Player>, Without<Explosion>)>,
@@ -238,7 +251,7 @@ fn animate_player_explosion(
         Err(_) => return,
     };
 
-    for (_entity, mut explosion_pos, mut timer, mut sprite) in &mut query {
+    for (explosion_entity, mut explosion_pos, mut timer, mut sprite) in &mut query {
         timer.tick(time.delta());
 
         if timer.just_finished() {
@@ -248,8 +261,45 @@ fn animate_player_explosion(
                     atlas.index += 1;
                 } else {
                     atlas.index = 0;
+                    commands.trigger(Restart {
+                        entity: explosion_entity,
+                    });
                 }
             }
         }
     }
+}
+
+fn restart(
+    trigger: Trigger<Restart>,
+    mut commands: Commands,
+    mut player: Query<(&mut Player, &mut Transform, &mut Velocity, &mut Visibility), With<Player>>,
+    mut next_state: ResMut<NextState<GameState>>,
+) {
+    let (mut player, mut player_pos, mut player_velocity, mut player_visibility) =
+        match player.get_single_mut() {
+            Ok(player_entity) => player_entity,
+            Err(_) => return,
+        };
+    commands.entity(trigger.entity).despawn_recursive();
+    *player_visibility = Visibility::Visible;
+    *player_velocity = Velocity::default();
+    player_pos.translation = Vec3::new(0.0, 0.0, 0.0);
+    player_pos.rotation = Quat::from_rotation_z(0.0);
+    if player.lifes == 0 {
+        next_state.set(GameState::GameOver);
+    } else {
+        player.lifes -= 1;
+        debug!("Remaining lifes: {}", player.lifes);
+    }
+}
+
+fn despawn_vessel(mut commands: Commands, query: Query<Entity, With<Player>>) {
+    for entity in query.iter() {
+        commands.entity(entity).despawn_recursive();
+    }
+}
+
+fn exit_to_menu(mut next_state: ResMut<NextState<GameState>>) {
+    next_state.set(GameState::Menu);
 }
