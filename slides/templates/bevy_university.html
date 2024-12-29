@@ -1480,6 +1480,143 @@
         </section>
 
         <section>
+          <h3>Observers</h3>
+          <h3>Manage restart, gameover and exit game</h3>
+          <img
+            src="images/days_of_the_tentacle.png"
+            alt="collisions_explosions"
+            width="75%"
+          />
+        </section>
+
+        <section>
+          <h3>Properly Manage Restart with an Observer</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Managing the restart within the
+                <code>animate_player_explosion</code> system would create
+                unwanted coupling between systems.
+              </li>
+              <li>
+                Events or observers are a better solution to ensure systems
+                maintain single responsibility.
+              </li>
+              <li>Add a <code>Restart</code> event.</li>
+              <li>
+                Trigger the <code>Restart</code> event at the end of the
+                explosion animation.
+              </li>
+              <li>
+                Add an observer system (a system with a <code>Trigger</code> as
+                its first parameter) to handle the restart:
+                <ul>
+                  <li>Set the player's visibility to visible.</li>
+                  <li>Reset the player's velocity to default.</li>
+                  <li>
+                    Translate the vessel back to the origin and rotate it to
+                    angle 0.
+                  </li>
+                  <li>
+                    Decrease the player's number of lives. If no lives remain,
+                    transition the <code>AppState</code> to
+                    <code>Gameover</code>.
+                  </li>
+                </ul>
+              </li>
+              <li>Add the observer system to the app.</li>
+              <li>
+                Add a <code>despawn_vessel</code> system to despawn the vessel
+                when <code>Ingame</code> state is exited.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>14-observers</td>
+                      <td>src/vessel.rs</td>
+                      <td>7 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Manage Gameover and Exit Game</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Create a <code>display_gameover</code> system by duplicating the
+                <code>display_menu</code> system.
+              </li>
+              <li>
+                Add the <code>display_gameover</code> system to run when the
+                <code>Gameover</code> state is entered.
+              </li>
+              <li>
+                Rename the <code>start_game</code> system to
+                <code>manage_inputs</code>, and update it to handle input
+                controls in the <code>Gameover</code> state.
+              </li>
+              <li>
+                Trigger the <code>AppExit::Success</code> event if the player
+                presses the Escape key to exit the game.
+              </li>
+              <li>
+                Update the app to execute the <code>manage_inputs</code> system
+                in the <code>Gameover</code> state.
+              </li>
+              <li>
+                Note: A potential issue could arise with the camera
+                transitioning back to the <code>Menu</code> state. Handle this
+                case carefully.
+              </li>
+              <li>
+                <strong>Bonus:</strong> Add an <code>exit_to_menu</code> system
+                in <code>vessel.rs</code> to allow returning to the
+                <code>Menu</code>.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>14-observers</td>
+                      <td>
+                        src/state.rs<br />
+                        src/vessel.rs<br />
+                        src/camera.rs
+                      </td>
+                      <td>7 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
           <h2>Compilation and Exportation</h2>
         </section>
 
