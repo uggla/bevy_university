@@ -5,10 +5,9 @@ mod vessel;
 
 use asteroids::AsteroidsPlugin;
 use bevy::{prelude::*, window::WindowResolution};
-use bevy_rapier2d::{
-    plugin::{NoUserData, RapierPhysicsPlugin},
-    render::RapierDebugRenderPlugin,
-};
+use bevy_rapier2d::plugin::{NoUserData, RapierPhysicsPlugin};
+#[cfg(debug_assertions)]
+use bevy_rapier2d::render::RapierDebugRenderPlugin;
 use camera::CameraPlugin;
 use states::StatesPlugin;
 use vessel::{VesselPlugin, VESSEL_WIDTH};
@@ -35,6 +34,7 @@ fn main() {
             StatesPlugin,
             CameraPlugin,
             RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(VESSEL_WIDTH * 0.5 / 5.0),
+            #[cfg(debug_assertions)]
             RapierDebugRenderPlugin::default(),
             AsteroidsPlugin,
             VesselPlugin,

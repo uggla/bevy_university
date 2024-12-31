@@ -21,6 +21,7 @@ fn setup_camera(mut commands: Commands) {
     commands.spawn(Camera2d);
 }
 
+#[cfg(debug_assertions)]
 fn debug_camera(
     mut camera: Query<&mut OrthographicProjection, With<Camera2d>>,
     keyboard_input: Res<ButtonInput<KeyCode>>,
