@@ -93,10 +93,11 @@ fn manage_inputs(
     mut app_exit_events: EventWriter<AppExit>,
     state: Res<State<GameState>>,
     mut next_state: ResMut<NextState<GameState>>,
-    keybord: Res<ButtonInput<KeyCode>>,
+    mut keybord: ResMut<ButtonInput<KeyCode>>,
     gamepads: Query<(Entity, &Gamepad)>,
 ) {
     if *state == GameState::Menu && keybord.just_pressed(KeyCode::Space) {
+        keybord.reset(KeyCode::Space);
         next_state.set(GameState::InGame);
     }
 
