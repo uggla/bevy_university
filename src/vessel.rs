@@ -3,7 +3,12 @@ use crate::{
     states::GameState,
     CurrentLevel, WINDOW_HEIGHT, WINDOW_WIDTH,
 };
-use bevy::{input::common_conditions::input_just_pressed, prelude::*, utils::HashSet};
+use bevy::{
+    audio::{PlaybackMode, Volume},
+    input::common_conditions::input_just_pressed,
+    prelude::*,
+    utils::HashSet,
+};
 use bevy_rapier2d::prelude::{
     ActiveEvents, Collider, CollisionEvent, ExternalImpulse, GravityScale, RigidBody, Velocity,
 };
@@ -44,6 +49,9 @@ struct AsteroidExplosion {
 
 #[derive(Component, Deref, DerefMut)]
 struct AnimationTimer(Timer);
+
+#[derive(Component)]
+struct ThrustSound;
 
 #[derive(Event)]
 struct Restart {
@@ -136,25 +144,43 @@ fn rotate_vessel(
 }
 
 fn move_vessel(
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
     players: Query<&mut Transform, With<Player>>,
     keybord: Res<ButtonInput<KeyCode>>,
     gamepads: Query<(Entity, &Gamepad)>,
     mut ext_impulses: Query<&mut ExternalImpulse, With<Player>>,
+    thrust_sound: Query<&ThrustSound>,
 ) {
     if keybord.pressed(KeyCode::ArrowUp) {
-        activate_thrust(&players, &mut ext_impulses);
+        activate_thrust(
+            &mut commands,
+            &asset_server,
+            &players,
+            &mut ext_impulses,
+            &thrust_sound,
+        );
     }
 
     for (_entity, gamepad) in gamepads.iter() {
         if gamepad.pressed(GamepadButton::South) {
-            activate_thrust(&players, &mut ext_impulses);
+            activate_thrust(
+                &mut commands,
+                &asset_server,
+                &players,
+                &mut ext_impulses,
+                &thrust_sound,
+            );
         }
     }
 }
 
 fn activate_thrust(
+    commands: &mut Commands,
+    asset_server: &Res<AssetServer>,
     players: &Query<&mut Transform, With<Player>>,
     ext_impulses: &mut Query<&mut ExternalImpulse, With<Player>>,
+    thrust_sound: &Query<&ThrustSound>,
 ) {
     let player_transform = players.single();
     // Get the 2D rotation angle in radians around the Z axis
@@ -169,6 +195,18 @@ fn activate_thrust(
     );
     for mut ext_impulse in ext_impulses.iter_mut() {
         ext_impulse.impulse = impulse_direction
+    }
+
+    if thrust_sound.get_single().is_err() {
+        commands.spawn((
+            AudioPlayer::new(asset_server.load("sounds/thrust.ogg")),
+            PlaybackSettings {
+                mode: PlaybackMode::Despawn,
+                volume: Volume::new(0.5),
+                ..default()
+            },
+            ThrustSound,
+        ));
     }
 }
 
@@ -229,6 +267,15 @@ fn spawn_lasers(
             ActiveEvents::COLLISION_EVENTS,
             Velocity {
                 linvel: vessel_direction * LASER_SPEED + player_velocity.linvel,
+                ..default()
+            },
+        ));
+
+        commands.spawn((
+            AudioPlayer::new(asset_server.load("sounds/sfx_laser1.ogg")),
+            PlaybackSettings {
+                mode: PlaybackMode::Despawn,
+                volume: Volume::new(0.5),
                 ..default()
             },
         ));
@@ -420,6 +467,16 @@ fn spawn_explosion(
             },
             AnimationTimer(Timer::from_seconds(0.1, TimerMode::Repeating)),
         ))
+        .with_children(|parent| {
+            parent.spawn((
+                AudioPlayer::new(asset_server.load("sounds/explosion.ogg")),
+                PlaybackSettings {
+                    mode: PlaybackMode::Despawn,
+                    // volume: Volume::new(0.5),
+                    ..default()
+                },
+            ));
+        })
         .id()
 }
 
