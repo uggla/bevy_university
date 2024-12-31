@@ -1617,6 +1617,78 @@
         </section>
 
         <section>
+          <h3>Vessel lasers</h3>
+          <img
+            src="images/super_mario_world.webp"
+            alt="vessel_lasers"
+            width="75%"
+          />
+        </section>
+
+        <section>
+          <h3>Lasers</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Create a <code>display_gameover</code> system by duplicating the
+                <code>display_menu</code> system.
+              </li>
+              <li>
+                Add the <code>display_gameover</code> system to run when the
+                <code>Gameover</code> state is entered.
+              </li>
+              <li>
+                Rename the <code>start_game</code> system to
+                <code>manage_inputs</code>, and update it to handle input
+                controls in the <code>Gameover</code> state.
+              </li>
+              <li>
+                Trigger the <code>AppExit::Success</code> event if the player
+                presses the Escape key to exit the game.
+              </li>
+              <li>
+                Update the app to execute the <code>manage_inputs</code> system
+                in the <code>Gameover</code> state.
+              </li>
+              <li>
+                Note: A potential issue could arise with the camera
+                transitioning back to the <code>Menu</code> state. Handle this
+                case carefully.
+              </li>
+              <li>
+                <strong>Bonus:</strong> Add an <code>exit_to_menu</code> system
+                in <code>vessel.rs</code> to allow returning to the
+                <code>Menu</code>.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>15-lasers</td>
+                      <td>
+                        src/state.rs<br />
+                        src/vessel.rs<br />
+                        src/camera.rs
+                      </td>
+                      <td>7 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
           <h2>Compilation and Exportation</h2>
         </section>
 
