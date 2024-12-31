@@ -20,14 +20,14 @@ impl Plugin for AsteroidsPlugin {
 
 #[derive(Component, Debug, Clone)]
 pub struct Asteroid {
-    pos: Vec2,
-    speed: Vec2,
-    rot_speed: f32,
-    size: AsteriodSize,
+    pub pos: Vec2,
+    pub speed: Vec2,
+    pub rot_speed: f32,
+    pub size: AsteroidSize,
 }
 
 impl Asteroid {
-    fn new(pos: Vec2, speed: Vec2, rot_speed: f32, size: AsteriodSize) -> Self {
+    pub fn new(pos: Vec2, speed: Vec2, rot_speed: f32, size: AsteroidSize) -> Self {
         Self {
             pos,
             speed,
@@ -38,54 +38,63 @@ impl Asteroid {
 }
 
 #[derive(Debug, Clone, Copy)]
-enum AsteriodSize {
+pub enum AsteroidSize {
     Tiny,
     Small,
     Medium,
     Big,
 }
 
-impl AsteriodSize {
+impl AsteroidSize {
     fn size(&self) -> u32 {
         match self {
-            AsteriodSize::Tiny => (18.0 * 1.5) as u32,
-            AsteriodSize::Small => (28.0 * 1.5) as u32,
-            AsteriodSize::Medium => (43.0 * 1.5) as u32,
-            AsteriodSize::Big => (98.0 * 1.5) as u32,
+            AsteroidSize::Tiny => (18.0 * 1.5) as u32,
+            AsteroidSize::Small => (28.0 * 1.5) as u32,
+            AsteroidSize::Medium => (43.0 * 1.5) as u32,
+            AsteroidSize::Big => (98.0 * 1.5) as u32,
         }
     }
 
-    fn sprite(&self) -> &str {
+    pub fn sprite(&self) -> &str {
         match self {
-            AsteriodSize::Tiny => "sprites/meteorbrown_tiny1.png",
-            AsteriodSize::Small => "sprites/meteorbrown_small1.png",
-            AsteriodSize::Medium => "sprites/meteorbrown_med1.png",
-            AsteriodSize::Big => "sprites/meteorbrown_big1.png",
+            AsteroidSize::Tiny => "sprites/meteorbrown_tiny1.png",
+            AsteroidSize::Small => "sprites/meteorbrown_small1.png",
+            AsteroidSize::Medium => "sprites/meteorbrown_med1.png",
+            AsteroidSize::Big => "sprites/meteorbrown_big1.png",
         }
     }
 
-    fn radius(&self) -> u32 {
+    pub fn radius(&self) -> u32 {
         match self {
-            AsteriodSize::Tiny => (12.0 * 1.5) as u32,
-            AsteriodSize::Small => (18.0 * 1.5) as u32,
-            AsteriodSize::Medium => (28.0 * 1.5) as u32,
-            AsteriodSize::Big => (60.0 * 1.5) as u32,
+            AsteroidSize::Tiny => (12.0 * 1.5) as u32,
+            AsteroidSize::Small => (18.0 * 1.5) as u32,
+            AsteroidSize::Medium => (28.0 * 1.5) as u32,
+            AsteroidSize::Big => (60.0 * 1.5) as u32,
+        }
+    }
+
+    pub fn explosion_size(&self) -> f32 {
+        match self {
+            AsteroidSize::Tiny => 0.1,
+            AsteroidSize::Small => 0.2,
+            AsteroidSize::Medium => 0.3,
+            AsteroidSize::Big => 0.5,
         }
     }
 }
 
 fn setup_asteroids(mut commands: Commands, asset_server: Res<AssetServer>) {
     let asteroid_size = [
-        AsteriodSize::Tiny,
-        AsteriodSize::Small,
-        AsteriodSize::Medium,
-        AsteriodSize::Big,
+        AsteroidSize::Tiny,
+        AsteroidSize::Small,
+        AsteroidSize::Medium,
+        AsteroidSize::Big,
     ];
 
     let mut rng = thread_rng();
     let mut asteroids: Vec<Asteroid> = Vec::with_capacity(ASTEROIDS_COUNT);
 
-    for _ in 0..=ASTEROIDS_COUNT {
+    for _ in 0..ASTEROIDS_COUNT {
         let asteroid_size = *asteroid_size.choose(&mut rng).unwrap();
 
         let mut pos = Vec2::new(
