@@ -3,7 +3,7 @@ use crate::{
     states::GameState,
     CurrentLevel, WINDOW_HEIGHT, WINDOW_WIDTH,
 };
-use bevy::{input::common_conditions::input_just_pressed, prelude::*};
+use bevy::{input::common_conditions::input_just_pressed, prelude::*, utils::HashSet};
 use bevy_rapier2d::prelude::{
     ActiveEvents, Collider, CollisionEvent, ExternalImpulse, GravityScale, RigidBody, Velocity,
 };
@@ -300,6 +300,7 @@ fn vessel_collisions(
     velocity_qry: Query<&Velocity>,
     asset_server: Res<AssetServer>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
+    mut avoid_duplicated: Local<HashSet<Entity>>,
 ) {
     let (player_entity, mut player_visibility, player_pos) = match player.get_single_mut() {
         Ok(player_entity) => player_entity,
@@ -332,6 +333,13 @@ fn vessel_collisions(
                 };
 
                 if let Some((laser_entity, object_entity)) = laser_colision {
+                    if !avoid_duplicated.insert(*laser_entity) {
+                        return;
+                    }
+                    if !avoid_duplicated.insert(*object_entity) {
+                        return;
+                    }
+
                     if *object_entity == player_entity {
                         debug!(
                             "Received collision event with player: {:?}",
