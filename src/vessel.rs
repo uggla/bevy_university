@@ -53,6 +53,9 @@ struct AnimationTimer(Timer);
 #[derive(Component)]
 struct ThrustSound;
 
+#[derive(Component)]
+struct Radar;
+
 #[derive(Event)]
 struct Restart {
     entity: Entity,
@@ -80,6 +83,7 @@ impl Plugin for VesselPlugin {
                     fire_lasers,
                     restrict_lasers_range.after(vessel_collisions),
                     animate_asteroid_explosion.after(vessel_collisions),
+                    radar,
                 )
                     .run_if(in_state(GameState::InGame)),
             )
@@ -111,6 +115,20 @@ fn setup_vessel(
         ActiveEvents::COLLISION_EVENTS,
         Visibility::Visible,
         Velocity::default(),
+    ));
+
+    commands.spawn((
+        Sprite {
+            color: Color::hsv(0.0, 1.0, 6.5),
+            image: asset_server.load("sprites/radar.png"),
+            ..default()
+        },
+        Transform {
+            translation: Vec3::new(0.0, VESSEL_HEIGHT / 2.0 + 10.0, 1.0),
+            scale: Vec3::new(0.3, 0.5, 0.5),
+            ..default()
+        },
+        Radar,
     ));
 }
 
@@ -638,6 +656,67 @@ fn spawn_splited_asteroids(
     }
 }
 
+type RadarOnly = (With<Radar>, Without<Player>, Without<Asteroid>);
+
+fn radar(
+    player: Query<&Transform, With<Player>>,
+    asteroids: Query<&Transform, With<Asteroid>>,
+    mut radar: Query<(&mut Transform, &mut Sprite), RadarOnly>,
+) {
+    let player_pos = match player.get_single() {
+        Ok(player_entity) => player_entity,
+        Err(_) => return,
+    };
+
+    let shortest_asteroid = asteroids.iter().min_by(|a, b| {
+        a.translation
+            .distance(player_pos.translation)
+            .partial_cmp(&b.translation.distance(player_pos.translation))
+            .unwrap_or(std::cmp::Ordering::Equal)
+    });
+
+    if let Some(asteroid) = shortest_asteroid {
+        let (mut radar_pos, mut radar_sprite) = radar.single_mut();
+        let relative_vector = asteroid.translation.xy() - player_pos.translation.xy();
+        let angle = Vec2::new(0.0, 1.0).angle_to(relative_vector);
+        debug!("Radar angle: {}", angle);
+
+        let distance = player_pos.translation.distance(asteroid.translation);
+        debug!("Distance: {}", distance);
+
+        match distance {
+            d if d <= 300.0 => {
+                radar_sprite.color = Color::hsv(0.0, 1.0, 6.5);
+            }
+            d if d > 300.0 && d <= 1100.0 => {
+                debug!("saturation: {}", calculate_saturation(d));
+                radar_sprite.color = Color::hsv(1.0, calculate_saturation(d), 6.5);
+            }
+            _ => {
+                radar_sprite.color = Color::hsv(1.0, 0.5, 6.5);
+            }
+        };
+
+        radar_pos.translation = player_pos.translation
+            + (Vec2::new(0.0, VESSEL_HEIGHT / 2.0 + 10.0))
+                .rotate(Vec2::from_angle(angle))
+                .extend(5.0);
+        radar_pos.rotation = Quat::from_rotation_z(angle);
+    };
+}
+
+fn calculate_saturation(distance: f32) -> f32 {
+    let min_distance = 300.0;
+    let max_distance = 1100.0;
+    let min_color = 1.0;
+    let max_color = 0.8;
+
+    let a = (max_color - min_color) / (max_distance - min_distance);
+    let b = min_color - a * min_distance;
+
+    a * distance + b
+}
+
 fn restart(
     trigger: Trigger<Restart>,
     mut commands: Commands,
@@ -662,8 +741,16 @@ fn restart(
     }
 }
 
-fn despawn_vessel(mut commands: Commands, query: Query<Entity, With<Player>>) {
-    for entity in query.iter() {
+fn despawn_vessel(
+    mut commands: Commands,
+    query_player: Query<Entity, With<Player>>,
+    query_radar: Query<Entity, With<Radar>>,
+) {
+    for entity in query_player.iter() {
+        commands.entity(entity).despawn_recursive();
+    }
+
+    for entity in query_radar.iter() {
         commands.entity(entity).despawn_recursive();
     }
 }
