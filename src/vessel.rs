@@ -68,9 +68,9 @@ impl Plugin for VesselPlugin {
                     move_vessel,
                     wrap_vessel,
                     vessel_collisions,
-                    animate_player_explosion,
+                    animate_player_explosion.after(vessel_collisions),
                     fire_lasers,
-                    restrict_lasers_range,
+                    restrict_lasers_range.after(vessel_collisions),
                     animate_asteroid_explosion.after(vessel_collisions),
                 )
                     .run_if(in_state(GameState::InGame)),
