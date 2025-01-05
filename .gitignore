@@ -1,2 +1,4 @@
 /target
 /slides/bevy_university.html
+/wasm/bevy_game.js
+/wasm/bevy_game_bg.wasm
