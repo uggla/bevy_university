@@ -1,5 +1,8 @@
+use bevy::asset::RenderAssetUsages;
 use bevy::prelude::*;
+use bevy::render::render_resource::{Extent3d, TextureDimension, TextureFormat};
 use bevy_rapier2d::prelude::{Collider, GravityScale, RigidBody, Velocity};
+use image::{ImageBuffer, Rgba};
 use rand::seq::SliceRandom;
 use rand::{thread_rng, Rng};
 
@@ -12,11 +15,17 @@ pub struct AsteroidsPlugin;
 
 impl Plugin for AsteroidsPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(OnEnter(GameState::InGame), setup_asteroids);
-        app.add_systems(OnExit(GameState::InGame), despawn_asteroids);
+        app.add_systems(OnEnter(GameState::InGame), (setup_asteroids, background));
+        app.add_systems(
+            OnExit(GameState::InGame),
+            (despawn_asteroids, despawn_background),
+        );
         app.add_systems(Update, wrap_asteroids);
     }
 }
+
+#[derive(Component, Debug, Clone)]
+pub struct Background;
 
 #[derive(Component, Debug, Clone)]
 pub struct Asteroid {
@@ -168,7 +177,66 @@ fn wrap_asteroids(mut query: Query<&mut Transform, With<Asteroid>>) {
     }
 }
 
+fn background(mut commands: Commands, asset_server: Res<AssetServer>) {
+    // Image dimensions
+    let width = 8 * WINDOW_WIDTH as u32;
+    let height = 8 * WINDOW_HEIGHT as u32;
+
+    // Create a black image buffer
+    let mut img = ImageBuffer::new(width, height);
+
+    // Number of stars
+    let num_stars = 10000;
+
+    // Random number generator
+    let mut rng = rand::thread_rng();
+
+    for _ in 0..num_stars {
+        let channel_color = rng.gen_range(100..255);
+
+        let x = rng.gen_range(0..width);
+        let y = rng.gen_range(0..height);
+
+        img.put_pixel(
+            x,
+            y,
+            Rgba([channel_color, channel_color, channel_color, 255]),
+        );
+    }
+
+    let image = Image::new(
+        Extent3d {
+            width,
+            height,
+            depth_or_array_layers: 1,
+        },
+        TextureDimension::D2,
+        img.into_raw(),
+        TextureFormat::Rgba8UnormSrgb,
+        RenderAssetUsages::RENDER_WORLD,
+    );
+
+    let image_handle = asset_server.add(image);
+    commands.spawn((
+        Sprite {
+            image: image_handle,
+            ..default()
+        },
+        Transform {
+            translation: Vec3::new(0.0, 0.0, -1.0),
+            ..default()
+        },
+        Background,
+    ));
+}
+
 fn despawn_asteroids(mut commands: Commands, query: Query<Entity, With<Asteroid>>) {
+    for entity in query.iter() {
+        commands.entity(entity).despawn_recursive();
+    }
+}
+
+fn despawn_background(mut commands: Commands, query: Query<Entity, With<Background>>) {
     for entity in query.iter() {
         commands.entity(entity).despawn_recursive();
     }
