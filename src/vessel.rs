@@ -360,8 +360,14 @@ fn vessel_collisions(
                             "Received collision event with asteroid: {:?}",
                             collision_event
                         );
-                        let (asteroid_pos, asteroid) = asteroid_qry.get(*object_entity).unwrap();
-                        let laser_velocity = velocity_qry.get(*laser_entity).unwrap();
+                        let (asteroid_pos, asteroid) = match asteroid_qry.get(*object_entity) {
+                            Ok((asteroid_pos, asteroid)) => (asteroid_pos, asteroid),
+                            Err(_) => return,
+                        };
+                        let laser_velocity = match velocity_qry.get(*laser_entity) {
+                            Ok(laser_velocity) => laser_velocity,
+                            Err(_) => return,
+                        };
                         let explosion = spawn_explosion(
                             &asset_server,
                             &mut texture_atlas_layouts,
