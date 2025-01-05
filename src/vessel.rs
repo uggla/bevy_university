@@ -30,7 +30,7 @@ const LASER_VESSEL_POSITION: [f32; 2] = [-22.0, 22.0];
 #[derive(Component)]
 pub struct Player {
     name: String,
-    lifes: u8,
+    pub lifes: u8,
 }
 
 #[derive(Component)]
@@ -733,11 +733,10 @@ fn restart(
     *player_velocity = Velocity::default();
     player_pos.translation = Vec3::new(0.0, 0.0, 0.0);
     player_pos.rotation = Quat::from_rotation_z(0.0);
+    player.lifes -= 1;
+    debug!("Remaining lifes: {}", player.lifes);
     if player.lifes == 0 {
         next_state.set(GameState::GameOver);
-    } else {
-        player.lifes -= 1;
-        debug!("Remaining lifes: {}", player.lifes);
     }
 }
 

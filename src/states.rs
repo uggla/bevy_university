@@ -1,7 +1,12 @@
 use bevy::prelude::*;
 
+use crate::{asteroids::Asteroid, vessel::Player};
+
 #[derive(Component)]
 pub struct Menu;
+
+#[derive(Component)]
+pub struct UiText(f32);
 
 pub struct StatesPlugin;
 
@@ -15,7 +20,10 @@ impl Plugin for StatesPlugin {
             )
             .add_systems(OnExit(GameState::Menu), despawn_menu)
             .add_systems(OnEnter(GameState::GameOver), display_gameover)
-            .add_systems(OnExit(GameState::GameOver), despawn_menu);
+            .add_systems(OnExit(GameState::GameOver), despawn_menu)
+            .add_systems(OnEnter(GameState::InGame), ui)
+            .add_systems(Update, update_ui.run_if(in_state(GameState::InGame)))
+            .add_systems(OnExit(GameState::InGame), despawn_ui);
     }
 }
 
@@ -122,7 +130,66 @@ fn manage_inputs(
     }
 }
 
+fn ui(mut commands: Commands, time: Res<Time>, asset_server: Res<AssetServer>) {
+    commands
+        .spawn((
+            Node {
+                position_type: PositionType::Absolute,
+                width: Val::Px(210.0),
+                height: Val::Px(100.0),
+                right: Val::Px(0.0),
+                top: Val::Px(0.0),
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },
+            // BackgroundColor(Color::srgb(0.0, 0.5, 0.)),
+        ))
+        .with_children(|parent| {
+            parent.spawn((
+                Text::new("Life: 3\nAsteroids: 200\nTime: 00:00:00"),
+                TextFont {
+                    font: asset_server.load("fonts/kenvector_future.ttf"),
+                    font_size: 20.0,
+                    ..default()
+                },
+                TextLayout {
+                    justify: JustifyText::Left,
+                    ..default()
+                },
+                TextColor(Color::srgb(0.9, 0.0, 0.0)),
+                UiText(time.elapsed_secs()),
+            ));
+        });
+}
+
+fn update_ui(
+    time: Res<Time>,
+    mut query: Query<(&mut Text, &UiText), With<UiText>>,
+    asteroids: Query<Entity, With<Asteroid>>,
+    player: Query<&Player, With<Player>>,
+) {
+    let asteroids_count = asteroids.iter().count();
+    let player = player.single();
+    for (mut text, UiText(start_time)) in query.iter_mut() {
+        let game_time = time.elapsed_secs() - start_time;
+        *text = Text::new(format!(
+            "Life: {}\nAsteroids: {}\nTime: {:0>2}:{:0>2}:{:0>2}",
+            player.lifes,
+            asteroids_count,
+            (game_time / 3600.0) as u32,
+            (game_time / 60.0) as u32,
+            (game_time % 60.0) as u32
+        ));
+    }
+}
 fn despawn_menu(mut commands: Commands, query: Query<Entity, With<Menu>>) {
+    for entity in query.iter() {
+        commands.entity(entity).despawn_recursive();
+    }
+}
+
+fn despawn_ui(mut commands: Commands, query: Query<Entity, With<UiText>>) {
     for entity in query.iter() {
         commands.entity(entity).despawn_recursive();
     }
