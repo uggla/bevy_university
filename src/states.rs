@@ -6,7 +6,10 @@ use crate::{asteroids::Asteroid, vessel::Player};
 pub struct Menu;
 
 #[derive(Component)]
-pub struct UiText(f32);
+pub struct UiText;
+
+#[derive(Resource)]
+pub struct GameTime(f32);
 
 pub struct StatesPlugin;
 
@@ -23,7 +26,8 @@ impl Plugin for StatesPlugin {
             .add_systems(OnExit(GameState::GameOver), despawn_menu)
             .add_systems(OnEnter(GameState::InGame), ui)
             .add_systems(Update, update_ui.run_if(in_state(GameState::InGame)))
-            .add_systems(OnExit(GameState::InGame), despawn_ui);
+            .add_systems(OnExit(GameState::InGame), despawn_ui)
+            .insert_resource(GameTime(0.0));
     }
 }
 
@@ -130,7 +134,12 @@ fn manage_inputs(
     }
 }
 
-fn ui(mut commands: Commands, time: Res<Time>, asset_server: Res<AssetServer>) {
+fn ui(
+    mut commands: Commands,
+    time: Res<Time>,
+    asset_server: Res<AssetServer>,
+    mut gametime: ResMut<GameTime>,
+) {
     commands
         .spawn((
             Node {
@@ -158,21 +167,23 @@ fn ui(mut commands: Commands, time: Res<Time>, asset_server: Res<AssetServer>) {
                     ..default()
                 },
                 TextColor(Color::srgb(0.9, 0.0, 0.0)),
-                UiText(time.elapsed_secs()),
+                UiText,
+                gametime.0 = time.elapsed_secs(),
             ));
         });
 }
 
 fn update_ui(
     time: Res<Time>,
-    mut query: Query<(&mut Text, &UiText), With<UiText>>,
+    mut query: Query<&mut Text, With<UiText>>,
     asteroids: Query<Entity, With<Asteroid>>,
     player: Query<&Player, With<Player>>,
+    gametime: Res<GameTime>,
 ) {
     let asteroids_count = asteroids.iter().count();
     let player = player.single();
-    for (mut text, UiText(start_time)) in query.iter_mut() {
-        let game_time = time.elapsed_secs() - start_time;
+    for mut text in query.iter_mut() {
+        let game_time = time.elapsed_secs() - gametime.0;
         *text = Text::new(format!(
             "Life: {}\nAsteroids: {}\nTime: {:0>2}:{:0>2}:{:0>2}",
             player.lifes,
