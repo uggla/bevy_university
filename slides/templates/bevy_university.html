@@ -1779,6 +1779,69 @@
         </section>
 
         <section>
+          <h3>Audio</h3>
+          <h3>Thrust, Lasers, Explosions Sounds</h3>
+          <img src="images/prince_of_persia.png" alt="audio" width="75%" />
+        </section>
+
+        <section>
+          <h3>Thrust, Lasers, Explosions Sounds</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Spawn an entity with <code>AudioPlayer</code> and
+                <code>PlaybackSettings</code> when a laser is fired.
+                <ul>
+                  <li>
+                    <code>PlaybackSettings</code> controls volume and playback
+                    mode. Using <code>PlaybackMode::Despawn</code>, the entity
+                    will automatically despawn when the sound finishes.
+                  </li>
+                </ul>
+              </li>
+              <li>Repeat this process for explosion sounds.</li>
+              <li>
+                Apply the same approach for thrust sounds when the vessel is
+                thrusting.
+                <ul>
+                  <li>
+                    <strong>Potential Challenge:</strong>
+                    <ul>
+                      <li>
+                        The sound might not finish playing before a new one is
+                        triggered, leading to overlapping and odd audio effects.
+                      </li>
+                      <li>
+                        A possible solution is to avoid spawning a new sound if
+                        the current one is still playing.
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>16-audio</td>
+                      <td>src/vessel.rs</td>
+                      <td>7 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
           <h2>Compilation and Exportation</h2>
         </section>
 
