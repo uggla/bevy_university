@@ -1,4 +1,4 @@
-use bevy::prelude::*;
+use bevy::{audio::PlaybackMode, prelude::*};
 
 use crate::{asteroids::Asteroid, vessel::Player};
 
@@ -19,14 +19,23 @@ impl Plugin for StatesPlugin {
             .add_systems(OnEnter(GameState::Menu), display_menu)
             .add_systems(
                 Update,
-                manage_inputs.run_if(in_state(GameState::Menu).or(in_state(GameState::GameOver))),
+                manage_inputs.run_if(
+                    in_state(GameState::Menu)
+                        .or(in_state(GameState::GameOver))
+                        .or(in_state(GameState::Win)),
+                ),
             )
             .add_systems(OnExit(GameState::Menu), despawn_menu)
             .add_systems(OnEnter(GameState::GameOver), display_gameover)
             .add_systems(OnExit(GameState::GameOver), despawn_menu)
             .add_systems(OnEnter(GameState::InGame), ui)
-            .add_systems(Update, update_ui.run_if(in_state(GameState::InGame)))
+            .add_systems(
+                Update,
+                (update_ui, check_win).run_if(in_state(GameState::InGame)),
+            )
             .add_systems(OnExit(GameState::InGame), despawn_ui)
+            .add_systems(OnEnter(GameState::Win), display_win)
+            .add_systems(OnExit(GameState::Win), despawn_menu)
             .insert_resource(GameTime(0.0));
     }
 }
@@ -39,6 +48,7 @@ pub enum GameState {
     InGame,
     Paused,
     GameOver,
+    Win,
 }
 
 fn display_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -108,16 +118,20 @@ fn manage_inputs(
     mut keybord: ResMut<ButtonInput<KeyCode>>,
     gamepads: Query<(Entity, &Gamepad)>,
 ) {
+    if *state == GameState::Menu && keybord.just_pressed(KeyCode::Escape) {
+        app_exit_events.send(AppExit::Success);
+    }
+
     if *state == GameState::Menu && keybord.just_pressed(KeyCode::Space) {
         keybord.reset(KeyCode::Space);
         next_state.set(GameState::InGame);
     }
 
-    if *state == GameState::Menu && keybord.just_pressed(KeyCode::Escape) {
-        app_exit_events.send(AppExit::Success);
+    if *state == GameState::GameOver && keybord.just_pressed(KeyCode::Space) {
+        next_state.set(GameState::Menu);
     }
 
-    if *state == GameState::GameOver && keybord.just_pressed(KeyCode::Space) {
+    if *state == GameState::Win && keybord.just_pressed(KeyCode::Space) {
         next_state.set(GameState::Menu);
     }
 
@@ -128,6 +142,11 @@ fn manage_inputs(
         }
 
         if *state == GameState::GameOver && gamepad.just_pressed(GamepadButton::South) {
+            debug!("Gamepad {} just pressed South", entity);
+            next_state.set(GameState::Menu);
+        }
+
+        if *state == GameState::Win && gamepad.just_pressed(GamepadButton::South) {
             debug!("Gamepad {} just pressed South", entity);
             next_state.set(GameState::Menu);
         }
@@ -194,6 +213,67 @@ fn update_ui(
         ));
     }
 }
+
+fn check_win(
+    asteroids: Query<Entity, With<Asteroid>>,
+    mut next_state: ResMut<NextState<GameState>>,
+) {
+    let asteroids_count = asteroids.iter().count();
+    if asteroids_count == 0 {
+        next_state.set(GameState::Win);
+    }
+}
+
+fn display_win(
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+    time: Res<Time>,
+    gametime: Res<GameTime>,
+) {
+    let game_time = time.elapsed_secs() - gametime.0;
+    commands
+        .spawn((
+            Node {
+                position_type: PositionType::Absolute,
+                width: Val::Percent(100.0),
+                height: Val::Percent(100.0),
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },
+            Menu,
+        ))
+        .with_children(|parent| {
+            parent.spawn((
+                Text::new(format!(
+                    "You win !\nYou cleared all asteroids in {:0>2}:{:0>2}:{:0>2}",
+                    (game_time / 3600.0) as u32,
+                    (game_time / 60.0) as u32,
+                    (game_time % 60.0) as u32
+                )),
+                TextFont {
+                    font: asset_server.load("fonts/kenvector_future.ttf"),
+                    font_size: 40.0,
+                    ..default()
+                },
+                TextLayout {
+                    justify: JustifyText::Center,
+                    ..default()
+                },
+                TextColor(Color::srgb(0.9, 0.0, 0.0)),
+            ));
+        })
+        .with_children(|parent| {
+            parent.spawn((
+                AudioPlayer::new(asset_server.load("sounds/victory.ogg")),
+                PlaybackSettings {
+                    mode: PlaybackMode::Despawn,
+                    ..default()
+                },
+            ));
+        });
+}
+
 fn despawn_menu(mut commands: Commands, query: Query<Entity, With<Menu>>) {
     for entity in query.iter() {
         commands.entity(entity).despawn_recursive();
