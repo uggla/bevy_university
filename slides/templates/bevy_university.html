@@ -1630,35 +1630,126 @@
           <div class="lots_of_items">
             <ul>
               <li>
-                Create a <code>display_gameover</code> system by duplicating the
-                <code>display_menu</code> system.
+                Create a <code>fire_lasers</code> system to spawn lasers at the
+                vessel's wings when the player fires.
+                <ul>
+                  <li>Take care of the sprite orientation.</li>
+                  <li>
+                    Set an initial velocity for the lasers. You can use constant
+                    values for laser properties provided in the branch.
+                  </li>
+                </ul>
               </li>
               <li>
-                Add the <code>display_gameover</code> system to run when the
-                <code>Gameover</code> state is entered.
+                Add a <code>restrict_lasers_range</code> system to limit the
+                laser range. This can be achieved by despawning the lasers after
+                they exceed a certain lifetime.
+                <ul>
+                  <li>
+                    A possible solution is to add a <code>Laser</code> component
+                    to the laser entity, which includes a timer.
+                  </li>
+                </ul>
               </li>
               <li>
-                Rename the <code>start_game</code> system to
-                <code>manage_inputs</code>, and update it to handle input
-                controls in the <code>Gameover</code> state.
+                Update the <code>vessel_collision</code> system to handle laser
+                collisions:
+                <ul>
+                  <li>Despawn the laser and the asteroid it collides with.</li>
+                  <li>Spawn an explosion animation at the collision point.</li>
+                  <li>
+                    The code shows the following techniques:
+                    <ul>
+                      <li>
+                        Retrieve components from a known entity using the
+                        <code>get()</code> method.
+                      </li>
+                      <li>Track the ID of a spawned entity.</li>
+                      <li>Add components to a newly spawned entity.</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Feel free to refer to the proposed code, but try
+                    implementing your own solution for better learning.
+                  </li>
+                  <li>
+                    Note: The proposed code modifies <code>vessel.rs</code> for
+                    convenience, but for better maintainability, you should
+                    consider splitting the logic into separate modules or
+                    plugins.
+                  </li>
+                </ul>
               </li>
               <li>
-                Trigger the <code>AppExit::Success</code> event if the player
-                presses the Escape key to exit the game.
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>15-lasers</td>
+                      <td>src/vessel.rs</td>
+                      <td>15 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Explosions</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Asteroid explosions require special handling (e.g., size,
+                splitting asteroids) compared to vessel explosions. Create a new
+                <code>animate_asteroid_explosion</code> system for this purpose.
               </li>
               <li>
-                Update the app to execute the <code>manage_inputs</code> system
-                in the <code>Gameover</code> state.
+                Initially, play the explosion animation and despawn it once
+                completed.
               </li>
               <li>
-                Note: A potential issue could arise with the camera
-                transitioning back to the <code>Menu</code> state. Handle this
-                case carefully.
+                <strong>Bonus 1:</strong> Scale the explosion size based on the
+                asteroid size.
               </li>
               <li>
-                <strong>Bonus:</strong> Add an <code>exit_to_menu</code> system
-                in <code>vessel.rs</code> to allow returning to the
-                <code>Menu</code>.
+                <strong>Bonus 2:</strong> Split large asteroids into two medium
+                ones, and medium asteroids into two tiny ones upon explosion
+                completion.
+              </li>
+              <li>
+                <strong>Bonus 3:</strong> Assign random velocities, but ensure
+                they move orthogonal to the laser's trajectory.
+              </li>
+              <li>
+                <strong>Potential Challenges:</strong>
+                <ul>
+                  <li>
+                    Private asteroid methods and properties need to be made
+                    public for reuse.
+                  </li>
+                  <li>
+                    Non-unique events can lead to spawning extra asteroids
+                    (e.g., 4 instead of 2). Ensure only one event is processed.
+                  </li>
+                  <li>
+                    Warning messages about already despawned entities may occur.
+                    Add constraints to ensure the collision system runs first.
+                  </li>
+                  <li>
+                    Note: System execution order often causes strange behaviors.
+                    Pay attention to dependencies and ordering.
+                  </li>
+                </ul>
               </li>
               <li>
                 <strong>Practical Exercise:</strong>
@@ -1675,11 +1766,10 @@
                     <tr>
                       <td>15-lasers</td>
                       <td>
-                        src/state.rs<br />
                         src/vessel.rs<br />
-                        src/camera.rs
+                        src/asteroid.rs
                       </td>
-                      <td>7 minutes</td>
+                      <td>15 minutes</td>
                     </tr>
                   </tbody>
                 </table>
