@@ -179,14 +179,14 @@ fn wrap_asteroids(mut query: Query<&mut Transform, With<Asteroid>>) {
 
 fn background(mut commands: Commands, asset_server: Res<AssetServer>) {
     // Image dimensions
-    let width = 8 * WINDOW_WIDTH as u32;
-    let height = 8 * WINDOW_HEIGHT as u32;
+    let width = 2 * WINDOW_WIDTH as u32;
+    let height = 2 * WINDOW_HEIGHT as u32;
 
     // Create a black image buffer
     let mut img = ImageBuffer::new(width, height);
 
     // Number of stars
-    let num_stars = 10000;
+    let num_stars = 2000;
 
     // Random number generator
     let mut rng = rand::thread_rng();
@@ -217,6 +217,23 @@ fn background(mut commands: Commands, asset_server: Res<AssetServer>) {
     );
 
     let image_handle = asset_server.add(image);
+
+    for x in (-3..=3).step_by(2) {
+        for y in (-3..=3).step_by(2) {
+            commands.spawn((
+                Sprite {
+                    image: image_handle.clone(),
+                    ..default()
+                },
+                Transform {
+                    translation: Vec3::new(WINDOW_WIDTH * x as f32, WINDOW_HEIGHT * y as f32, -1.0),
+                    ..default()
+                },
+                Background,
+            ));
+        }
+    }
+
     commands.spawn((
         Sprite {
             image: image_handle,
