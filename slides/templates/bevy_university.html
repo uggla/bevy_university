@@ -1845,7 +1845,7 @@
 
         <section>
           <h3>Radar</h3>
-          <img src="images/another_world.webp" alt="audio" width="75%" />
+          <img src="images/another_world.webp" alt="radar" width="75%" />
         </section>
 
         <section>
@@ -1901,7 +1901,7 @@
 
         <section>
           <h3>UI</h3>
-          <img src="images/barbarian.png" alt="audio" width="75%" />
+          <img src="images/barbarian.png" alt="ui" width="75%" />
         </section>
 
         <section>
@@ -1942,6 +1942,59 @@
                       <td>18-ui</td>
                       <td>src/state.rs</td>
                       <td>10 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Game Finished</h3>
+          <h3>You Win!</h3>
+          <img src="images/xenon2.jpg" alt="you_win" width="60%" />
+        </section>
+
+        <section>
+          <h3>You Win! Menu</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>Add a new game state: <code>Gamestate::Win</code>.</li>
+              <li>
+                Implement a <code>check_win</code> system to monitor if all
+                asteroids have been cleared. If so, transition to the
+                <code>Win</code> state.
+              </li>
+              <li>
+                Create a <code>display_win</code> system to show the victory
+                screen. This system can be adapted from the
+                <code>display_menu</code> system.
+              </li>
+              <li>
+                Handle player input to exit the victory menu and return to the
+                main menu.
+              </li>
+              <li>
+                Integrate the new systems into the plugin and ensure they are
+                executed at the appropriate times during gameplay.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>19-win</td>
+                      <td>src/state.rs</td>
+                      <td>7 minutes</td>
                     </tr>
                   </tbody>
                 </table>
