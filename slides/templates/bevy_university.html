@@ -1900,6 +1900,62 @@
         </section>
 
         <section>
+          <h3>UI</h3>
+          <img src="images/barbarian.png" alt="audio" width="75%" />
+        </section>
+
+        <section>
+          <h3>Radar</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Spawn a radar entity in the <code>setup_vessel</code> system to
+                display the radar sprite.
+              </li>
+              <li>
+                Create a <code>radar</code> system to update the radar's
+                orientation, ensuring it points to the nearest asteroid.
+              </li>
+              <li>
+                <strong>Bonus:</strong> Adapt the radar color based on the
+                distance to the nearest asteroid.
+                <ul>
+                  <li>
+                    Consider using HSV values for defining the color, as this
+                    allows adjusting only the saturation to create a color
+                    variation.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Ensure the radar entity is despawned appropriately when no
+                longer needed.
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>17-radar</td>
+                      <td>src/vessel.rs</td>
+                      <td>10 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
           <h2>Compilation and Exportation</h2>
         </section>
 
