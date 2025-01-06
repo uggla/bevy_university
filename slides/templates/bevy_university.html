@@ -1905,32 +1905,27 @@
         </section>
 
         <section>
-          <h3>Radar</h3>
+          <h3>UI</h3>
           <div class="lots_of_items">
             <ul>
               <li>
-                Spawn a radar entity in the <code>setup_vessel</code> system to
-                display the radar sprite.
+                Create a <code>ui</code> system to display the player's
+                remaining lives, the number of asteroids, and the time elapsed
+                since the game started.
               </li>
               <li>
-                Create a <code>radar</code> system to update the radar's
-                orientation, ensuring it points to the nearest asteroid.
+                Create an <code>update_ui</code> system to retrieve and display
+                this data dynamically in the UI.
               </li>
               <li>
-                <strong>Bonus:</strong> Adapt the radar color based on the
-                distance to the nearest asteroid.
-                <ul>
-                  <li>
-                    Consider using HSV values for defining the color, as this
-                    allows adjusting only the saturation to create a color
-                    variation.
-                  </li>
-                </ul>
+                Implement a <code>despawn_ui</code> system to remove the UI when
+                it is no longer needed.
               </li>
               <li>
-                Ensure the radar entity is despawned appropriately when no
-                longer needed.
+                Integrate these systems into the plugin and ensure they are
+                triggered at the appropriate times during gameplay.
               </li>
+              <li>Warning: The code to decrease lives have a bug.</li>
               <li>
                 <strong>Practical Exercise:</strong>
                 <div class="clearfix"></div>
@@ -1944,8 +1939,8 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>17-radar</td>
-                      <td>src/vessel.rs</td>
+                      <td>18-ui</td>
+                      <td>src/state.rs</td>
                       <td>10 minutes</td>
                     </tr>
                   </tbody>
