@@ -63,6 +63,12 @@
         margin-right: 1em;
       }
 
+      /* Larger elements */
+      .lots_of_items4 ul {
+        font-size: 0.8em;
+        text-align: left;
+      }
+
       /* Normal elements */
       .lots_of_items ul {
         font-size: 0.6em;
@@ -185,45 +191,42 @@
         <!-- <section data-background="images/background.svg" data-background-size="cover"> -->
         <section>
           <h1>Bevy university</h1>
-          <img src="images/bevy_logo_dark.svg" alt="bevy_logo" width="50%" />
+          <img src="images/bevy_logo_dark.svg" alt="bevy_logo" width="60%" />
         </section>
 
         <section>
-          <h3>Development Environment Setup and Welcome</h3>
-          <ul>
-            <li>Save time by doing the bevy setup if not already done.</li>
-            <li>Then we will do the introduction.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Installation and Configuration of Tools</h3>
-          <div class="long_link">
-            <ol>
-              <li>
-                <strong>Install Rust</strong>: rustup, rustc, cargo, clippy,
-                rustfmt.
-              </li>
-              <li>
-                <strong>Configure Editor</strong>: Set up your preferred editor
-                with Rust Analyzer.
-              </li>
-              <li>
-                <strong>Get bevy dependencies</strong> according to your OS.
-                <a
-                  href="https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies"
-                  >https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies</a
-                >
-              </li>
-              <li>
-                <strong>Clone the workshop repository</strong>
-                from GitHub.
-                <a href="https://github.com/uggla/bevy_university"
-                  >https://github.com/uggla/bevy_university</a
-                >
-              </li>
-              <li><strong>Compile</strong> the project.</li>
-            </ol>
+          <h3>Bevy university</h3>
+          <h3>Welcome and Development Environment Setup</h3>
+          <div class="lots_of_items4">
+            <ul>
+              <li>Save time by doing the bevy setup if not already done.</li>
+              <ol>
+                <li>
+                  <strong>Install Rust</strong>: rustup, rustc, cargo, clippy,
+                  rustfmt.
+                </li>
+                <li>
+                  <strong>Configure Editor</strong>: Set up your preferred
+                  editor with Rust Analyzer.
+                </li>
+                <li>
+                  <strong>Get bevy dependencies</strong> according to your
+                  OS.<br />
+                  <a
+                    href="https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies"
+                    >https://bevyengine.org/learn/quick-start/getting-started/setup/#installing-os-dependencies</a
+                  >
+                </li>
+                <li>
+                  <strong>Clone the workshop repository</strong>
+                  from GitHub.<br />
+                  <a href="https://github.com/uggla/bevy_university"
+                    >https://github.com/uggla/bevy_university</a
+                  >
+                </li>
+              </ol>
+              <li>Then we will do the introduction.</li>
+            </ul>
           </div>
         </section>
 
@@ -390,8 +393,10 @@
             </ul>
           </div>
           <div class="pic lots_of_items">
-            <p>Paste screenshots of the game.</p>
-            <img src="images/asteroids.png" alt="screenshot" width="50%" />
+            <video width="100%" autoplay loop muted>
+              <source src="images/asteroids.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </section>
 
@@ -2004,41 +2009,209 @@
         </section>
 
         <section>
-          <h2>Compilation and Exportation</h2>
+          <h3>A background with stars</h3>
+          <img src="images/sonic.jpg" alt="background" width="75%" />
         </section>
 
         <section>
-          <h3>Building and Exporting</h3>
-          <ul>
-            <li>
-              <strong>Native Compilation</strong>: Test the mockup locally.
-            </li>
-            <li>
-              <strong>WebAssembly Compilation</strong>: Deploy on a simple
-              webpage.
-            </li>
-          </ul>
+          <h3>Background</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Add a new <code>Background</code> component to identify
+                background entities.
+              </li>
+              <li>
+                Modify the <code>AsteroidsPlugin</code>:
+                <ul>
+                  <li>
+                    Add a <code>background</code> system to spawn the starry
+                    background when entering <code>GameState::InGame</code>.
+                  </li>
+                  <li>
+                    Add a <code>despawn_background</code> system to remove
+                    background entities when exiting
+                    <code>GameState::InGame</code>.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Implement the <code>background</code> system:
+                <ul>
+                  <li>
+                    Create a starry image using an <code>ImageBuffer</code> with
+                    randomly placed white dots (stars).
+                  </li>
+                  <li>
+                    Convert the <code>ImageBuffer</code> into a Bevy
+                    <code>Image</code> asset.
+                  </li>
+                  <li>
+                    Spawn multiple sprites using the generated image to cover
+                    the game area.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong> Implement and test the
+                background rendering and cleanup.
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>20-background</td>
+                      <td>src/asteroids.rs</td>
+                      <td>10 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
         </section>
 
         <section>
-          <h3>Practical Exercise</h3>
-          <p>
-            Integrate the game mockup into a webpage and test the WebAssembly
-            version.
-          </p>
+          <h3>Build WASM</h3>
+          <img src="images/bubble_bobble.png" alt="wasm" width="75%" />
         </section>
 
         <section>
-          <h2>Achievements and Q&A</h2>
-          <p>
-            Celebrate our accomplishments and address questions or feedback.
-          </p>
+          <h3>Prevent Blurry Sprites and WASM Compatibility</h3>
+          <div class="lots_of_items">
+            <ul>
+              <li>
+                Added <code>ImagePlugin::default_nearest()</code>:
+                <ul>
+                  <li>
+                    Ensures sprites are rendered with nearest-neighbor scaling
+                    to prevent blurriness when scaling.
+                  </li>
+                  <li>
+                    This is especially useful for pixel art or retro-style
+                    graphics.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Updated the <code>AssetPlugin</code> configuration:
+                <ul>
+                  <li>
+                    Added <code>meta_check: AssetMetaCheck::Never</code> to
+                    avoid checking for meta files during WASM builds.
+                  </li>
+                  <li>
+                    This prevents errors and potential panics on platforms like
+                    itch.io.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Build a wasm version of the game. This can be achieve by running
+                the <code>./build_wasm.sh</code>. The script will:
+                <ul>
+                  <li>
+                    Simply build the application using the
+                    <code>wasm32-unknown-unknown</code> target.
+                  </li>
+                  <li>
+                    Run <code>wasm-bindgen</code> cli to build the function
+                    bindings for javascript into a single file (bevy_game.js).
+                  </li>
+                  <li>
+                    Then the html file (index.html) just need to call the init
+                    function from the file produced by
+                    <code>wasm-bindgen</code>.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Practical Exercise:</strong>
+                <div class="clearfix"></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Branch</th>
+                      <th>Files</th>
+                      <th>Estimated Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>21-wasm</td>
+                      <td>src/main.rs</td>
+                      <td>10 minutes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
         </section>
 
         <section>
+          <h3>Build with BEVY</h3>
+          <img src="images/simcity.jpg" alt="wasm" width="75%" />
+        </section>
+
+        <section>
+          <h3>Rock Run Rose's Odyssey</h3>
+          <h4>Made with ❤️ by Uggla</h4>
+          <img src="images/rockrun.png" alt="rockrun" width="90%" />
+          <h5>https://uggla.itch.io/rockrun</h5>
+        </section>
+
+        <section>
+          <h3>Tiny Glade</h3>
+          <img src="images/tiny_glade.jpg" alt="tiny_glade" width="100%" />
+          <h5>https://store.steampowered.com/app/2198150/Tiny_Glade</h5>
+        </section>
+
+        <section>
+          <h3>DEATHTRIP</h3>
+          <img src="images/deathtrip.jpg" alt="deathtrip" width="100%" />
+          <h5>https://store.steampowered.com/app/2909010/DEATHTRIP/</h5>
+        </section>
+
+        <section>
+          <h3>Jarl</h3>
+          <img src="images/jarl.png" alt="jarl" width="100%" />
+          <h5>https://www.jarl-game.com/</h5>
+        </section>
+
+        <section>
+          <h3>Astortion</h3>
+          <img src="images/astortion.jpg" alt="astortion" width="100%" />
+          <h5>https://store.steampowered.com/app/1993980/Astortion/</h5>
+        </section>
+
+        <section>
+          <h3>Times of progress</h3>
+          <img
+            src="images/times_of_progress.jpg"
+            alt="times_of_progress"
+            width="100%"
+          />
+          <h5>https://store.steampowered.com/app/2628450/Times_of_Progress/</h5>
+        </section>
+
+        <section>
+          <h3>Gunbug</h3>
+          <img src="images/gunbug.jpg" alt="gunbug" width="100%" />
+          <h5>https://store.steampowered.com/app/2946990/Gunbug/</h5>
+        </section>
+
+        <section>
+          <h2>Thanks</h2>
           <img src="images/thanks.gif" alt="thank_you" width="50%" />
           <ul>
-            <li>Bastion Sevajol &lt;bastien@sevajol.fr&gt;</li>
+            <li>Bastien Sevajol &lt;bastien@sevajol.fr&gt;</li>
             <li>René Ribaud &lt;rene.ribaud@gmail.com&gt;</li>
           </ul>
         </section>
