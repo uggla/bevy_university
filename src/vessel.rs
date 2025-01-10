@@ -110,7 +110,7 @@ fn activate_thrust(
 
     // Compute the directional vector using cos (x) and sin (y)
     let direction = Vec2::new(
-        rotation.sin() * -VESSEL_THRUST_POWER,
+        -rotation.sin() * VESSEL_THRUST_POWER,
         rotation.cos() * VESSEL_THRUST_POWER,
     );
     for mut ext_impulse in ext_impulses.iter_mut() {
