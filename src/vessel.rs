@@ -104,17 +104,18 @@ fn activate_thrust(
     ext_impulses: &mut Query<&mut ExternalImpulse, With<Player>>,
 ) {
     let player_transform = players.single();
-    // Get the 2D rotation angle in radians
+    // Get the 2D rotation angle in radians around the Z axis
     let rotation = player_transform.rotation.to_euler(EulerRot::ZYX).0;
-    // Z-axis rotation
 
-    // Compute the directional vector using cos (x) and sin (y)
-    let direction = Vec2::new(
+    // Compute the directional vector for the impulse. Since the vessel's nose points upward,
+    // the impulse direction must be rotated 90 degrees counterclockwise. This is achieved
+    // using trigonometry, where x = -sin(angle) and y = cos(angle) rotate the vector accordingly.
+    let impulse_direction = Vec2::new(
         -rotation.sin() * VESSEL_THRUST_POWER,
         rotation.cos() * VESSEL_THRUST_POWER,
     );
     for mut ext_impulse in ext_impulses.iter_mut() {
-        ext_impulse.impulse = direction
+        ext_impulse.impulse = impulse_direction
     }
 }
 
