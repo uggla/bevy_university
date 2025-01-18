@@ -51,17 +51,16 @@ fn display_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
 }
 
 fn start_game(
-    state: Res<State<GameState>>,
     mut next_state: ResMut<NextState<GameState>>,
     keybord: Res<ButtonInput<KeyCode>>,
     gamepads: Query<(Entity, &Gamepad)>,
 ) {
-    if *state == GameState::Menu && keybord.just_pressed(KeyCode::Space) {
+    if keybord.just_pressed(KeyCode::Space) {
         next_state.set(GameState::InGame);
     }
 
     for (entity, gamepad) in gamepads.iter() {
-        if *state == GameState::Menu && gamepad.just_pressed(GamepadButton::South) {
+        if gamepad.just_pressed(GamepadButton::South) {
             debug!("Gamepad {} just pressed South", entity);
             next_state.set(GameState::InGame);
         }
