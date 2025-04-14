@@ -124,6 +124,14 @@
         text-align: left;
       }
 
+      .left_text_top_margin {
+        position: relative;
+        float: left;
+        width: 50%;
+        text-align: left;
+        margin-top: 66px;
+      }
+
       .left_text_bio {
         position: relative;
         float: left;
@@ -193,8 +201,7 @@
           <h1>Bevy university</h1>
           <img src="images/bevy_logo_dark.svg" alt="bevy_logo" width="60%" />
 
-          <h2>Snowcamp 2025</h2>
-          <img src="images/snowcamp_logo.png" alt="snowcamp" width="10%" />
+          <h2>Devoxx France 2025</h2>
         </section>
 
         <section>
@@ -202,7 +209,13 @@
           <h3>Welcome and Development Environment Setup</h3>
           <div class="lots_of_items4">
             <ul>
-              <li>Save time by doing the bevy setup if not already done.</li>
+              <li>
+                Save time by doing the bevy setup if not already done or as an
+                alternative use
+                <a href="https://github.com/codespaces"
+                  >https://github.com/codespaces</a
+                >.
+              </li>
               <ol>
                 <li>
                   <strong>Install Rust</strong>: rustup, rustc, cargo, clippy,
@@ -234,7 +247,7 @@
         </section>
 
         <section
-          data-background="images/snowcamp_sponsors.png"
+          data-background="images/devoxxfr.jpg"
           data-background-size="cover"
         ></section>
 
@@ -264,7 +277,10 @@
               <ul>
                 <li>Lone wolf</li>
                 <li>Ex-developer but still coder</li>
-                <li>The only tuxedo user among a whole team of half bitten apple (Does that make me a rebel undercover?)</li>
+                <li>
+                  The only tuxedo user among a whole team of half bitten apple
+                  (Does that make me a rebel undercover?)
+                </li>
               </ul>
             </ul>
           </div>
@@ -275,6 +291,40 @@
 
         <section>
           <h3>2 words about us 2/3</h3>
+          <div class="left_text_bio">
+            <!-- <pre class="bio"> -->
+            <ul>
+              <li>Stats</li>
+              <ul>
+                <li>First name: François</li>
+                <li>Last name: Mockers</li>
+              </ul>
+            </ul>
+
+            <ul>
+              <li>Skills</li>
+              <ul>
+                <li>Class: QA Lead</li>
+                <li>Latest Guild: Paylead</li>
+                <li>Preferred weapons: Rust / Rust (but compiled to Wasm)</li>
+              </ul>
+            </ul>
+
+            <ul>
+              <li>Optional traits</li>
+              <ul>
+                <li>Bevy contributor (almost) since the beginning</li>
+                <li>Karate black belt, and many injuries along the way</li>
+              </ul>
+            </ul>
+          </div>
+          <div class="pic">
+            <img src="images/francois.webp" alt="francois" width="53%" />
+          </div>
+        </section>
+
+        <section>
+          <h3>2 words about us 3/3</h3>
           <div class="left_text_bio">
             <!-- <pre class="bio"> -->
             <ul>
@@ -311,40 +361,6 @@
         </section>
 
         <section>
-          <h3>2 words about us 3/3</h3>
-          <div class="left_text_bio">
-            <!-- <pre class="bio"> -->
-            <ul>
-              <li>Stats</li>
-              <ul>
-                <li>First name: François</li>
-                <li>Last name: Mockers</li>
-              </ul>
-            </ul>
-
-            <ul>
-              <li>Skills</li>
-              <ul>
-                <li>Class: QA Lead</li>
-                <li>Latest Guild: Paylead</li>
-                <li>Preferred weapons: Rust / Rust (but compiled to Wasm)</li>
-              </ul>
-            </ul>
-
-            <ul>
-              <li>Optional traits</li>
-              <ul>
-                <li>Bevy contributor (almost) since the beginning</li>
-                <li>Karate black belt, and many injuries along the way</li>
-              </ul>
-            </ul>
-          </div>
-          <div class="pic">
-            <img src="images/francois.webp" alt="francois" width="53%" />
-          </div>
-        </section>
-
-        <section>
           <h3>Quick Overview of Rust (Optional)</h3>
           <ul>
             <li>
@@ -371,7 +387,7 @@
               <li>Data-driven game engine built in Rust</li>
               <li>August 10, 2020 by Carter Anderson</li>
               <li>Dual license MIT and Apache v2.0</li>
-              <li>Current version 0.15.1</li>
+              <li>Current version 0.15.3</li>
               <li>
                 Not stable, breaking changes ~3 months and migration guides
               </li>
@@ -390,7 +406,7 @@
         </section>
 
         <section>
-          <h3>Quick Overview of the project and the session</h3>
+          <h3>Quick Overview of the project</h3>
           <div class="left_text lots_of_items2">
             <ul>
               <li>
@@ -415,24 +431,6 @@
                   <li>An mockup of Asteroids game.</li>
                 </ul>
               </li>
-              <li>
-                Session Overview
-                <ul>
-                  <li>
-                    Provide an explanation of the tasks to be completed (via
-                    slides), showcasing the corresponding code. Engage actively
-                    by asking questions.
-                  </li>
-                  <li>
-                    Work on the code yourself, and don't hesitate to ask for
-                    help if needed.
-                  </li>
-                  <li>
-                    If you encounter any issues, no worries—you can always check
-                    out the branch for this specific section.
-                  </li>
-                </ul>
-              </li>
             </ul>
           </div>
           <div class="pic lots_of_items">
@@ -440,6 +438,42 @@
               <source src="images/asteroids.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+          </div>
+        </section>
+
+        <section>
+          <h3>Quick Overview of the session</h3>
+          <div class="lots_of_items2">
+            <ul>
+              <li>
+                Provide an explanation of the tasks to be completed (via
+                slides), showcasing the corresponding code. Engage actively by
+                asking questions.
+              </li>
+              <li>
+                At each step of the workshop, we’ll offer two options:
+                <ul>
+                  <li>
+                    <strong>Move on</strong> if you feel the current part is
+                    clear and doesn’t need further exploration.
+                  </li>
+                  <li>
+                    <strong>Take some time to experiment</strong>: you can
+                    <code>git checkout</code> the relevant branch and play with
+                    the code.
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                We’ll make the decision <strong>together</strong>, most likely
+                with a <strong>show of hands</strong>.
+              </li>
+              <li>
+                The goal is to <strong>adjust the pace</strong> based on your
+                needs, without wasting time if everyone is comfortable.
+              </li>
+            </ul>
           </div>
         </section>
 
@@ -2265,11 +2299,16 @@
 
         <section>
           <h2>Thanks</h2>
-          <img src="images/thanks.gif" alt="thank_you" width="50%" />
-          <ul>
-            <li>Bastien Sevajol &lt;bastien@sevajol.fr&gt;</li>
-            <li>René Ribaud &lt;rene.ribaud@gmail.com&gt;</li>
-          </ul>
+          <div class="left_text_top_margin">
+            <img src="images/thanks.gif" alt="thank_you" width="100%" />
+          </div>
+          <div class="right_text">
+            <img src="images/qr_feedback.png" alt="feedback" width="100%" />
+          </div>
+          <!-- <ul> -->
+          <!--   <li>Bastien Sevajol &lt;bastien@sevajol.fr&gt;</li> -->
+          <!--   <li>René Ribaud &lt;rene.ribaud@gmail.com&gt;</li> -->
+          <!-- </ul> -->
         </section>
       </div>
     </div>
